@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes circleGrow {
+  0% {
+    transform: scale(0.2);
+    opacity: 0; /* Start completely transparent */
+  }
+  20% {
+    opacity: 0.3; /* Fade in smoothly */
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0; /* End completely transparent */
+  }
+}
+
+.circle {
+  z-index: 0;
+  position: absolute;
+  border-radius: 80%;
+  border: 8px solid rgba(255, 255, 255, 0.3);
+  width: 120%;
+  height: 120%;
+  opacity: 0; /* Ensure circles start invisible */
+}
+
+.animate-circle {
+  animation: circleGrow 3s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.circle-animation {
+  position: absolute;
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  pointer-events: none; /* Prevents interference with UI interactions */
+}
+
+body {
+  background-color: #F7F7FF;
+}

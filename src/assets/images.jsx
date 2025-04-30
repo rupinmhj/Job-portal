@@ -19,6 +19,16 @@ import adobe from './adobe.png'
 import wings from './wings.png'
 import airbnb from './airbnb.png'
 import threeDot from './threeDot.svg'
+import jobkoLogo from './jobkoLogo.png'
+import home from './home.svg'
+import clipboard from './clipboard.svg'
+import message from './message.svg'
+import profile from './profile.svg'
+import listHome from './listHome.svg'
+import listPages from './listPages.svg'
+import listComponent from './listComponent.svg'
+import listProfile from './listProfile.svg'
+import listLogout from './listLogout.svg'
 const images={
     hello,
     profileSmall,
@@ -26,6 +36,7 @@ const images={
     bellIcon,
     option,
     searchIcon,
+
     banner1,
     company,
     fullTime,
@@ -41,6 +52,17 @@ const images={
     wings,
     airbnb,
     threeDot,
+    jobkoLogo,
+    home,
+    clipboard,
+    message,
+    profile,
+    listComponent,
+    listHome,
+    listPages,
+    listLogout,
+    listProfile,
+
 
 
 }

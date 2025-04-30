@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+// useState
 import images from '../assets/images';
+
 // import profileSmall from "../assets/profileSmall.jpg"
-const Header = () => {
+const Header = ({toggleSidebar,isSideBarOpen}) => {
+  const [ham,setHam]=useState(false);
+  // const hamburgerclick=()=>{
+  //   setHam(prev => !prev);
+  // }
+  // console.log(ham);
   return (
-    <div className='lg:mx-[232px] px-[24px] pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] w-full fixed top-0 bg-bgColor z-50'>
+
+    <div className='lg:px-[232px] xl:px-[274px] px-[24px] pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] w-full fixed top-0 bg-bgColor z-50'>
         {/* left part */}
       <div className="flex gap-[12px] items-center">
         <div>
@@ -25,7 +33,7 @@ const Header = () => {
           </svg>
         </div>
 
-        <div className='h-[40px] w-[40px] p-2 rounded-lg bg-gray-100 cursor-pointer hover:bg-blue-500 transition-all group'>
+        <div onClick={toggleSidebar} className='h-[40px] w-[40px] p-2 rounded-lg bg-gray-100 cursor-pointer hover:bg-blue-500 transition-all group'>
           <svg className="text-[#1A1528] group-hover:text-white"
           width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="1">
@@ -36,6 +44,10 @@ const Header = () => {
           </svg>
         </div>
       </div>
+      {/* {ham && (
+          <SideBar/>
+      )
+      } */}
     </div>
   )
 }

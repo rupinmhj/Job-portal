@@ -4,7 +4,7 @@ import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 const Company = () => {
   return (
-    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col">
+    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px]">
       
       <div className="flex justify-between w-full">
         <h1 className="text-black font-bold text-[18px] leading-[22px] mb-[24px] ">
@@ -16,7 +16,7 @@ const Company = () => {
       </div>
       <div className="flex flex-col w-full mb-[20px]">
         <div className="flex rounded-xl bg-white gap-[16px] p-[12px] justify-between w-full ">
-            <img src={images.apple} className="h-[48px]" alt="" />
+            <img src={images.apple} className="h-[48px] rounded-xl" alt="" />
             <div className="flex-grow flex justify-between">
                 <div className="flex-col flex justify-between">
                     <h2 className="text-[18px] font-semibold leading-[26px]">Sr. Product Designer</h2>
@@ -37,7 +37,7 @@ const Company = () => {
 
       <div className="flex flex-col w-full mb-[20px]">
         <div className="flex rounded-xl bg-white gap-[16px] p-[12px] justify-between w-full ">
-            <img src={images.amplitude} className="h-[48px]" alt="" />
+            <img src={images.amplitude} className="h-[48px] rounded-xl" alt="" />
             <div className="flex-grow flex justify-between">
                 <div className="flex-col flex justify-between">
                     <h2 className="text-[18px] font-semibold leading-[26px]">Sr. UI/UX Designer</h2>
@@ -59,7 +59,7 @@ const Company = () => {
       
       <div className="flex flex-col w-full mb-[20px]">
         <div className="flex rounded-xl bg-white  gap-[16px] p-[12px] justify-between w-full ">
-            <img src={images.adobe} className="h-[48px]" alt="" />
+            <img src={images.adobe} className="h-[48px] rounded-xl" alt="" />
             <div className="flex-grow flex justify-between">
                 <div className="flex-col flex justify-between">
                     <h2 className="text-[18px] font-semibold leading-[26px]">Software Developer</h2>
@@ -80,7 +80,7 @@ const Company = () => {
 
       <div className="flex flex-col w-full mb-[20px]">
         <div className="flex rounded-xl bg-white gap-[16px] p-[12px] justify-between w-full ">
-            <img src={images.wings} className="h-[48px]" alt="" />
+            <img src={images.wings} className="h-[48px] rounded-xl" alt="" />
             <div className="flex-grow flex justify-between">
                 <div className="flex-col flex justify-between">
                     <h2 className="text-[18px] font-semibold leading-[26px]">Lead Digital Marketar</h2>
@@ -100,7 +100,7 @@ const Company = () => {
       </div>
       <div className="flex flex-col w-full mb-[20px] ">
         <div className="flex gap-[16px] p-[12px] justify-between w-full bg-white rounded-xl">
-            <img src={images.airbnb} className="h-[48px]" alt="" />
+            <img src={images.airbnb} className="h-[48px] rounded-xl" alt="" />
             <div className="flex-grow flex justify-between">
                 <div className="flex-col flex justify-between">
                     <h2 className="text-[18px] font-semibold leading-[26px]">Full Stack Developer</h2>

@@ -3,8 +3,8 @@ import images from "../assets/images";
 
 const LearnMore = () => {
   return (
-    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center">
-      <div className="px-[24px] pt-[20px] pb-[24px] bg-backGreen w-full rounded-2xl relative overflow-hidden">
+    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center bg-white">
+      <div className="px-[24px] pt-[20px] pb-[24px] bg-backGreen w-full rounded-2xl relative overflow-hidden ">
         <h1 className="text-white text-[18px] leading-[26px] font-semibold mb-[23px]">
           Let's find a new job
           <br />

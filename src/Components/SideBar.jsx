@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import images from "../assets/images"
-const SideBar = () => {
+import Pages from './Pages';
+import { useState } from 'react';
+const SideBar = ({isPageOpen,setIsPageOpen}) => {
     console.log("Sidebar activated");
+    // const [isPageOpen,setIsPageOpen]=useState(false);
+    
+    const handelPages=()=>{
+      setIsPageOpen(true);
+    }
+    const back=()=>{
+      setIsPageOpen(false);
+    }
+    
   return (
-    <div className='absolute w-[300px] h-screen    z-50 bg-white font-urbanist'>
+    <div className='absolute w-[300px] h-screen   z-40 bg-white font-urbanist '>
        <div className="flex p-[15px] w-full bg-bgLogo " >
           <div className="logo  ">
             <img src={images.jobkoLogo} className="h-[60px]" alt="" />
@@ -32,7 +43,8 @@ const SideBar = () => {
               <img src={images.listHome} className='' alt="" />
               <span>Home</span>
             </li>
-            <li className='mt-[16px] flex justify-between cursor-pointer'>
+            <li onClick={handelPages}
+             className='mt-[16px] flex justify-between cursor-pointer'>
               <div className='flex gap-[10px]'>
               <img src={images.listPages} className='' alt="" />
               <span>Pages</span>
@@ -78,6 +90,18 @@ const SideBar = () => {
     
 
        </div>
+       {
+        isPageOpen && 
+        <div className='transition-all ease-out duration-200'>
+        <Pages back={back}/>
+        </div>
+       }
+        {isPageOpen && (
+    <div
+      className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+      onClick={() => setIsPageOpen(false)}
+    ></div>
+  )}
 
     </div>
   )

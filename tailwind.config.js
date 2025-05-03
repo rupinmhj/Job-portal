@@ -20,10 +20,17 @@ export default {
         buttonPurple:"#7847BA",
         textSeeAll:"rgba(18, 25, 39, 0.6)",
         bgColor:"#f7f7f8",
-        bgLogo:"#7c66ff"
+        bgLogo:"#7c66ff",
+        google:"#71757D"
+        
 
       },
+     
       keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(10%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
         circle: {
           '0%': { transform: 'scale(0.4)', opacity: '0.5' },
           '50%': { opacity: '0.1' },
@@ -32,6 +39,7 @@ export default {
       },
       animation: {
         circle: 'circle 1.2s infinite ease-in-out',
+        'slide-in': 'slideIn 4s ',
       },
 
     },

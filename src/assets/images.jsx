@@ -29,6 +29,16 @@ import listPages from './listPages.svg'
 import listComponent from './listComponent.svg'
 import listProfile from './listProfile.svg'
 import listLogout from './listLogout.svg'
+import profileSetup from './SetUpProfile/profile-setup.png'
+import contact from './SetUpProfile/phone.svg'
+import calender from './SetUpProfile/calender.svg'
+import gender from './SetUpProfile/gender.svg'
+import dropdown from './dropdown.svg'
+import notigoogle from './notigoogle.png'
+import slack from './slack.png'
+import zapier from './zapier.png'
+import treehouse from './treehouse.png'
+import notimicrosoft from './notimicrosoft.png'
 const images={
     hello,
     profileSmall,
@@ -36,7 +46,7 @@ const images={
     bellIcon,
     option,
     searchIcon,
-
+    treehouse,
     banner1,
     company,
     fullTime,
@@ -62,8 +72,15 @@ const images={
     listPages,
     listLogout,
     listProfile,
-
-
+    profileSetup,
+    contact,
+    calender,
+    gender,
+    dropdown,
+    notigoogle,
+    slack,
+    zapier,
+    notimicrosoft
 
 }
 export default images;

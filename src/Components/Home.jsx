@@ -8,10 +8,11 @@ import MostPopular from './MostPopular';
 import Company from './Company';
 import Footer from './Footer';
 import SideBar from './SideBar';
-
+import { Outlet } from 'react-router-dom';
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPageOpen, setIsPageOpen] = useState(false);
+  const [isComponentOpen,setIsComponentOpen]=useState(false);
 
   useEffect(() => {
     document.body.style.overflow = isSidebarOpen ? 'hidden' : 'auto';
@@ -46,11 +47,20 @@ const Home = () => {
           onClick={() => setIsPageOpen(false)}
         ></div>
       )}
+      {isSidebarOpen && isComponentOpen && (
+        <div
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+          onClick={() => setIsComponentOpen(false)}
+        ></div>
+      )}
 
       {/* Sidebar */}
       {isSidebarOpen && (
         <div className="fixed z-40 top-0 left-0 h-full ">
-          <SideBar isPageOpen={isPageOpen} setIsPageOpen={setIsPageOpen} />
+           
+          <SideBar isPageOpen={isPageOpen} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}  setIsPageOpen={setIsPageOpen} isComponentOpen={isComponentOpen} setIsComponentOpen={setIsComponentOpen}/>
+          <Outlet/>
+           
         </div>
       )}
     </div>

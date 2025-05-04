@@ -3,15 +3,26 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import images from "../assets/images"
 import Pages from './Pages';
 import { useState } from 'react';
-const SideBar = ({isPageOpen,setIsPageOpen}) => {
+import Component from './Component';
+// import { useNavigate } from 'react-router-dom';
+
+const SideBar = ({isPageOpen,setIsPageOpen,isSidebarOpen,setIsSidebarOpen,isComponentOpen,setIsComponentOpen}) => {
     console.log("Sidebar activated");
     // const [isPageOpen,setIsPageOpen]=useState(false);
     
     const handelPages=()=>{
       setIsPageOpen(true);
     }
+    const handleComponent=()=>{
+      setIsComponentOpen(true);
+    }
     const back=()=>{
       setIsPageOpen(false);
+      setIsComponentOpen(false);
+    }
+    // const navigate=useNavigate();
+    const home=()=>{
+      setIsSidebarOpen(!isSidebarOpen);
     }
     
   return (
@@ -39,7 +50,7 @@ const SideBar = ({isPageOpen,setIsPageOpen}) => {
       <div className=" my-[20px]  ">
         <p className='text-[12px] font-bold leading-[20px]  flex  w-[100%]'>MAIN MENU</p>
         <ul className='list-none text-[15px] leading-[22px] font-semibold'>
-            <li className='mt-[16px] flex gap-[10px] cursor-pointer'>
+            <li onClick={home} className='mt-[16px] flex gap-[10px] cursor-pointer'>
               <img src={images.listHome} className='' alt="" />
               <span>Home</span>
             </li>
@@ -55,7 +66,7 @@ const SideBar = ({isPageOpen,setIsPageOpen}) => {
 
               
             </li>
-            <li className='mt-[16px] flex justify-between cursor-pointer'>
+            <li onClick={handleComponent} className='mt-[16px] flex justify-between cursor-pointer'>
               <div className='flex gap-[10px]'>
               <img src={images.listComponent} className='' alt="" />
               <span>Components</span>
@@ -96,10 +107,22 @@ const SideBar = ({isPageOpen,setIsPageOpen}) => {
         <Pages back={back}/>
         </div>
        }
+       {
+        isComponentOpen && 
+        <div className='transition-all ease-out duration-200'>
+        <Component back={back}/>
+        </div>
+       }
         {isPageOpen && (
     <div
       className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
       onClick={() => setIsPageOpen(false)}
+    ></div>
+  )}
+        {isComponentOpen && (
+    <div
+      className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+      onClick={() => setIsComponentOpen(false)}
     ></div>
   )}
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaAngleLeft } from "react-icons/fa6";
 const Pages = ({back}) => {
+ 
   console.log("pages is seen")
   return (
     <div className='absolute top-0 w-[280px] h-screen overflow-y-auto    z-50 bg-white font-urbanist'>

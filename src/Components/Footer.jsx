@@ -21,7 +21,7 @@ const Footer = () => {
             <img src={images.profile} className="cursor-pointer" alt="" />
           </div>
           <div className="flex p-2 rounded-full bg-white bottom-0 left-1/2 -translate-x-1/2  absolute">
-            <button className="flex items-center justify-center bg-blue-500 h-[60px] w-[60px] text-[24px] font-normal text-white  rounded-full ">
+            <button className="flex items-center justify-center bg-[#2869FE] h-[60px] w-[60px] text-[24px] font-normal text-white  rounded-full ">
               +
             </button>
           </div>

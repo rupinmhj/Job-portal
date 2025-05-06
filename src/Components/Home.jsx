@@ -9,6 +9,7 @@ import Company from './Company';
 import Footer from './Footer';
 import SideBar from './SideBar';
 import { Outlet } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPageOpen, setIsPageOpen] = useState(false);
@@ -21,7 +22,7 @@ const Home = () => {
   return (
     <div className='relative'>
       {/* Main content */}
-      <div className="relative z-10 xl:mx-[10px]">
+      <div className="relative z-10 ">
         <Header
           isSidebarOpen={isSidebarOpen}
           toggleSidebar={() => setIsSidebarOpen(prev => !prev)}
@@ -55,14 +56,27 @@ const Home = () => {
       )}
 
       {/* Sidebar */}
-      {isSidebarOpen && (
-        <div className="fixed z-40 top-0 left-0 h-full ">
-           
-          <SideBar isPageOpen={isPageOpen} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}  setIsPageOpen={setIsPageOpen} isComponentOpen={isComponentOpen} setIsComponentOpen={setIsComponentOpen}/>
-          <Outlet/>
-           
-        </div>
-      )}
+      <AnimatePresence>
+  {isSidebarOpen && (
+    <motion.div
+      initial={{ x: -300 }}
+      animate={{ x:0}}
+      exit={{ x: -300 }}
+      transition={{ duration: 0.2, ease: 'easeInOut' }}
+      className="fixed z-40 top-0 left-0 h-full"
+    >
+      <SideBar
+        isPageOpen={isPageOpen}
+        setIsPageOpen={setIsPageOpen}
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+        isComponentOpen={isComponentOpen}
+        setIsComponentOpen={setIsComponentOpen}
+      />
+      <Outlet />
+    </motion.div>
+  )}
+</AnimatePresence>
     </div>
   );
 };

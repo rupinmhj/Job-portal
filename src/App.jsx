@@ -6,6 +6,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import SetupProfile from './Components/SetupProfile';
 import Interest from "./Components/Interest";
 import Notification from "./Components/Notification";
+import Profile from "./Components/Profile"
+import Clipboard from "./Components/Clipboard";
+import Message from './Components/Message'
+import SignIn from "./Components/SignIn";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,12 +27,27 @@ const router = createBrowserRouter([
   {
     path:"/notification",
     element:<Notification/>
-  
+  },
+  {
+    path:"/profile",
+    element: <Profile />
+  },
+  {
+    path:"/clipboard",
+    element:<Clipboard />
+  },
+  {
+    path:"/message",
+    element: <Message />
+  },
+  {
+    path:"/signin",
+    element:<SignIn/>
   }
 ]);
 const App = () => {
   return (
-    <div>
+    <div className="font-urbanist">
       {/* <Home/> */}
       <RouterProvider router={router} />
     </div>

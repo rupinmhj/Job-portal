@@ -24,6 +24,10 @@ import home from './home.svg'
 import clipboard from './clipboard.svg'
 import message from './message.svg'
 import profile from './profile.svg'
+import homefill from './homefill.svg'
+import clipboardfill from './clipboardfill.svg'
+import messagefill from './messagefill.svg'
+import profilefill from './profilefill.svg'
 import listHome from './listHome.svg'
 import listPages from './listPages.svg'
 import listComponent from './listComponent.svg'
@@ -39,6 +43,23 @@ import slack from './slack.png'
 import zapier from './zapier.png'
 import treehouse from './treehouse.png'
 import notimicrosoft from './notimicrosoft.png'
+import purpleprofile from './purpleprofile.svg'
+import education from './education.svg'
+import wallet from './wallet.svg'
+import location from './location.svg'
+import messenger1 from './messenger1.jpg'
+import messenger2 from './messenger2.jpg'
+import messenger3 from './messenger3.jpg'
+import messenger4 from './messenger4.jpg'
+import messenger5 from './messenger5.jpg'
+import messenger7 from './messenger7.jpg'
+import messenger6 from './messenger6.jpg'
+import logolight from './logo-light.png'
+import email from './email.svg'
+import password from './password.svg'
+import facebook from './fb.png'
+import googlelogo from './googlelogo.png'
+import applelogo from './apple.svg'
 const images={
     hello,
     profileSmall,
@@ -80,7 +101,27 @@ const images={
     notigoogle,
     slack,
     zapier,
-    notimicrosoft
-
+    notimicrosoft,
+    purpleprofile,
+    education,
+    profilefill,
+    clipboardfill,
+    messagefill,
+    homefill,
+    location,
+    wallet,
+    messenger1,
+    messenger2,
+    messenger3,
+    messenger4,
+    messenger5,
+    messenger7,
+    messenger6,
+    logolight,
+    email,
+    password,
+    googlelogo,
+    facebook,
+    applelogo,
 }
 export default images;

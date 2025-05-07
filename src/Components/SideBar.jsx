@@ -136,7 +136,7 @@ const SideBar = ({
             initial={{ x: -280, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -280, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             className="absolute top-0  z-50"
           >
             <Pages back={back} />
@@ -150,7 +150,7 @@ const SideBar = ({
          initial={{ x: -280, opacity: 0 }}
          animate={{ x: 0, opacity: 1 }}
          exit={{ x: -280, opacity: 0 }}
-         transition={{ duration: 0.3, ease: "easeInOut" }}
+         transition={{ duration: 0.4, ease: "easeInOut" }}
          className="absolute top-0  z-50"
        >
           <Component back={back} />

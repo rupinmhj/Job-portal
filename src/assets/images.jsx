@@ -61,6 +61,9 @@ import facebook from './fb.png'
 import googlelogo from './googlelogo.png'
 import applelogo from './apple.svg'
 import gallery from './gallery.svg'
+import locationfilter from './locationfilter.svg'
+import bag from './bag.svg'
+
 const images={
     hello,
     profileSmall,
@@ -125,5 +128,8 @@ const images={
     facebook,
     applelogo,
     gallery,
+    locationfilter,
+    bag,
+   
 }
 export default images;

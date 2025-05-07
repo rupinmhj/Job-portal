@@ -11,6 +11,7 @@ import Clipboard from "./Components/Clipboard";
 import Message from './Components/Message'
 import SignIn from "./Components/SignIn";
 import ApplyJob from "./Components/ApplyJob";
+import SetFilters from "./Components/SetFilters"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
   {
     path:"applyjob",
     element:<ApplyJob/>
-  }
+  },
+  {
+    path:"setfilters",
+    element:<SetFilters/>
+  },
 ]);
 const App = () => {
   return (

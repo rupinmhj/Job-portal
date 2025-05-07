@@ -62,7 +62,7 @@ const Home = () => {
       initial={{ x: -300 }}
       animate={{ x:0}}
       exit={{ x: -300 }}
-      transition={{ duration: 0.2, ease: 'easeInOut' }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
       className="fixed z-40 top-0 left-0 h-full"
     >
       <SideBar

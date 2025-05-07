@@ -1,6 +1,12 @@
 import React from 'react'
 import images from '../assets/images'
+import { useNavigate } from 'react-router-dom'
 const Search = () => {
+  const navigate=useNavigate();
+  const filter=()=>{
+    navigate("/setfilters")
+  }
+
   return (
     <div className='lg:mx-[232px] px-[24px]  flex font-urbanist items-center pt-[88px] bg-white'>
       
@@ -8,7 +14,7 @@ const Search = () => {
         <img src={images.searchIcon} className='pl-[18px] cursor-pointer' alt="" />
         
         <input type="text" className='text-[14px] px-[14px] text-textSearch  focus:outline-none w-full' placeholder='Search...'/>
-        <img src={images.option} className='pr-[14px]' alt="" />
+        <img onClick={filter} src={images.option} className='pr-[14px]' alt="" />
       
       </div>
     </div>

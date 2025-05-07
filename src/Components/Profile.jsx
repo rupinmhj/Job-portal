@@ -74,7 +74,7 @@ const Profile = () => {
       </div>
 
       <div className=" rounded-t-3xl  bg-[#7D67FF] text-white text-[16px] font-urbanist  leading-[19px] mt-[24px] pt-[32px] h-full ">
-        <div className="px-[24px]">
+        <div className="px-[24px] pb-[20px]">
         <li className=" mt-[0px] flex justify-between cursor-pointer items-center pb-[16px] border-b border-gray-200 border-opacity-35 mb-[16px]">
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">

@@ -20,7 +20,7 @@ const Home = () => {
   }, [isSidebarOpen]);
 
   return (
-    <div className='relative'>
+    <div className='relative '>
       {/* Main content */}
       <div className="relative z-10 ">
         <Header

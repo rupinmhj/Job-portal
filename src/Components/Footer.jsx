@@ -1,8 +1,12 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet,useNavigate } from "react-router-dom";
 import images from "../assets/images";
 
 const Footer = () => {
+  const navigate=useNavigate();
+  const applyjob=()=>{
+    navigate('/applyjob')
+  }
   return (
     <div>
       <div className="lg:px-[232px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
@@ -49,7 +53,7 @@ const Footer = () => {
             </NavLink>
           </div>
 
-          <div className="flex p-2 rounded-full bg-white bottom-0 left-1/2 -translate-x-1/2 absolute">
+          <div onClick={applyjob} className=" flex p-2 rounded-full bg-white bottom-0 left-1/2 -translate-x-1/2 absolute">
             <button className="flex items-center justify-center bg-[#2869FE] h-[60px] w-[60px] text-[24px] font-normal text-white rounded-full">
               +
             </button>

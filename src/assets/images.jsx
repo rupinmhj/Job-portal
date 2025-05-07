@@ -60,6 +60,7 @@ import password from './password.svg'
 import facebook from './fb.png'
 import googlelogo from './googlelogo.png'
 import applelogo from './apple.svg'
+import gallery from './gallery.svg'
 const images={
     hello,
     profileSmall,
@@ -123,5 +124,6 @@ const images={
     googlelogo,
     facebook,
     applelogo,
+    gallery,
 }
 export default images;

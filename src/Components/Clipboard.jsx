@@ -16,7 +16,7 @@ const Clipboard = () => {
     <>
       <div className=" text-[#121927] lg:px-[232px] xl:px-[274px] px-[24px] pt-[20px] pb-[40px] flex font-urbanist items-center justify-between relative">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
-          <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
+          <div className="flex items-center justify-between px-[24px] lg:px-[274px] py-[16px]">
             <div
               onClick={back}
               className="p-[6px] border rounded-lg border-black cursor-pointer"
@@ -52,8 +52,9 @@ const Clipboard = () => {
         </div>
       </div>
 
-      <div className="mt-[24px] lg:px-[232px] xl:px-[274px] px-[24px] bg-bgColor ">
-        <div className="bg-white rounded-xl flex-col flex  p-[16px] mb-[16px]">
+      <div className="mt-[24px] lg:px-[232px] xl:px-[274px] px-[24px]  ">
+        <div className="bg-bgColor bg-opacity-65">
+        <div className="bg-white  rounded-xl flex-col flex  p-[16px] mb-[16px]">
           <div className="relative flex   gap-[16px] mb-[20px]">
             <div className="flex    justify-center items-start  ">
               <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
@@ -243,6 +244,7 @@ const Clipboard = () => {
               <h2 className="text-[#2869FE] ">View Application</h2>
             </div>
           </div>
+        </div>
         </div>
       </div >
       <Footer />

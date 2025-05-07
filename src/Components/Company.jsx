@@ -4,9 +4,9 @@ import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 const Company = () => {
   return (
-    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px] bg-bgColor">
+    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px] bg-bgColor bg-opacity-80 rounded-2xl">
       
-      <div className="flex justify-between w-full ">
+      <div className="flex justify-between w-full bg-white  ">
         <h1 className="text-black font-bold text-[18px] leading-[22px] mb-[24px] ">
           Most Popular
         </h1>

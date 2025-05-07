@@ -10,6 +10,7 @@ import Profile from "./Components/Profile"
 import Clipboard from "./Components/Clipboard";
 import Message from './Components/Message'
 import SignIn from "./Components/SignIn";
+import ApplyJob from "./Components/ApplyJob";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,11 +44,15 @@ const router = createBrowserRouter([
   {
     path:"/signin",
     element:<SignIn/>
+  },
+  {
+    path:"applyjob",
+    element:<ApplyJob/>
   }
 ]);
 const App = () => {
   return (
-    <div className="font-urbanist">
+    <div className="font-urbanist" id="scrollable">
       {/* <Home/> */}
       <RouterProvider router={router} />
     </div>

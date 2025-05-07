@@ -7,7 +7,7 @@ import images from "../assets/images";
 const SignIn = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
-  const home=()=>navigate("/")
+  const home=()=>navigate("/");
 
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -17,8 +17,8 @@ const SignIn = () => {
       <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] w-full">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
           <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
-            <div className="p-[6px] border rounded-lg border-black cursor-pointer">
-              <FaAngleLeft onClick={back} className="text-gray-500 size-[14px]" />
+            <div onClick={back} className="p-[6px] border rounded-lg border-black cursor-pointer">
+              <FaAngleLeft  className="text-gray-500 size-[14px]" />
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Sign In</h2>
             <h2 className="w-[14px]"></h2>

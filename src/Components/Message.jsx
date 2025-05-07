@@ -37,7 +37,8 @@ const Message = () => {
         </div>
       </div>
 
-      <div className="text-[#121927] bg-bgColor lg:px-[232px] xl:px-[274px] px-[24px] flex-col mb-[100px] flex font-urbanist">
+      <div className="text-[#121927] bg-opacity-70 rounded-xl lg:px-[232px] xl:px-[274px] px-[24px] flex-col mb-[100px] flex font-urbanist">
+       <div className=" bg-bgColor bg-opacity-60">
         <div className="flex justify-between w-full p-[16px] mb-[16px]  bg-white rounded-xl gap-[12px]">
           <img
             src={images.messenger1}
@@ -55,7 +56,7 @@ const Message = () => {
           <div className="flex flex-col text-google flex-shrink-0 gap-[8px]">
             <h1 className="text-[11px] ">Just Now</h1>
             <span className="flex justify-end text-white ">
-              <span className="text-[10px] h-4 w-4 pl-1.5 rounded-full bg-purple-600">
+              <span className="text-[10px] h-4 w-4 pl-1.5  rounded-full bg-purple-600">
                 2
               </span>
             </span>
@@ -71,7 +72,7 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">5 mins ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600  " fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -86,7 +87,7 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">10 mins ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -101,7 +102,7 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">30 mins ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -116,7 +117,7 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">1 hour ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -131,7 +132,7 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">2 hours ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -144,12 +145,12 @@ const Message = () => {
   </div>
   <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
     <h1 className="text-[11px]">2 hours ago</h1>
-    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   </div>
 </div>
-
+</div>
       </div>
 
       <Footer />

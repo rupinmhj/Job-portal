@@ -12,6 +12,7 @@ import Message from './Components/Message'
 import SignIn from "./Components/SignIn";
 import ApplyJob from "./Components/ApplyJob";
 import SetFilters from "./Components/SetFilters"
+import Details from "./Components/Details";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path:"setfilters",
     element:<SetFilters/>
+  },
+  {
+    path:"details",
+    element:<Details/>
   },
 ]);
 const App = () => {

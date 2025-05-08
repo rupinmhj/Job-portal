@@ -1,7 +1,12 @@
 import React from "react";
 import images from "../assets/images";
-
+import SetFilters from "./SetFilters"
+import { useNavigate } from "react-router-dom";
 const LearnMore = () => {
+  const navigate=useNavigate();
+  const filter=()=>{
+    navigate("/details")
+  }
   return (
     <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center bg-white">
       <div className="px-[24px] pt-[20px] pb-[24px] bg-backGreen w-full rounded-2xl relative overflow-hidden ">
@@ -10,7 +15,7 @@ const LearnMore = () => {
           <br />
           suitable for you
         </h1>
-        <button className="text-[12px] leading-[20px] bg-buttonGreen text-white font-semibold px-[14px] py-[10px] rounded-lg">
+        <button onClick={filter} className="text-[12px] leading-[20px] bg-buttonGreen text-white font-semibold px-[14px] py-[10px] rounded-lg">
           Learn More
         </button>
         <img

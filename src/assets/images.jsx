@@ -63,6 +63,15 @@ import applelogo from './apple.svg'
 import gallery from './gallery.svg'
 import locationfilter from './locationfilter.svg'
 import bag from './bag.svg'
+import bookmark from './bookmark.svg'
+import web from './web.svg'
+import location3 from './location3.svg'
+import people from './people.svg'
+import wallet2 from './wallet2.svg'
+import calender3 from './calendar3.svg'
+import review from './reviews.svg'
+import star from './star-rating.svg'
+import star2 from './stargray.svg' 
 
 const images={
     hello,
@@ -130,6 +139,14 @@ const images={
     gallery,
     locationfilter,
     bag,
-   
+    bookmark,
+    web,
+    location3,
+    people,
+    wallet2,
+    calender3,
+    review,
+    star,
+    star2
 }
 export default images;

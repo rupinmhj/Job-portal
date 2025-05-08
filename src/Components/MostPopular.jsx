@@ -2,8 +2,12 @@ import React from "react";
 import images from "../assets/images";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
+import { useNavigate } from "react-router-dom";
 const MostPopular = () => {
+  const navigate=useNavigate();
+  const detail=()=>{
+    navigate("/details");
+  }
   return (
     <div className="text-white lg:mx-[232px] pl-[24px] mt-[24px] font-urbanist">
       <div className="flex justify-between pr-[24px]">
@@ -47,7 +51,7 @@ const MostPopular = () => {
               <div className="flex items-end font-bold text-[16px] leading-[19px]">
                 $195,000/<span className="font-medium text-[10px] ml-1">Year</span>
               </div>
-              <button className="font-medium text-[12px] bg-buttonBlue flex gap-[4px] px-[12px] rounded-lg py-[6px]">
+              <button onClick={detail} className="font-medium text-[12px] bg-buttonBlue flex gap-[4px] px-[12px] rounded-lg py-[6px]">
                 Apply <img src={images.arrowRight} alt="" />
               </button>
             </div>
@@ -82,7 +86,7 @@ const MostPopular = () => {
               <div className="flex items-end font-bold text-[16px] leading-[19px]">
                 $195,000/<span className="font-medium text-[10px] ml-1">Year</span>
               </div>
-              <button className="font-medium text-[12px] bg-buttonPurple flex gap-[4px] px-[12px] rounded-lg py-[6px]">
+              <button onClick={detail} className="font-medium text-[12px] bg-buttonPurple flex gap-[4px] px-[12px] rounded-lg py-[6px]">
                 Apply <img src={images.arrowRight} alt="" />
               </button>
             </div>

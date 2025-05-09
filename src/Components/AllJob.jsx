@@ -3,13 +3,20 @@ import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
+import { motion } from 'framer-motion';
 const AllJob = () => {
   const navigate = useNavigate();
   const back = () => {
     navigate("/");
   };
   return (
-    <div>
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3, delay:0.1 }}
+    className="h-screen overflow-y-scroll scroll-container"
+  >
       <div className=" bg-white lg:px-[232px] xl:px-[274px]  text-[#121927] font-urbanist  w-full">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
           <div className="flex items-center justify-between px-[24px] pb-[24px] lg:px-[252px] py-[16px]">
@@ -292,7 +299,7 @@ const AllJob = () => {
           </div>
         </div>
       </div>
-    </div>
+      </motion.div>
   );
 };
 

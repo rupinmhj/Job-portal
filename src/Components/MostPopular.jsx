@@ -8,12 +8,15 @@ const MostPopular = () => {
   const detail=()=>{
     navigate("/details");
   }
+  const allJob=()=>{
+    navigate("/alljob")
+  }
   return (
     <div className="text-white lg:mx-[232px] pl-[24px] mt-[24px] font-urbanist">
       <div className="flex justify-between pr-[24px]">
 
       <h1 className='text-black font-bold text-[18px] leading-[22px] mb-[24px] '>Most Popular</h1>
-      <h4 className="leading-[24px] font-bold text-[14px] text-textSeeAll">See all</h4>
+      <h4 className="leading-[24px] font-bold text-[14px] cursor-pointer text-textSeeAll" onClick={allJob}>See all</h4>
       </div>
       <Swiper
         spaceBetween={20}

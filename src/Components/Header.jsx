@@ -18,7 +18,7 @@ const Header = ({toggleSidebar,isSideBarOpen}) => {
   }
   return (
 
-    <div className='lg:px-[232px] xl:px-[274px] px-[24px] pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] w-full fixed top-0 bg-white z-50'>
+    <div className='lg:px-[232px] xl:px-[254px] px-[24px] pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] w-full fixed top-0 bg-white z-50'>
         {/* left part */}
       <div onClick={handleSetup} className="cursor-pointer flex gap-[12px] items-center">
         <div>

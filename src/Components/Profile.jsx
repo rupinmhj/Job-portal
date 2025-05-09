@@ -10,6 +10,7 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { IoLogOutOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import Footer from "../Components/Footer"
+import {motion} from  'framer-motion'
 const Profile = () => {
   const navigate = useNavigate();
   const back = () => {
@@ -17,7 +18,14 @@ const Profile = () => {
   };
  
   return (
-    <div className=" text-[#121927]  pt-[20px]   font-urbanist items-center justify-between  ">
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      transition={{duration:0.3}}
+      className="h-screen overflow-y-scroll scroll-container"
+      >
+          <div className=" text-[#121927]  pt-[20px]   font-urbanist items-center justify-between  ">
       <div className="fixed top-0 left-0 right-0 bg-white z-10  ">
         <div className="flex items-center justify-between lg:px-[232px] xl:px-[274px] px-[24px] pt-[16px] pb-[24px]">
           <div
@@ -160,6 +168,8 @@ const Profile = () => {
 
       <Outlet />
     </div>
+      </motion.div>
+    
   );
 };
 

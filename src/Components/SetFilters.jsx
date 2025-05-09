@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Range } from "react-range";
-
+import { motion } from 'framer-motion';
 const categories = [
   "Business",
   "Writing",
@@ -66,6 +66,12 @@ const SetFilters = () => {
   
 
   return (
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }}
+  >
     <div className="bg-white font-urbanist w-full text-[#121927] lg:px-[232px]">
       {/* Top Header */}
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
@@ -237,6 +243,7 @@ const SetFilters = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <div className="transition-all duration-300 ease-in-out">
-      <div className="lg:px-[232px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
+      <div className="lg:px-[202px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
         <div className="w-full relative px-[20px]">
           <div className="flex lg:gap-20 justify-between w-full px-4 flex-grow">
             <NavLink to="/" className="transition-transform duration-200 hover:scale-110">

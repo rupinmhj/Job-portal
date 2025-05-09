@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Outlet } from "react-router-dom";
-
+import { motion } from 'framer-motion';
 const SetupProfile = () => {
   const navigate = useNavigate();
   
@@ -123,6 +123,13 @@ const SetupProfile = () => {
   };
 
   return (
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 ,delay:0.1 }}
+    className="h-screen overflow-y-scroll scroll-container"
+  >
     <div className="bg-white lg:px-[232px] font-urbanist text-[rgb(18, 25, 39)] w-full">
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
         <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
@@ -312,6 +319,7 @@ const SetupProfile = () => {
 
       <Outlet />
     </div>
+    </motion.div>
   );
 };
 

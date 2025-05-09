@@ -9,7 +9,7 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { LiaAwardSolid } from "react-icons/lia";
 import { IoLogOutOutline } from "react-icons/io5";
 import Footer from "../Components/Footer";
-
+import {motion} from 'framer-motion'
 const Message = () => {
   const navigate = useNavigate();
   const back = () => {
@@ -17,6 +17,13 @@ const Message = () => {
   };
   return (
     <>
+     <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }}
+    className="h-screen overflow-y-scroll scroll-container"
+  >
       <div className=" text-[#121927] lg:px-[232px] xl:px-[274px] px-[24px]  pb-[88px]  flex font-urbanist items-center justify-between relative">
         <div className="fixed top-0 left-0 right-0 bg-white z-10  ">
           <div className="flex items-center justify-between lg:px-[232px] xl:px-[274px] px-[24px] pt-[16px] pb-[24px]">
@@ -154,6 +161,7 @@ const Message = () => {
       </div>
 
       <Footer />
+      </motion.div>
     </>
   );
 };

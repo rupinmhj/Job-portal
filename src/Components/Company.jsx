@@ -8,6 +8,9 @@ const Company = () => {
     const detail=()=>{
       navigate("/details")
     }
+    const allJob=()=>{
+        navigate("/alljob")
+      }
   return (
     <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px] bg-bgColor bg-opacity-80 rounded-2xl">
       
@@ -15,7 +18,7 @@ const Company = () => {
         <h1 className="text-black font-bold text-[18px] leading-[22px] mb-[24px] ">
           Most Popular
         </h1>
-        <h4 className="leading-[24px] font-bold text-[14px] text-textSeeAll">
+        <h4 onClick={allJob} className="leading-[24px] font-bold text-[14px] text-textSeeAll cursor-pointer">
           See all
         </h4>
       </div>

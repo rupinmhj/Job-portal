@@ -4,7 +4,7 @@ const Pages = ({back}) => {
  
   console.log("pages is seen")
   return (
-    <div className='w-[280px] h-screen overflow-y-auto bg-white font-urbanist shadow-lg'>
+    <div className='w-[280px]  bg-white font-urbanist shadow-lg h-screen overflow-y-scroll scroll-container'>
 
       <div className="flex pt-[16px] p-[24px]">
         <div className='p-[6px] border border-1/2 rounded-lg border-black '>

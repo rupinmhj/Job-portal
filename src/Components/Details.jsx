@@ -5,6 +5,7 @@ import images from "../assets/images";
 import { IoLocationSharp } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
 // import { Outlet } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 import JobDescription from "./JobDescription";
 import CompanyDetail from "./CompanyDetail";
@@ -18,12 +19,19 @@ const Details = () => {
   const [showOptions, setShowOptions] = useState("description");
 
   return (
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3,delay:0.1 }}
+    className="h-screen overflow-y-scroll scroll-container"
+  >
     <div className=" bg-white lg:px-[232px] xl:px-[274px] px-[24px] text-[#121927] font-urbanist text-[rgb(18, 25, 39)] w-full ">
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
         <div className="flex items-center justify-between px-[24px] lg:px-[232px] xl:px-[274px] py-[16px]">
-          <div className="p-[6px] border rounded-lg border-black cursor-pointer">
+          <div onClick={back} className="p-[6px] border rounded-lg border-black cursor-pointer">
             <FaAngleLeft
-              onClick={back}
+              
               className="text-gray-500  size-[14px]"
             />
           </div>
@@ -105,11 +113,43 @@ const Details = () => {
   </button>
 </div>
 
-      <div className="mt-[16px] mb-[100px]">
-        {showOptions === "description" && <JobDescription />}
-        {showOptions === "company" && <CompanyDetail />}
-        {showOptions === "review" && <Review />}
-      </div>
+<div className="mt-[16px] mb-[100px]">
+  <AnimatePresence mode="wait">
+    {showOptions === "description" && (
+      <motion.div
+        key="description"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        <JobDescription />
+      </motion.div>
+    )}
+    {showOptions === "company" && (
+      <motion.div
+        key="company"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        <CompanyDetail />
+      </motion.div>
+    )}
+    {showOptions === "review" && (
+      <motion.div
+        key="review"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Review />
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
         <div className="px-[24px] lg:px-[232px] xl:px-[274px]">
@@ -119,6 +159,7 @@ const Details = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

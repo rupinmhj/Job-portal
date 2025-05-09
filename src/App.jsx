@@ -67,7 +67,8 @@ const router = createBrowserRouter([
 ]);
 const App = () => {
   return (
-    <div className="font-urbanist" id="scrollable">
+    
+    <div >
       {/* <Home/> */}
       <RouterProvider router={router} />
     </div>

@@ -54,3 +54,13 @@ body {
 html{
   scroll-behavior: smooth;
 }
+
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

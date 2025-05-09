@@ -8,7 +8,7 @@ const Component = ({ back }) => {
     <div className='absolute top-0 w-[280px] h-screen overflow-y-auto z-50 bg-white font-urbanist'>
       <div className="flex pt-[16px] p-[24px]">
         <div className='p-[6px] border border-1/2 rounded-lg border-black '>
-          <FaAngleLeft onClick={back} className='text-gray-500 size-[14px]' />
+          <FaAngleLeft onClick={back} className='text-gray-500 cursor-pointer size-[14px]' />
         </div>
         <h2 className='text-[18px] font-bold ml-14'>Components</h2>
       </div>

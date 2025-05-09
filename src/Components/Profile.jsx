@@ -8,6 +8,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { LiaAwardSolid } from "react-icons/lia";
 import { IoLogOutOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 import Footer from "../Components/Footer"
 const Profile = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const Profile = () => {
           className="size-[80.4px] mb-[12px] border border-blue-500 rounded-xl"
           alt=""
         />
+       
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-[18px] font-bold leading-[22px] mb-[8px]">
             Jonathan Smith
@@ -78,9 +80,10 @@ const Profile = () => {
         <li className=" mt-[0px] flex justify-between cursor-pointer items-center pb-[16px] border-b border-gray-200 border-opacity-35 mb-[16px]">
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
-              <img src={images.purpleprofile} className="" alt="" />
+              
+              <CgProfile  className="h-[24px] w-[24px]"/>
             </div>
-            <span className="flex items-center text-[16px] font-bold">Personnal Information</span>
+            <span className="flex items-center text-[16px] font-bold">Personal Information</span>
           </div>
           <div className=" flex items-center">
             <MdOutlineKeyboardArrowRight />

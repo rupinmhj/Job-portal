@@ -56,7 +56,7 @@ const Message = () => {
           <div className="flex flex-col text-google flex-shrink-0 gap-[8px]">
             <h1 className="text-[11px] ">Just Now</h1>
             <span className="flex justify-end text-white ">
-              <span className="text-[10px] h-4 w-4 pl-1.5  rounded-full bg-purple-600">
+              <span className="text-[10px] h-4 w-4 pl-[5.5px] pt-[1px] rounded-full bg-purple-600">
                 2
               </span>
             </span>

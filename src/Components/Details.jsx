@@ -20,7 +20,7 @@ const Details = () => {
   return (
     <div className=" bg-white lg:px-[232px] xl:px-[274px] px-[24px] text-[#121927] font-urbanist text-[rgb(18, 25, 39)] w-full ">
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
-        <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
+        <div className="flex items-center justify-between px-[24px] lg:px-[232px] xl:px-[274px] py-[16px]">
           <div className="p-[6px] border rounded-lg border-black cursor-pointer">
             <FaAngleLeft
               onClick={back}
@@ -112,7 +112,7 @@ const Details = () => {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
-        <div className="px-[24px] lg:px-[252px]">
+        <div className="px-[24px] lg:px-[232px] xl:px-[274px]">
           <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl">
             Continue
           </button>

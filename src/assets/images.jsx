@@ -64,6 +64,7 @@ import gallery from './gallery.svg'
 import locationfilter from './locationfilter.svg'
 import bag from './bag.svg'
 import bookmark from './bookmark.svg'
+import bookmark2 from './bookmark2.svg'
 import web from './web.svg'
 import location3 from './location3.svg'
 import people from './people.svg'
@@ -72,7 +73,9 @@ import calender3 from './calendar3.svg'
 import review from './reviews.svg'
 import star from './star-rating.svg'
 import star2 from './stargray.svg' 
-
+import arrow from './arrow.svg'
+import mailchimp from './mailchimp.png'
+import evernote from './evernote.png'
 const images={
     hello,
     profileSmall,
@@ -140,6 +143,7 @@ const images={
     locationfilter,
     bag,
     bookmark,
+    bookmark2,
     web,
     location3,
     people,
@@ -147,6 +151,9 @@ const images={
     calender3,
     review,
     star,
-    star2
+    star2,
+    arrow,
+    mailchimp,
+    evernote,
 }
 export default images;

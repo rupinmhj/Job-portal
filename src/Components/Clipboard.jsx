@@ -16,7 +16,7 @@ const Clipboard = () => {
     <>
       <div className=" text-[#121927] lg:px-[232px] xl:px-[274px] px-[24px] pt-[20px] pb-[40px] flex font-urbanist items-center justify-between relative">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
-          <div className="flex items-center justify-between px-[24px] lg:px-[274px] py-[16px]">
+          <div className="flex items-center justify-between px-[24px] xl:px-[274px] lg:px-[232px] py-[16px]">
             <div
               onClick={back}
               className="p-[6px] border rounded-lg border-black cursor-pointer"

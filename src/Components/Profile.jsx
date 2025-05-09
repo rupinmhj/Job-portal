@@ -22,7 +22,7 @@ const Profile = () => {
       initial={{opacity:0}}
       animate={{opacity:1}}
       exit={{opacity:0}}
-      transition={{duration:0.3}}
+      transition={{duration:0.3,delay:0.15}}
       className="h-screen overflow-y-scroll scroll-container"
       >
           <div className=" text-[#121927]  pt-[20px]   font-urbanist items-center justify-between  ">

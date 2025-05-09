@@ -21,7 +21,7 @@ const ApplyJob = () => {
   >
     <div className=" bg-white lg:px-[232px] xl:px-[274px]  text-[#121927] font-urbanist  w-full ">
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
-        <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
+        <div className="flex items-center justify-between px-[24px] lg:px-[252px] xl:px-[294px] py-[16px]">
           <div className="p-[6px] border rounded-lg border-black cursor-pointer">
             <FaAngleLeft
               onClick={back}

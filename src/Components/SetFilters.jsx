@@ -26,7 +26,9 @@ const SetFilters = () => {
   const navigate = useNavigate();
 
   const handleBack = () => navigate("/");
-
+  const allJob=()=>{
+    navigate('/alljob')
+  }
   const handleSelect = (category) => {
     setSelectedCategory(category);
     setShowOptions(false);
@@ -237,7 +239,7 @@ const SetFilters = () => {
       {/* Bottom Button */}
       <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
         <div className="px-[24px] lg:px-[252px]">
-          <button className="w-full bg-[#2869FE]  p-[16px] text-white font-medium rounded-xl">
+          <button onClick={allJob} className="w-full bg-[#2869FE]  p-[16px] text-white font-medium rounded-xl">
             Apply filter
           </button>
         </div>

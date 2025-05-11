@@ -21,7 +21,9 @@ export default {
         textSeeAll:"rgba(18, 25, 39, 0.6)",
         bgColor:"#f7f7f8",
         bgLogo:"#7c66ff",
-        google:"#71757D"
+        google:"#71757D",
+        "primary-text":"#121927",
+        borderBlue:"#245EE4"
         
 
       },

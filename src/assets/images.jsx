@@ -76,6 +76,9 @@ import star2 from './stargray.svg'
 import arrow from './arrow.svg'
 import mailchimp from './mailchimp.png'
 import evernote from './evernote.png'
+import boarding1 from './boarding1.png'
+import boarding2 from './boarding2.png'
+import boarding3 from './boarding3.png'
 const images={
     hello,
     profileSmall,
@@ -155,5 +158,8 @@ const images={
     arrow,
     mailchimp,
     evernote,
+    boarding1,
+    boarding2,
+    boarding3,
 }
 export default images;

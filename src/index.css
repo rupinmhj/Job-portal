@@ -64,3 +64,24 @@ html{
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+/* Fix pagination position */
+
+
+/* Custom bullet styles */
+.swiper .swiper-pagination-bullet {
+  width: 32px;
+  height: 6px;
+  background: #D9D9D9;
+  opacity: 1;
+   transition: all 0.3s ease;
+}
+
+.swiper .swiper-pagination-bullet-active {
+  background: #2869FE;
+  width: 28px;
+  border-radius: 5px;
+}
+
+.swiper-slide {
+  transition: opacity 1000ms ease !important;
+}

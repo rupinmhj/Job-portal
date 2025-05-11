@@ -8,6 +8,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
   const home=()=>navigate("/");
+  const signup=()=>navigate("/signup");
 
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -109,7 +110,7 @@ const SignIn = () => {
           </div>
         </div>
 
-        <div className="flex mt-[35px] justify-center mb-4">
+        <div onClick={signup} className="flex mt-[35px] justify-center mb-4">
           <p className="text-[#71757D] text-[14px] font-medium leading-[24px]">
             Don't have an account?
             <span className="text-[#2869FE] cursor-pointer"> Sign Up</span>

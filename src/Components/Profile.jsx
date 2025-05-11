@@ -16,6 +16,7 @@ const Profile = () => {
   const back = () => {
     navigate("/");
   };
+  const boarding=()=>navigate("/boarding")
  
   return (
     <motion.div
@@ -148,7 +149,7 @@ const Profile = () => {
         </li>
 
         <li className=" mt-[16px] pb-[116px] flex justify-between cursor-pointer items-center   mb-[16px]">
-          <div className="flex gap-[16px]">
+          <div onClick={boarding} className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
             <IoLogOutOutline    className="size-[24px] fill-white"/>
             </div>

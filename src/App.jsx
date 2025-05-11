@@ -10,10 +10,14 @@ import Profile from "./Components/Profile"
 import Clipboard from "./Components/Clipboard";
 import Message from './Components/Message'
 import SignIn from "./Components/SignIn";
+import SignUp from "./Components/signup";
 import ApplyJob from "./Components/ApplyJob";
 import SetFilters from "./Components/SetFilters"
 import Details from "./Components/Details";
 import AllJob from "./Components/AllJob";
+import Boarding from "./Components/Boarding";
+import ResetPassword from "./Components/ResetPassword";
+import Verification from "./Components/Verification";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +67,23 @@ const router = createBrowserRouter([
   {
     path:"alljob",
     element:<AllJob/>
+  },
+  {
+    path:"boarding",
+    element:<Boarding/>
+
+  },
+  {
+    path:"signup",
+    element:<SignUp/>
+  },
+  {
+    path:"resetpassword",
+    element:<ResetPassword/>
+  },
+  {
+    path:"verification",
+    element:<Verification/>
   }
 ]);
 const App = () => {

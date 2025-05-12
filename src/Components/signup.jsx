@@ -104,9 +104,9 @@ const SignUp = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <FaRegEyeSlash size={20} className="mt-4" />
-                ) : (
                   <FaRegEye size={20} className="mt-4" />
+                ) : (
+                  <FaRegEyeSlash size={20} className="mt-4" />
                 )}
               </span>
             </div>
@@ -134,9 +134,9 @@ const SignUp = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <FaRegEyeSlash size={20} className="mt-4" />
-                ) : (
                   <FaRegEye size={20} className="mt-4" />
+                ) : (
+                  <FaRegEyeSlash size={20} className="mt-4" />
                 )}
               </span>
             </div>

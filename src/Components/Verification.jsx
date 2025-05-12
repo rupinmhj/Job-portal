@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState ,useEffect,useRef} from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -12,6 +12,46 @@ const Verification = () => {
 
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const inputRefs=[
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null)
+  ];
+
+  useEffect(()=>{
+    inputRefs[0].current?.focus(); //we use ? so that it doesn't shows error even if the curren is null
+  },[]);
+
+  const[seconds,setSeconds]=useState(59);
+  useEffect(()=>{
+    if(seconds>0){
+      const timer=setTimeout(()=>setSeconds(seconds-1),1000);
+      return()=>clearTimeout(timer);
+    }
+  })
+
+  const handleInput=(index,e)=>{
+    console.log("handleInputclicked")
+    const inputElement=e.target;
+
+    //Replace any non-digit with empty string
+    inputElement.value=inputElement.value.replace(/[^\d]/g,'');
+    
+    if(inputElement.value && index<3){
+      inputRefs[index+1].current?.focus();
+    }
+  }
+
+  const handleKeyDown=(index,e)=>{
+     console.log("handleKeyclicked")
+    if(e.key==='Backspace' && !e.target.value && index>0){
+      const prevInput=inputRefs[index-1].current;
+      prevInput.value="";
+      prevInput.focus();
+    }
+  }
 
   
 
@@ -40,6 +80,25 @@ const Verification = () => {
           </div>
         </div>
 
+        <div>
+           <div className="flex justify-center space-x-4 p-4">
+               {[0,1,2,3].map((index)=>(
+            <input
+              key={index}
+              ref={inputRefs[index]}
+              type="text"
+              maxLength={1}
+              inputMode="numeric "
+              className="h-[55px] w-[55px] text-center text-[24px] font-bold border rounded-[12px] focus:outline-custBlackBold"
+              onInput={(e)=>handleInput(index,e)}
+              onKeyDown={e=>handleKeyDown(index,e)}
+              
+         /> ))}
+           </div>
+         
+        </div>
+
+
         
        
 
@@ -49,6 +108,11 @@ const Verification = () => {
         >
           Request
         </button>
+
+        <div className="text-[14px] mt-[48px] leading-[24px] font-medium text-google flex gap-2 justify-center">
+          <h1>Code expires in 00:{seconds}</h1>
+          {seconds===0 && <p className="text-[#2869FE]">Resend code </p>}
+        </div>
       </div>
     </>
   );

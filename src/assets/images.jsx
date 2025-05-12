@@ -79,6 +79,16 @@ import evernote from './evernote.png'
 import boarding1 from './boarding1.png'
 import boarding2 from './boarding2.png'
 import boarding3 from './boarding3.png'
+import intDesign from './intDesign.svg'
+import intDevelop from './intDevelop.svg'
+import intInfo from './intInfo.svg'
+import intMarketing from './intMarketing.svg'
+import intResearch from './intResearch.svg'
+import graytick from './graytick.svg'
+import greentick from './greentick.svg'
+import success from './success.png'
+import clock from './clock.svg'
+
 const images={
     hello,
     profileSmall,
@@ -161,5 +171,14 @@ const images={
     boarding1,
     boarding2,
     boarding3,
+    greentick,
+    graytick,
+    intDesign,
+    intDevelop,
+    intInfo,
+    intMarketing,
+    intResearch,
+    success,
+    clock,
 }
 export default images;

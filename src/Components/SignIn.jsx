@@ -65,7 +65,7 @@ const SignIn = () => {
                 className="absolute right-4 top-[42%] transform -translate-y-1/2 cursor-pointer text-gray-500"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaRegEyeSlash size={20} className="mt-4" /> : <FaRegEye size={20} className="mt-4"/>}
+                {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4"/>}
               </span>
             </div>
           </div>

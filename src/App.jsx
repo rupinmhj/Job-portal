@@ -18,6 +18,10 @@ import AllJob from "./Components/AllJob";
 import Boarding from "./Components/Boarding";
 import ResetPassword from "./Components/ResetPassword";
 import Verification from "./Components/Verification";
+import ForgetPassword from "./Components/ForgetPassword";
+import ConfirmNewAccount from "./Components/ConfirmNewAccount";
+import Success from "./Components/Success";
+import SearchJob from "./Components/SearchJob";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,37 +57,54 @@ const router = createBrowserRouter([
     element:<SignIn/>
   },
   {
-    path:"applyjob",
+    path:"/applyjob",
     element:<ApplyJob/>
   },
   {
-    path:"setfilters",
+    path:"/setfilters",
     element:<SetFilters/>
   },
   {
-    path:"details",
+    path:"/details",
     element:<Details/>
   },
   {
-    path:"alljob",
+    path:"/alljob",
     element:<AllJob/>
   },
   {
-    path:"boarding",
+    path:"/boarding",
     element:<Boarding/>
 
   },
   {
-    path:"signup",
+    path:"/signup",
     element:<SignUp/>
   },
   {
-    path:"resetpassword",
+    path:"/resetpassword",
     element:<ResetPassword/>
   },
   {
-    path:"verification",
+    path:"/verification",
     element:<Verification/>
+  },
+  {
+    path:"/forgetpassword",
+    element: <ForgetPassword/>
+
+  },
+  {
+    path:"/setup/interest/confirmnewaccount",
+    element:<ConfirmNewAccount/>
+  },
+  {
+    path:"/setup/interest/confirmnewaccount/success",
+    element:<Success/>
+  },
+  {
+    path:'/searchjob',
+    element:<SearchJob/>
   }
 ]);
 const App = () => {

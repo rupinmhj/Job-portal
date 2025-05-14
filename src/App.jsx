@@ -30,6 +30,10 @@ import SkillAssessment from "./Components/SkillAssessment";
 import SkillAssessment2 from "./Components/SkillAssessment2";
 import SkillAssessment3 from "./Components/SkillAssessment3";
 import SuccessSkill from "./Components/SuccessSkill";
+import Education from "./Components/Education";
+import Awards from "./Components/Awards";
+import GroupMessage from "./Components/GroupMessage";
+import EmptyNotification from "./Components/EmptyNotification";
 
 const router = createBrowserRouter([
   {
@@ -146,7 +150,27 @@ const router = createBrowserRouter([
   {
     path:'/successskill',
     element:<SuccessSkill/>
+  },
+  {
+    path:'/education',
+    element:<Education/>
+  },
+  {
+    path:'/awards',
+    element:<Awards/>
+  },
+  {
+    path:'/groupmessage',
+    element: <GroupMessage />
+  },
+  {
+     path:'/emptynotification',
+    element: <EmptyNotification />
   }
+
+   
+  
+
   
 ]);
 const App = () => {

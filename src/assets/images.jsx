@@ -96,6 +96,9 @@ import sent from './sent.svg'
 import homewhite from './homeWhite.svg'
 import Illustration from './Illustration.png'
 import option2 from './option2.svg'
+import groupcall from './groupcall.png'
+import search from './search.svg'
+import cat from './cat.png'
 
 const images={
     hello,
@@ -196,5 +199,8 @@ const images={
     homewhite,
     Illustration,
     option2,
+    search,
+    groupcall,
+    cat,
 }
 export default images;

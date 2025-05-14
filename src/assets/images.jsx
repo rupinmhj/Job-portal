@@ -88,6 +88,14 @@ import graytick from './graytick.svg'
 import greentick from './greentick.svg'
 import success from './success.png'
 import clock from './clock.svg'
+import call from './call.svg'
+import videocall from './videocall.svg'
+import attachfile from './attachfile.svg'
+import emoji from './emoji.svg'
+import sent from './sent.svg'
+import homewhite from './homeWhite.svg'
+import Illustration from './Illustration.png'
+import option2 from './option2.svg'
 
 const images={
     hello,
@@ -180,5 +188,13 @@ const images={
     intResearch,
     success,
     clock,
+    call,
+    videocall,
+    attachfile,
+    emoji,
+    sent,
+    homewhite,
+    Illustration,
+    option2,
 }
 export default images;

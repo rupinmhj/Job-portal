@@ -22,6 +22,15 @@ import ForgetPassword from "./Components/ForgetPassword";
 import ConfirmNewAccount from "./Components/ConfirmNewAccount";
 import Success from "./Components/Success";
 import SearchJob from "./Components/SearchJob";
+import MessageInbox from "./Components/MessageInbox";
+import JobDetailsTracking from "./Components/JobDetailsTracking"
+import SkillTest from "./Components/SkillTest";
+import WorkExperience from "./Components/WorkExperience";
+import SkillAssessment from "./Components/SkillAssessment";
+import SkillAssessment2 from "./Components/SkillAssessment2";
+import SkillAssessment3 from "./Components/SkillAssessment3";
+import SuccessSkill from "./Components/SuccessSkill";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -105,7 +114,40 @@ const router = createBrowserRouter([
   {
     path:'/searchjob',
     element:<SearchJob/>
+  },
+  {
+    path:'/message/messageinbox',
+    element:<MessageInbox/>
+  },
+  {
+    path:'/jobdetailstracking',
+    element:<JobDetailsTracking/>
+  },
+  {
+    path:'/skilltest',
+    element:<SkillTest/>
+  },
+  {
+    path:'/workexperience',
+    element:<WorkExperience/>
+  },
+  {
+    path:'/skillassessment',
+    element:<SkillAssessment/>
+  },
+  {
+    path:'/skillassessment2',
+    element:<SkillAssessment2/>
+  },
+  {
+    path:'/skillassessment3',
+    element:<SkillAssessment3/>
+  },
+  {
+    path:'/successskill',
+    element:<SuccessSkill/>
   }
+  
 ]);
 const App = () => {
   return (

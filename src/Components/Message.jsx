@@ -15,6 +15,9 @@ const Message = () => {
   const back = () => {
     navigate("/");
   };
+  const messageinbox=()=>{
+    navigate('/message/messageinbox');
+  }
   return (
     <>
      <motion.div
@@ -46,15 +49,15 @@ const Message = () => {
 
       <div className="text-[#121927] bg-opacity-70 rounded-xl lg:px-[232px] xl:px-[274px] px-[24px] flex-col mb-[100px] flex font-urbanist">
        <div className=" bg-bgColor bg-opacity-60">
-        <div className="flex justify-between w-full p-[16px] mb-[16px]  bg-white rounded-xl gap-[12px]">
+        <div onClick={messageinbox} className="cursor-pointer flex justify-between w-full p-[16px] mb-[16px]  bg-white rounded-xl gap-[12px]">
           <img
-            src={images.messenger1}
+            src={images.messenger5}
             className="border h-[44px] w-[44px] flex-shrink-0  border-green-800 rounded-full"
             alt=""
           />
           <div className="flex flex-col flex-grow gap-[6px] ">
             <h1 className="text-[15px] leading-[18px] font-bold">
-              Floyd Miles
+              Sonu Nigam
             </h1>
             <h1 className="text-[12px] text-google">
               Great I will have a look the{" "}
@@ -145,7 +148,7 @@ const Message = () => {
   </div>
 </div>
 <div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger5} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
+  <img src={images.messenger1} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Courtney Henry</h1>
     <h1 className="text-[12px] text-google">Check your inbox please.</h1>

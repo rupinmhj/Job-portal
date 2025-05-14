@@ -85,3 +85,34 @@ html{
 .swiper-slide {
   transition: opacity 1000ms ease !important;
 }
+
+ .green-radio {
+            position: relative;
+            appearance: none;
+            width: 13px;
+            height: 13px;
+            border: 1px solid #999;
+            border-radius: 50%;
+            outline: none;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+          
+          .green-radio:checked {
+            border-color: #22c55e;
+          }
+          
+          .green-radio:checked::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #22c55e;
+          }
+          
+          .green-radio:focus {
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+          }

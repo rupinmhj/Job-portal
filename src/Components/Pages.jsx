@@ -30,20 +30,20 @@ const Pages = ({back}) => {
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/details")}>Job Details</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/alljob")}>All Job</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/applyjob")}>Apply Job</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Success Applied</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'>Search Job</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Your Applications</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Job Details Tracking</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/successskill")}>Success Applied</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/searchjob')}>Search Job</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/clipboard')}>Your Applications</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/jobdetailstracking')}>Job Details Tracking</h2>
   <h2 className='pt-[16px] font-medium text-[15px]'>Empty Notification</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/message")}>Message</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Message Inbox</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/message/messageinbox")}>Message Inbox</h2>
   <h2 className='pt-[16px] font-medium text-[15px]'>Group Message</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/profile")}>Profile</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/searchjob")}>Search Job</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Skill Test</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Skill Assessment</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Work Experience</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Education</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/skilltest')}>Skill Test</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/skillassessment')}>Skill Assessment</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/workexperience')}>Work Experience</h2>
+  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate('/education')}>Education</h2>
   <h2 className='pt-[16px] font-medium text-[15px]'>Awards</h2>
   <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/setup/interest/confirmnewaccount/success")}>Success</h2>
 </div>

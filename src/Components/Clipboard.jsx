@@ -44,7 +44,7 @@ const Clipboard = () => {
         </div>
       </div>
       <div className="lg:mx-[232px] xl:px-[274px] px-[24px]  flex font-urbanist items-center pt-[0px] bg-white">
-        <div className="py-[14px] border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+        <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
           <img
             src={images.searchIcon}
             className="pl-[18px] cursor-pointer"
@@ -53,7 +53,7 @@ const Clipboard = () => {
 
           <input
             type="text"
-            className="text-[14px] px-[14px] text-textSearch  focus:outline-none w-full"
+            className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
             placeholder="Search..."
           />
           {/* <img src={images.option} className='pr-[14px]' alt="" /> */}

@@ -48,7 +48,7 @@ const SkillTest = () => {
 
         </div>
         <div className="p-[24px] text-white text-4 leading-[26px] font-bold">
-          <button className='w-full flex justify-center items-center p-4 bg-[#2869FE] rounded-[16px]'>
+          <button className='w-full flex justify-center items-center p-4 cursor-pointer bg-[#2869FE] rounded-[16px]' onClick={()=>navigate('/skillassessment')}>
             <h1>Start Skill Assessment</h1>
           </button>
         </div>

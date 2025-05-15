@@ -2,7 +2,7 @@ import React from "react";
 
 const JobDescription = () => {
   return (
-    <div>
+    <div className="font-urbanist">
       <div className="mt-[24px] ">
         <h1 className="text-[16px] font-bold leading-[19px]">About the Role</h1>
         <p className="mt-[14px] text-[12px] text-[#12192799]">

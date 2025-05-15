@@ -117,7 +117,7 @@ const MessageInbox = () => {
           <input
             type="text"
             placeholder="Type message"
-            className="w-full text-gray-700 outline-none text-[14px] py-[24px] pl-[99px] pr-[80px] "
+            className="w-full  text-gray-700 outline-none text-[14px] py-[24px] pl-[99px] pr-[80px] "
           />
           <img
             src={images.emoji}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import images from "../assets/images";
 
 const SignUp = () => {
@@ -57,7 +56,7 @@ const SignUp = () => {
             />
             <input
               type="text"
-              className="focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your your full name"
             />
           </div>
@@ -75,7 +74,7 @@ const SignUp = () => {
             />
             <input
               type="email"
-              className="focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
           </div>
@@ -96,7 +95,7 @@ const SignUp = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span
@@ -126,7 +125,7 @@ const SignUp = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span

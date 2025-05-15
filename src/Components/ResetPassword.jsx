@@ -55,7 +55,7 @@ const ResetPassword = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                className="w-full focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span
@@ -87,7 +87,7 @@ const ResetPassword = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span

@@ -197,8 +197,8 @@ const SetupProfile = () => {
               value={formData.fullName}
               onChange={handleChange}
               className={`focus:outline-none border ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full`}
+                errors.fullName ? "border-red-500" : "focus:border-gray-400"
+              } shadow-sm rounded-xl mt-[12px] pl-[52px] border py-[14px] pr-[20px] w-full`}
               placeholder="Type your full name"
             />
           </div>
@@ -227,8 +227,8 @@ const SetupProfile = () => {
               value={formData.contactNumber}
               onChange={handleChange}
               className={`focus:outline-none border ${
-                errors.contactNumber ? "border-red-500" : "border-gray-300"
-              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full`}
+                errors.contactNumber ? "border-red-500" : "focus:border-gray-400"
+              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] border pr-[20px] w-full`}
               placeholder="Type your phone"
             />
           </div>
@@ -257,8 +257,8 @@ const SetupProfile = () => {
               value={formData.dateOfBirth}
               onChange={handleChange}
               className={`bg-white appearance-none focus:outline-none border ${
-                errors.dateOfBirth ? "border-red-500" : "border-gray-300"
-              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full`}
+                errors.dateOfBirth ? "border-red-500" : "focus:border-gray-400 "
+              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] border pr-[20px] w-full`}
             />
             <RiArrowDropDownLine className="sm:hidden size-6 text-gray-500 right-4 top-7 absolute" />
           </div>
@@ -286,8 +286,8 @@ const SetupProfile = () => {
               value={formData.gender}
               onChange={handleChange}
               className={`appearance-none focus:outline-none border ${
-                errors.gender ? "border-red-500" : "border-gray-300"
-              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full bg-white text-gray-700`}
+                errors.gender ? "border-red-500" : "focus:border-gray-400"
+              } shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] border pr-[20px] w-full bg-white text-gray-700`}
             >
               <option value="" disabled>Select your gender</option>
               <option value="Male">Male</option>

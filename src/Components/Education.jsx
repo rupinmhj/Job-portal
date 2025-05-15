@@ -14,7 +14,7 @@ const Education = () => {
     navigate(-1);
   };
   return (
-    <div className="h-screen overflow-y-scroll scroll-container">
+    <div className="h-screen overflow-y-scroll scroll-container font-urbanist">
       <div className="text-custBlackBold font-urbanist">
         <div className="fixed left-0 right-0 top-0 outline-none z-30">
           <div className="flex bg-white justify-between p-[24px] pt-[16px] mx-auto max-w-[1024px] items-center">

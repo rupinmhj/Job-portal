@@ -40,11 +40,11 @@ const SignIn = () => {
         {/* Email Field */}
         <div className="mt-[32px] w-full flex flex-col">
           <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Email</p>
-          <div className="relative mb-[20px]">
+          <div className=" relative mb-[20px]">
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
-              className="focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              className="focus:outline-none border focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
           </div>
@@ -58,7 +58,7 @@ const SignIn = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                className="w-full focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span

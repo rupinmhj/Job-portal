@@ -45,7 +45,7 @@ const ForgetPassword = () => {
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
-              className="focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              className="focus:border-gray-400 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
           </div>

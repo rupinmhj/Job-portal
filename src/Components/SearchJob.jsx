@@ -26,7 +26,7 @@ const SearchJob = () => {
         </div>
       </div>
       <div className="max-w-[1024px] mx-auto px-[24px]">
-        <div className="py-[14px] border border-gray-200 w-full rounded-xl leading-[20px] flex items-center focus:border-gray-700  ">
+        <div className="py-[14px] border focus-within:border-gray-400 w-full rounded-xl leading-[20px] flex items-center focus:border-gray-700  ">
           <img
             src={images.searchIcon}
             className="pl-[18px] cursor-pointer"
@@ -35,7 +35,7 @@ const SearchJob = () => {
 
           <input
             type="text"
-            className="text-[14px] px-[14px] text-textSearch  focus:outline-none w-full"
+            className="text-[14px]  px-[14px] text-textSearch  focus:outline-none w-full"
             placeholder="Search..."
           />
           <img

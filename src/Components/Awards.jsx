@@ -61,7 +61,7 @@ const Awards = () => {
 
             <div className="mt-[20px]">
               <div className="flex gap-2 leading-6 text-[14px] font-medium justify-between">
-                <div className="relative flex-1">
+                <div className="relative ">
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
@@ -75,7 +75,7 @@ const Awards = () => {
                   />
                 </div>
 
-                <div className="relative flex-1">
+                <div className="relative ">
                   <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}

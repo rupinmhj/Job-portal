@@ -53,7 +53,7 @@ const ApplyJob = () => {
             <input
               type="text"
               required
-              className=" focus:outline-none text-[14px] border shadow-sm rounded-xl mt-[12px] pl-[16px] py-[14px] pr-[20px] w-full"
+              className="focus:border-gray-400 focus:outline-none text-[14px] border shadow-sm rounded-xl mt-[12px] pl-[16px] py-[14px] pr-[20px] w-full"
               placeholder="Type your full name"
             />
           </div>
@@ -69,7 +69,7 @@ const ApplyJob = () => {
             <input
               type="text"
               required
-              className=" focus:outline-none border shadow-sm rounded-xl mt-[12px] text-[14px] pl-[16px] py-[14px] pr-[20px] w-full"
+              className="focus:border-gray-400 focus:outline-none border shadow-sm rounded-xl mt-[12px] text-[14px] pl-[16px] py-[14px] pr-[20px] w-full"
               placeholder="Type your portfolio address"
             />
           </div>
@@ -85,7 +85,7 @@ const ApplyJob = () => {
           <div className="mt-4 mb-4 flex border border-gray-200 py-6 rounded-xl justify-center items-center flex-col cursor-pointer relative">
   <input
     type="file"
-    className="absolute inset-0 opacity-0 cursor-pointer"
+    className="absolute inset-0 focus:border-gray-400 border focus:outline-none opacity-0 cursor-pointer"
     onChange={(e) => console.log(e.target.files)}
   />
   <img src={images.gallery} alt="Upload icon" />
@@ -99,7 +99,7 @@ const ApplyJob = () => {
           >
             Motivational letter
           </label>
-         <textarea className="w-full rounded-[16px] mb-[100px] outline-none mt-4 px-[20px] font-urbanist py-[14px] text-[14px] font-semibold text-gray-700 h-[135px] border border-gray-200" placeholder="Write something..."></textarea>
+         <textarea className="w-full focus:border-gray-400  rounded-[16px] mb-[100px] outline-none mt-4 px-[20px] font-urbanist py-[14px] text-[14px] font-semibold text-gray-700 h-[135px] border border-gray-200" placeholder="Write something..."></textarea>
           <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
             <div className="px-[24px] lg:px-[252px]">
               <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl">

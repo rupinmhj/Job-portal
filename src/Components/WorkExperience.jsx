@@ -111,7 +111,7 @@ const WorkExperience = () => {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     placeholderText="Start"
-                    className="py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl focus:border-gray-500 focus:outline-none border-[0.5px]  px-[20px]"
+                    className=" py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl focus:border-gray-500 focus:outline-none border-[0.5px]  px-[20px]"
                   />
                   <img
                     src={images.calender}

@@ -25,7 +25,7 @@ const JobDetailsTracking = () => {
             Applied Job
           </h2>
 
-          <img src={images.homewhite} onClick={()=>navigate('/')} alt="" />
+          <img src={images.homewhite} className="cursor-pointer" onClick={()=>navigate()} alt="" />
         </div>
       </div>
       <div className="max-w-[1024px] mx-auto px-[24px] ">

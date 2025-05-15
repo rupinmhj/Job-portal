@@ -15,8 +15,8 @@ const SkillAssessment = () => {
   const options = ["Almost Never", "Sometimes", "Fairly Often", "Very Often"];
 
   return (
-    <div className="bg-[#7661F2]">
-      <div className="h-[100dvh]  max-w-[1024px] text-white font-urbanist">
+    <div className="bg-[#7661F2] ">
+      <div className="h-[100dvh]   text-white font-urbanist">
         <div className="fixed left-0 right-0 top-0 outline-none z-30">
           <div className="flex  justify-between p-[24px] pt-[16px] mx-auto max-w-[1024px] items-center">
             <div
@@ -31,11 +31,11 @@ const SkillAssessment = () => {
               Skill Assessment
             </h2>
 
-            <img src={images.homewhite} className="h-6 w-6" alt="" />
+            <img src={images.homewhite} className="h-6 w-6 cursor-pointer" onClick={()=>navigate('/')} alt="" />
           </div>
         </div>
 
-        <div className="px-8 pt-[70px]">
+        <div className="px-8 pt-[70px] max-w-[1024px] mx-auto">
           <h1 className="text-[18px] font-semibold leading-[26px]">
             Question 4/20
           </h1>

@@ -4,7 +4,7 @@ import { FaAngleLeft} from "react-icons/fa6";
 import images from '../assets/images';
 const Success = () => {
          const navigate = useNavigate();
-  const back = () => navigate("/setup/interest/confirmnewaccount");
+  const back = () => navigate(-1);
   return (
     <div className='font-urbanist h-[100dvh]'>
       <div className="max-w-[1024px] mx-auto">
@@ -33,7 +33,7 @@ const Success = () => {
 
              <div className="fixed bottom-0 right-0 left-0 ">
          <div className="p-[24px] max-w-[1024px] mx-auto ">
-          <div className="bg-[#2869FE] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer" onClick={()=>navigate('/')}>
+          <div className="bg-[#2869FE] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer" onClick={()=>navigate('/home')}>
                 <h1 className="text-[16px] leading-[26px] font-bold" >Back To Home</h1>
           </div>
         </div>

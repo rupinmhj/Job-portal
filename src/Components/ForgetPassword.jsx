@@ -6,8 +6,8 @@ import images from "../assets/images";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  const back = () => navigate("/");
-  const home=()=>navigate("/");
+  const back = () => navigate("/home");
+  const home=()=>navigate("/home");
   const signup=()=>navigate("/signup");
   const verification=()=>navigate("/verification");
 

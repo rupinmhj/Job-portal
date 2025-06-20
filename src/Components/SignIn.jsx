@@ -7,7 +7,7 @@ import images from "../assets/images";
 const SignIn = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
-  const home=()=>navigate("/");
+  const home=()=>navigate("/home");
   const signup=()=>navigate("/signup");
 
   const [remember, setRemember] = useState(false);
@@ -39,7 +39,8 @@ const SignIn = () => {
 
         {/* Email Field */}
         <div className="mt-[32px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Email</p>
+          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Email  <span className="text-red-500">*</span></p>
+
           <div className=" relative mb-[20px]">
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
@@ -47,12 +48,13 @@ const SignIn = () => {
               className="focus:outline-none border focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
+           
           </div>
         </div>
 
         {/* Password Field */}
         <div className="mt-[10px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Password</p>
+          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Password  <span className="text-red-500">*</span></p>
           <div className="relative mb-[20px]">
             <img src={images.password} className="absolute z-20 inset-y-7 size-[20px] left-4" alt="Password" />
             <div className="relative w-full">
@@ -77,14 +79,14 @@ const SignIn = () => {
               id="checkRemember"
               checked={remember}
               onChange={() => setRemember(!remember)}
-              className="w-4 h-4 text-[#2869FE] rounded border-gray-300 focus:ring-blue-500"
+              className="w-4 h-4 text-[#2869FE] rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
             />
             <label htmlFor="checkRemember" className="text-sm text-[#71757D]">
               Remember me
             </label>
           </div>
 
-          <p className="text-blue-600 font-semibold text-[14px] leading-[24px] cursor-pointer">
+          <p className="text-blue-600 font-semibold text-[14px] leading-[24px] cursor-pointer" onClick={()=>navigate('/forgetpassword')}>
             Forgot Password?
           </p>
         </div>

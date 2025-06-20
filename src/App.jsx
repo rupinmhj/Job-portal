@@ -34,10 +34,16 @@ import Education from "./Components/Education";
 import Awards from "./Components/Awards";
 import GroupMessage from "./Components/GroupMessage";
 import EmptyNotification from "./Components/EmptyNotification";
-
+import PersonalInfo from "./Components/PersonalInfo";
+import SuccessApplied from "./Components/SuccessApplied"
 const router = createBrowserRouter([
+   {
+    path:"/",
+    element:<Boarding/>
+
+  },
   {
-    path: "/",
+    path: "/home",
     element: <Home />,
   },
   {
@@ -85,11 +91,7 @@ const router = createBrowserRouter([
     path:"/alljob",
     element:<AllJob/>
   },
-  {
-    path:"/boarding",
-    element:<Boarding/>
-
-  },
+ 
   {
     path:"/signup",
     element:<SignUp/>
@@ -166,6 +168,14 @@ const router = createBrowserRouter([
   {
      path:'/emptynotification',
     element: <EmptyNotification />
+  },
+  {
+    path:'/personalinfo',
+    element:<PersonalInfo/>
+  },
+  {
+    path:'/successapplied',
+    element:<SuccessApplied/>
   }
 
    

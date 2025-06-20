@@ -24,14 +24,14 @@ const SkillTest = () => {
             Skill Test
           </h2>
 
-          <img src={images.homewhite} alt="" />
+          <img src={images.homewhite} alt="" className='cursor-pointer' onClick={()=>navigate('/home')}/>
         </div>
       </div>
 
       <div className="px-6 pb-[100px] mx-auto max-w-[1024px] outline-none text-white flex gap-[12px] mt-[69px] ">
             <div className="flex-1 flex flex-col">
                 <span className='text-[18px] leading-[22px] font-bold'>Recent Searches</span>
-                <span className='font-medium text-[14px] leading-[24px] mt-[6px] text-opacity-60 text-white'>Explore your self with Newbie Future Skill Assasment from Jobfin</span>
+                <span className='font-medium text-[14px] leading-[24px] mt-[6px] text-opacity-60 text-white'>Explore your self with Newbie Future Skill Assessment from Jobfinder</span>
             </div>
             <div className="flex justify-center items-center bg-white bg-opacity-40 rounded-xl h-[40px] w-[40px]">
                     <img src={images.option2} className=' z-40' alt="" />

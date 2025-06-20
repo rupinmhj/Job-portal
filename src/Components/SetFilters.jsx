@@ -25,7 +25,7 @@ const SetFilters = () => {
   const [values, setValues] = useState([28000, 161000]);
   const navigate = useNavigate();
 
-  const handleBack = () => navigate("/");
+  const handleBack = () => navigate(-1);
   const allJob=()=>{
     navigate('/alljob')
   }

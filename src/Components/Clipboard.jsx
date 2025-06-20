@@ -8,11 +8,14 @@ import {motion} from "framer-motion"
 const Clipboard = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate("/home");
   };
   const noti = () => {
     navigate("/notification");
   };
+  const application=()=>{
+    navigate("/jobdetailstracking")
+  }
   return (
     <>
      <motion.div
@@ -103,8 +106,8 @@ const Clipboard = () => {
             <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E5FAF5]">
               <h2 className="text-[#00CC9A]">On the way</h2>
             </div>
-            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF]">
-              <h2 className="text-[#2869FE] ">View Application</h2>
+            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF] cursor-pointer" onClick={application}>
+              <h2 className="text-[#2869FE] " >View Application</h2>
             </div>
           </div>
         </div>
@@ -154,8 +157,8 @@ const Clipboard = () => {
             <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#F1F1F2]">
               <h2 className="">Delivered</h2>
             </div>
-            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF]">
-              <h2 className="text-[#2869FE] ">View Application</h2>
+            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF] cursor-pointer" onClick={application}>
+              <h2 className="text-[#2869FE] " >View Application</h2>
             </div>
           </div>
         </div>
@@ -201,8 +204,8 @@ const Clipboard = () => {
             <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#F1F1F2]">
               <h2 className="text-[#FA4848]">Canceled</h2>
             </div>
-            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF]">
-              <h2 className="text-[#2869FE] ">View Application</h2>
+            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF] cursor-pointer" onClick={application}>
+              <h2 className="text-[#2869FE] " >View Application</h2>
             </div>
           </div>
         </div>
@@ -248,7 +251,7 @@ const Clipboard = () => {
             <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#F1F1F2]">
               <h2 className="">Delivered</h2>
             </div>
-            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF]">
+            <div className="p-[6px] rounded-xl flex-1 flex justify-center items-center bg-[#E9F0FF] cursor-pointer" onClick={application}>
               <h2 className="text-[#2869FE] ">View Application</h2>
             </div>
           </div>

@@ -143,7 +143,7 @@ const SignUp = () => {
         </div>
 
         <button
-          onClick={home}
+          onClick={()=>navigate('/setup')}
           className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]"
         >
           Sign Up

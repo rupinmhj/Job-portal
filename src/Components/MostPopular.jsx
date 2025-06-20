@@ -34,7 +34,7 @@ const MostPopular = () => {
                 <img src={images.google} className="h-[40px]" alt="" />
                 <div className="flex flex-col gap-[2px]">
                   <h1 className="text-softWhite text-[14px] font-medium leading-[24px]">Google LLC</h1>
-                  <h1 className="font-bold text-[16px] leading-[19px]">Sr. UX Designer</h1>
+                  <h1 className="font-bold text-[16px] leading-[19px] cursor-pointer" onClick={()=>navigate('/details')}>Sr. UX Designer</h1>
                 </div>
               </div>
               <div className="p-2 h-[32px] bg-white bg-opacity-30 rounded-full text-center">
@@ -69,7 +69,7 @@ const MostPopular = () => {
                 <img src={images.microsoft} className="h-[40px]" alt="" />
                 <div className="flex flex-col gap-[2px]">
                   <h1 className="text-softWhite text-[14px] font-medium leading-[24px]">Microsoft</h1>
-                  <h1 className="font-bold text-[16px] leading-[19px]">Lead Designer</h1>
+                  <h1 className="font-bold text-[16px] leading-[19px] cursor-pointer" onClick={()=>navigate('details')}>Lead Designer</h1>
                 </div>
               </div>
               <div className="p-2 h-[32px] bg-white bg-opacity-30 rounded-full">

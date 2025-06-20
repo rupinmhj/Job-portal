@@ -16,7 +16,7 @@ const SearchJob = () => {
       <div className="max-w-[1024px] mx-auto">
         <div className="flex items-center justify-between p-[24px] pt-[16px] ">
           <div
-            onClick={() => navigate("/")}
+            onClick={() => navigate(-1)}
             className="p-[6px] border rounded-lg border-gray-700 cursor-pointer"
           >
             <FaAngleLeft className="text-gray-700 size-[14px]" />

@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaAngleLeft} from "react-icons/fa6";
 import images from '../assets/images';
-const SuccessSkill = () => {
+const SuccessApplied = () => {
          const navigate = useNavigate();
   const back = () => navigate(-1);
   return (
@@ -25,8 +25,8 @@ const SuccessSkill = () => {
             <div className="p-[24px] max-w-[1024px] mx-auto pt-[120px]" >
                 <div className="p-[32px] pt-[16px] flex flex-col justify-center items-center">
                   <img src={images.success} className='size-[220px]' alt="" />
-                  <h1 className="text-[24px] leading-[36px] font-bold mt-[15px]">Test Success</h1>
-                  <h2 className='text-google text-[14px] leading-[24px] font-medium mt-[8px]'>You Have Successfully top up the wallet</h2>
+                  <h1 className="text-[24px] leading-[36px] font-bold mt-[15px]">You've Applied</h1>
+                  <h2 className='text-google text-[14px] leading-[24px] font-medium mt-[8px]'>You Have Successfully tapplied to the job vacancy</h2>
       
                 </div>
                 </div>
@@ -36,8 +36,8 @@ const SuccessSkill = () => {
           <div className="bg-[#2869FE] mb-[20px] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer" onClick={()=>navigate('/home')}>
                 <h1 className="text-[16px] leading-[26px] font-bold" >Back To Home</h1>
           </div>
-          <div className="bg-[#2869FE1A] p-[16px] text-[#2869FE]  rounded-[16px] flex justify-center shadow-2xl cursor-pointer hover:bg-[#2869FE] hover:text-white transition-all duration-200" onClick={()=>navigate(-1)}>
-                <h1 className="text-[16px] leading-[26px] font-bold " >Back To Skill Test</h1>
+          <div className="bg-[#2869FE1A] p-[16px] text-[#2869FE]  rounded-[16px] flex justify-center shadow-2xl cursor-pointer hover:bg-[#2869FE] hover:text-white transition-all duration-200" onClick={()=>navigate('/clipboard')}>
+                <h1 className="text-[16px] leading-[26px] font-bold " >See applied job</h1>
           </div>
         </div>
       </div>
@@ -45,4 +45,4 @@ const SuccessSkill = () => {
   )
 }
 
-export default SuccessSkill
+export default SuccessApplied

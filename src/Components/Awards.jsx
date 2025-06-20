@@ -28,7 +28,7 @@ const Awards = () => {
             </div>
             <h2 className="text-[20px] font-bold leading-[24px] ">Awards</h2>
 
-            <img src={images.home} onClick={()=>navigate('/')} className="h-6 w-6 cursor-pointer" alt="" />
+            <img src={images.home} onClick={()=>navigate('/home')} className="h-6 w-6 cursor-pointer" alt="" />
           </div>
         </div>
 
@@ -106,7 +106,7 @@ const Awards = () => {
               ></textarea>
             </div>
             <div className="p-6 fixed bottom-0 left-0 right-0 mx-auto max-w-[1024px] bg-white">
-              <button className="p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE]">
+              <button className="p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE]" onClick={()=>navigate('/profile')}>
                 Save
               </button>
             </div>

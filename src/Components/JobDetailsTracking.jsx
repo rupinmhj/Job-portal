@@ -6,7 +6,7 @@ import { IoTrophy } from "react-icons/io5";
 const JobDetailsTracking = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate(-1);
   };
   return (
     <div className="font-urbanist text-custBlackBold bg-sliderBlue h-screen overflow-y-scroll scroll-container">
@@ -25,7 +25,7 @@ const JobDetailsTracking = () => {
             Applied Job
           </h2>
 
-          <img src={images.homewhite} className="cursor-pointer" onClick={()=>navigate()} alt="" />
+          <img src={images.homewhite} className="cursor-pointer" onClick={()=>navigate('/home')} alt="" />
         </div>
       </div>
       <div className="max-w-[1024px] mx-auto px-[24px] ">

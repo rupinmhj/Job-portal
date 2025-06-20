@@ -6,8 +6,8 @@ import images from "../assets/images";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const back = () => navigate("/");
-  const home = () => navigate("/");
+  const back = () => navigate("/home");
+  const home = () => navigate("/home");
   const signup = () => navigate("/signup");
 
   const [remember, setRemember] = useState(false);
@@ -107,7 +107,7 @@ const ResetPassword = () => {
         </div>
 
         <button
-          onClick={home}
+          onClick={()=>navigate('/signin')}
           className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]"
         >
           Reset

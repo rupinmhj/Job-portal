@@ -13,7 +13,7 @@ import {motion} from 'framer-motion'
 const Message = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate("/home");
   };
   const messageinbox=()=>{
     navigate('/message/messageinbox');
@@ -74,7 +74,7 @@ const Message = () => {
         </div>
 
         {/* 1 */}
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger2} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Jane Cooper</h1>
@@ -89,7 +89,7 @@ const Message = () => {
 </div>
 
 {/* 2 */}
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger3} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Ronald Richards</h1>
@@ -104,7 +104,7 @@ const Message = () => {
 </div>
 
 {/* 3 */}
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger4} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Esther Howard</h1>
@@ -119,7 +119,7 @@ const Message = () => {
 </div>
 
 {/* 4 */}
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger7} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Wade Warren</h1>
@@ -134,7 +134,7 @@ const Message = () => {
 </div>
 
 {/* 5 */}
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger6} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Courtney Henry</h1>
@@ -147,7 +147,7 @@ const Message = () => {
     </svg>
   </div>
 </div>
-<div className="flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
+<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
   <img src={images.messenger1} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
   <div className="flex flex-col flex-grow gap-[6px]">
     <h1 className="text-[15px] leading-[18px] font-bold">Courtney Henry</h1>

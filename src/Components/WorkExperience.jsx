@@ -153,7 +153,7 @@ const WorkExperience = () => {
               ></textarea>
             </div>
             <div className="p-6 fixed bottom-0 left-0 right-0 mx-auto max-w-[1024px] bg-white">
-              <button className="p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE]">Save</button>
+              <button className="p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE]" onClick={()=>navigate('/profile')}>Save</button>
             </div>
           </form>
         </div>

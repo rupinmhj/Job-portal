@@ -14,9 +14,9 @@ import {motion} from  'framer-motion'
 const Profile = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate("/home");
   };
-  const boarding=()=>navigate("/boarding")
+  const boarding=()=>navigate("/")
  
   return (
     <motion.div
@@ -37,7 +37,7 @@ const Profile = () => {
           </div>
           <h2 className="text-[20px] font-bold leading-[24px] ml-6">Profile</h2>
           <div className="flex  gap-[12px]">
-            <img src={images.searchIcon} className="cursor-pointer" alt="" />
+            <img src={images.searchIcon} className="cursor-pointer" alt="" onClick={()=>navigate('/searchjob')} />
             <img src={images.threeDot} className="cursor-pointer" alt="" />
           </div>
         </div>
@@ -86,8 +86,8 @@ const Profile = () => {
 
       <div className=" rounded-t-3xl  bg-[#7D67FF] text-white text-[16px] font-urbanist  leading-[19px] mt-[24px] pt-[32px] h-full ">
         <div className="px-[24px] pb-[20px]">
-        <li className=" mt-[0px] flex justify-between cursor-pointer items-center pb-[16px] border-b border-gray-200 border-opacity-35 mb-[16px]">
-          <div className="flex gap-[16px]">
+        <li className=" mt-[0px] flex justify-between cursor-pointer items-center pb-[16px] border-b border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate("/personalinfo")}>
+          <div className="flex gap-[16px]" >
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
               
               <CgProfile  className="h-[24px] w-[24px]"/>
@@ -99,7 +99,7 @@ const Profile = () => {
           </div>
         </li>
 
-        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]">
+        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/skilltest')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
               <img src={images.education} className="" alt="" />
@@ -111,7 +111,7 @@ const Profile = () => {
           </div>
         </li>
 
-        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]">
+        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/workexperience')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
               {/* <img src={images.education} className="" alt="" /> */}
@@ -124,7 +124,7 @@ const Profile = () => {
           </div>
         </li>
 
-        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]">
+        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/education')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
               <img src={images.education} className="" alt="" />
@@ -136,20 +136,20 @@ const Profile = () => {
           </div>
         </li>
 
-        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]">
+        <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/awards')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
             <LiaAwardSolid   className="size-[24px] fill-white"/>
             </div>
-            <span className="flex items-center text-[16px] font-bold">Skill</span>
+            <span className="flex items-center text-[16px] font-bold">Awards</span>
           </div>
           <div className=" flex items-center">
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
 
-        <li className=" mt-[16px] pb-[116px] flex justify-between cursor-pointer items-center   mb-[16px]">
-          <div onClick={boarding} className="flex gap-[16px]">
+        <li onClick={boarding} className=" mt-[16px] pb-[116px] flex justify-between cursor-pointer items-center   mb-[16px]">
+          <div  className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
             <IoLogOutOutline    className="size-[24px] fill-white"/>
             </div>

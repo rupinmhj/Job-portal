@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const Notification = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate("/home");
   };
   return (
     <motion.div

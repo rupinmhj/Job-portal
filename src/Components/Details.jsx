@@ -13,7 +13,7 @@ import Review from "./Review";
 const Details = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const [showOptions, setShowOptions] = useState("description");
@@ -153,8 +153,8 @@ const Details = () => {
 
       <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
         <div className="px-[24px] lg:px-[232px] xl:px-[274px]">
-          <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl">
-            Continue
+          <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl" onClick={()=>navigate('/applyjob')}>
+            Apply this job
           </button>
         </div>
       </div>

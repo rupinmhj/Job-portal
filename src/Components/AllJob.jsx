@@ -7,8 +7,12 @@ import { motion } from 'framer-motion';
 const AllJob = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate(-1);
   };
+
+  const details=()=>{
+    navigate('/details');
+  }
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -20,9 +24,9 @@ const AllJob = () => {
       <div className=" bg-white lg:px-[232px] xl:px-[274px]  text-[#121927] font-urbanist  w-full">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
           <div className="flex items-center justify-between px-[24px] pb-[24px] lg:px-[252px] py-[16px]">
-            <div className="p-[6px] border rounded-lg border-black cursor-pointer">
+            <div className="p-[6px] border rounded-lg border-black cursor-pointer"  onClick={back}>
               <FaAngleLeft
-                onClick={back}
+               
                 className="text-gray-500  size-[14px]"
               />
             </div>
@@ -41,7 +45,7 @@ const AllJob = () => {
           <div className="bg-bgColor  bg-opacity-65">
             <div className="relative bg-white flex p-[16px] mb-[16px] gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.notigoogle} className="size-[24px]" alt="" />
                 </div>
               </div>
@@ -84,7 +88,7 @@ const AllJob = () => {
 
             <div className="relative flex p-[16px] mb-[16px] bg-white gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.mailchimp} className="size-[24px]" alt="" />
                 </div>
               </div>
@@ -127,7 +131,7 @@ const AllJob = () => {
 
             <div className="relative flex p-[16px] mb-[16px] bg-white gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.slack} className="size-[24px]" alt="" />
                 </div>
               </div>
@@ -170,7 +174,7 @@ const AllJob = () => {
 
             <div className="relative flex p-[16px] mb-[16px] bg-white gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.treehouse} className="size-[24px]" alt="" />
                 </div>
               </div>
@@ -213,7 +217,7 @@ const AllJob = () => {
 
             <div className="relative flex p-[16px] mb-[16px] bg-white gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.zapier} className="size-[24px]" alt="" />
                 </div>
               </div>
@@ -256,7 +260,7 @@ const AllJob = () => {
 
             <div className="relative flex p-[16px] mb-[16px] bg-white gap-[16px]">
               <div className="flex    justify-center items-start  ">
-                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl">
+                <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer" onClick={details}>
                   <img src={images.evernote} className="size-[24px]" alt="" />
                 </div>
               </div>

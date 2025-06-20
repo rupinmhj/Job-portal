@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="lg:px-[202px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
         <div className="w-full relative px-[20px]">
           <div className="flex lg:gap-20 justify-between w-full px-4 flex-grow">
-            <NavLink to="/" className="transition-transform duration-200 hover:scale-110">
+            <NavLink to="/home" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
                   src={isActive ? images.homefill : images.home}

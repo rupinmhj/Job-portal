@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const ApplyJob = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   return (
@@ -22,9 +22,9 @@ const ApplyJob = () => {
     <div className=" bg-white lg:px-[232px] xl:px-[274px]  text-[#121927] font-urbanist  w-full ">
       <div className="fixed top-0 left-0 right-0 bg-white z-10">
         <div className="flex items-center justify-between px-[24px] lg:px-[252px] xl:px-[294px] py-[16px]">
-          <div className="p-[6px] border rounded-lg border-black cursor-pointer">
+          <div className="p-[6px] border rounded-lg border-black cursor-pointer"   onClick={back}>
             <FaAngleLeft
-              onClick={back}
+            
               className="text-gray-500  size-[14px]"
             />
           </div>
@@ -102,7 +102,7 @@ const ApplyJob = () => {
          <textarea className="w-full focus:border-gray-400  rounded-[16px] mb-[100px] outline-none mt-4 px-[20px] font-urbanist py-[14px] text-[14px] font-semibold text-gray-700 h-[135px] border border-gray-200" placeholder="Write something..."></textarea>
           <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
             <div className="px-[24px] lg:px-[252px]">
-              <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl">
+              <button className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl" onClick={()=>navigate('/successapplied')}>
                 Continue
               </button>
             </div>

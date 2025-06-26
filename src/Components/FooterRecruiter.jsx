@@ -2,19 +2,19 @@ import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import images from "../assets/images";
 
-const Footer = () => {
+const FooterRecruiter = () => {
   const navigate = useNavigate();
 
-  const applyjob = () => {
-    navigate('/applyjob');
+  const createJob = () => {
+    navigate('/createjob');
   };
 
   return (
     <div className="transition-all duration-300 ease-in-out">
-      <div className="lg:px-[202px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
+      <div className="lg:px-[140px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
         <div className="w-full relative px-[20px]">
           <div className="flex lg:gap-20 justify-between w-full px-4 flex-grow">
-            <NavLink to="/home" className="transition-transform duration-200 hover:scale-110">
+            <NavLink to="/homerecruiter" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
                   src={isActive ? images.homefill : images.home}
@@ -24,7 +24,7 @@ const Footer = () => {
               )}
             </NavLink>
 
-            <NavLink to="/clipboard" className="transition-transform duration-200 hover:scale-110">
+            <NavLink to="/application" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
                   src={isActive ? images.clipboardfill : images.clipboard}
@@ -34,7 +34,7 @@ const Footer = () => {
               )}
             </NavLink>
 
-            <NavLink to="/message" className="transition-transform duration-200 hover:scale-110">
+            <NavLink to="/messagerecruiter" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
                   src={isActive ? images.messagefill : images.message}
@@ -44,7 +44,7 @@ const Footer = () => {
               )}
             </NavLink>
 
-            <NavLink to="/profile" className="transition-transform duration-200 hover:scale-110">
+            <NavLink to="/profilerecruiter" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
                   src={isActive ? images.profilefill : images.profile}
@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
 
           <div 
-            onClick={()=>navigate('/setfilters')} 
+            onClick={()=>navigate('/createJob')} 
             className="flex p-2 rounded-full bg-white bottom-0 left-1/2 -translate-x-1/2 absolute transition-transform duration-200 hover:scale-110"
           >
             <button className="flex items-center justify-center bg-[#2869FE] h-[60px] w-[60px] text-[24px] font-normal text-white rounded-full">
@@ -75,4 +75,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterRecruiter;

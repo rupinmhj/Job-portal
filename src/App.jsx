@@ -36,6 +36,17 @@ import GroupMessage from "./Components/GroupMessage";
 import EmptyNotification from "./Components/EmptyNotification";
 import PersonalInfo from "./Components/PersonalInfo";
 import SuccessApplied from "./Components/SuccessApplied"
+import HomeRecruiter from "./Components/HomeRecruiter";
+import CreateJob from "./Components/CreateJob";
+import SetupCompany from "./Components/SetupCompany";
+import Applications from "./Components/Application";
+import ManageJobs from "./Components/ManageJob";
+import EditJob from "./Components/EditJob";
+import SuccessCreateUpdate from "./Components/SuccessCreateUpdate";
+import MessageRecruiter from "./Components/MessageRecruiter";
+import ProfileRecruiter from "./Components/ProfileRecruiter";
+import CompanyProfile from "./Components/CompanyProfile";
+import NotificationRecruiter from "./Components/NotificationRecruiter"
 const router = createBrowserRouter([
    {
     path:"/",
@@ -176,7 +187,53 @@ const router = createBrowserRouter([
   {
     path:'/successapplied',
     element:<SuccessApplied/>
-  }
+  },
+  {
+    path:'/homerecruiter',
+    element:<HomeRecruiter />
+  },
+  {
+    path:'/createjob',
+    element: <CreateJob />
+  },
+  {
+    path:'/setupcompany',
+    element: <SetupCompany />
+  },
+{
+  path:'/application',
+  element: <Applications />
+},
+{
+  path:'/managejob',
+  element: <ManageJobs />
+},
+{
+  path:'/editjob',
+  element: <EditJob />
+},
+{
+  path:'/successcreateupdate',
+  element: <SuccessCreateUpdate />
+},
+{
+  path:'/messagerecruiter',
+  element: <MessageRecruiter />
+
+},
+{
+  path:'/profilerecruiter',
+  element: <ProfileRecruiter />
+},
+{
+  path:'/companyprofile',
+  element: <CompanyProfile />
+
+},
+{
+  path:'/notificationrecruiter',
+  element: <NotificationRecruiter />
+}
 
    
   

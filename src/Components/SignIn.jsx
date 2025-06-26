@@ -13,6 +13,36 @@ const SignIn = () => {
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+
+  const [emailError,setEmailError]=useState("");
+  const [passwordError,setPasswordError]=useState("");
+
+  //Validation function
+  const validate=()=>{
+    let valid=true;
+    setEmailError("");
+    setPasswordError("");
+
+    if(!email){
+      setEmailError("Email is required");
+      valid=false;
+    }
+
+    if(!password){
+      setPasswordError("Password is required.");
+      valid=false;
+    }
+    return valid;
+  }
+
+  const handleSignIn=()=>{
+    if(validate()){
+      home();
+    }
+  }
+
   return (
     <>
       <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] w-full">
@@ -45,11 +75,14 @@ const SignIn = () => {
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className="focus:outline-none border focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
            
           </div>
+          {emailError && <p className="text-red-600 text-[12px] pl-4">{emailError}</p>}
         </div>
 
         {/* Password Field */}
@@ -60,6 +93,8 @@ const SignIn = () => {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 className="w-full focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
@@ -70,6 +105,8 @@ const SignIn = () => {
                 {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4"/>}
               </span>
             </div>
+            {emailError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
+
           </div>
 
           {/* Remember Me */}
@@ -91,7 +128,7 @@ const SignIn = () => {
           </p>
         </div>
 
-        <button onClick={home} className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]">
+        <button onClick={handleSignIn} className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]">
           Sign In
         </button>
 

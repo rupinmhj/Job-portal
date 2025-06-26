@@ -6,8 +6,8 @@ import images from "../assets/images";
 
 const Verification = () => {
   const navigate = useNavigate();
-  const back = () => navigate("/home");
-  const home=()=>navigate("/home");
+  const back = () => navigate(-1);
+  // const home=()=>navigate("/home");
   const signup=()=>navigate("/signup");
 
   const [remember, setRemember] = useState(false);

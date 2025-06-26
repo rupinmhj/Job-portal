@@ -6,13 +6,30 @@ import images from "../assets/images";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  const back = () => navigate("/home");
+  const back = () => navigate(-1);
   const home=()=>navigate("/home");
   const signup=()=>navigate("/signup");
   const verification=()=>navigate("/verification");
-
+  const [password,setPassword]=useState("");
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [email,setEmail]=useState("");
+  const [emailError,setEmailError]=useState("");
+
+  const validate=()=>{
+    let valid=true;
+    if(!email){
+      setEmailError("Enter email");
+      valid=false;
+    }
+    return valid;
+  }
+
+  const validatePassword=()=>{
+    if(validate()){
+      verification();
+    }
+  }
 
   return (
     <>
@@ -45,16 +62,20 @@ const ForgetPassword = () => {
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className="focus:border-gray-400 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
+            {emailError && <p className="text-red-500 text-[13px] pl-[12px]">{emailError}</p>}
+
           </div>
         </div>
 
        
 
           <button
-          onClick={verification}
+          onClick={validatePassword}
           className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[20px]"
         >
           Request

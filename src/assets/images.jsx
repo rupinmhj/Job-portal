@@ -99,7 +99,10 @@ import option2 from './option2.svg'
 import groupcall from './groupcall.png'
 import search from './search.svg'
 import cat from './cat.png'
-
+import createjob from './createjob.png'
+import managejob from './management.png'
+import application from './application.png'
+import companyprofile from './companyprofile.png'
 const images={
     hello,
     profileSmall,
@@ -202,5 +205,9 @@ const images={
     search,
     groupcall,
     cat,
+    createjob,
+    managejob,
+    application,
+    companyprofile,
 }
 export default images;

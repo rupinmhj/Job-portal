@@ -43,7 +43,7 @@ const SideBar = ({
   return (
     <div className="absolute w-[300px] h-screen   z-40 bg-white font-urbanist ">
       <div className="flex p-[15px] w-full bg-bgLogo ">
-        <div className="logo  ">
+        <div className="logo cursor-pointer " onClick={home}>
           <img src={images.jobkoLogo} className="h-[60px]" alt="" />
         </div>
         <div className="flex text-[12px] leading-[20px] font-semibold text-white ml-[16px] justify-start items-center">

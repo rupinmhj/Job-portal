@@ -13,7 +13,7 @@ import {motion} from 'framer-motion'
 const Message = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/home");
+    navigate(-1);
   };
   const messageinbox=()=>{
     navigate('/message/messageinbox');

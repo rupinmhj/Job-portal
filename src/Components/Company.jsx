@@ -16,7 +16,7 @@ const Company = () => {
       
       <div className="flex justify-between w-full bg-white  ">
         <h1 className="text-black font-bold text-[18px] leading-[22px] mb-[24px] ">
-          Most Popular
+          Top Companies Hiring Now
         </h1>
         <h4 onClick={allJob} className="leading-[24px] font-bold text-[14px] text-textSeeAll cursor-pointer">
           See all

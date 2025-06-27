@@ -1,171 +1,179 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { LiaAwardSolid } from "react-icons/lia";
-import { IoLogOutOutline } from "react-icons/io5";
-import Footer from "../Components/Footer";
-import {motion} from 'framer-motion'
+import FooterRecruiter from "../Components/FooterRecruiter";
+
 const Message = () => {
   const navigate = useNavigate();
-  const back = () => {
-    navigate(-1);
-  };
-  const messageinbox=()=>{
-    navigate('/message/messageinbox');
-  }
+  const [messages, setMessages] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
+
+  useEffect(() => {
+    const mockMessages = [
+      {
+        id: 1,
+        name: "Sonu Nigam",
+        msg: "Great I will have a look the",
+        time: "Just Now",
+        unread: 2,
+        img: images.messenger5,
+        type: "unread",
+      },
+      {
+        id: 2,
+        name: "Jane Cooper",
+        msg: "I'll send you the files tonight.",
+        time: "5 mins ago",
+        img: images.messenger2,
+        type: "read",
+      },
+      {
+        id: 3,
+        name: "Ronald Richards",
+        msg: "Can we reschedule our meeting?",
+        time: "10 mins ago",
+        img: images.messenger3,
+        type: "read",
+      },
+      {
+        id: 4,
+        name: "Esther Howard",
+        msg: "Let's catch up this weekend.",
+        time: "30 mins ago",
+        img: images.messenger4,
+        type: "read",
+      },
+      {
+        id: 5,
+        name: "Wade Warren",
+        msg: "Thanks! That was really helpful.",
+        time: "1 hour ago",
+        img: images.messenger7,
+        type: "read",
+      },
+      {
+        id: 6,
+        name: "Courtney Henry",
+        msg: "Check your inbox please.",
+        time: "2 hours ago",
+        img: images.messenger6,
+        type: "read",
+      },
+      {
+        id: 7,
+        name: "Courtney Henry",
+        msg: "Check your inbox please.",
+        time: "2 hours ago",
+        img: images.messenger1,
+        type: "read",
+      },
+    ];
+
+    setMessages(mockMessages);
+  }, []);
+
+  const filteredMessages = messages.filter(msg =>
+    msg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    msg.msg.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
   return (
-    <>
-     <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.3,delay:0.15 }}
-    className="h-screen overflow-y-scroll scroll-container"
-  >
-      <div className=" text-[#121927] lg:px-[232px] xl:px-[274px] px-[24px]  pb-[88px]  flex font-urbanist items-center justify-between relative">
-        <div className="fixed top-0 left-0 right-0 bg-white z-10  ">
-          <div className="flex items-center justify-between lg:px-[232px] xl:px-[274px] px-[24px] pt-[16px] pb-[24px]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, delay: 0.15 }}
+      className="h-screen overflow-y-scroll font-urbanist scroll-container "
+    >
+      {/* Header */}
+      <div className="fixed top-0 left-0 right-0 bg-white z-10 ">
+        <div className="flex items-center justify-between max-w-[1024px] mx-auto px-6 pt-[16px] pb-[24px]">
+          <div
+            onClick={() => navigate(-1)}
+            className="p-[6px] border rounded-lg border-black cursor-pointer"
+          >
+            <FaAngleLeft className="text-gray-500 size-[14px]" />
+          </div>
+          <h2 className="text-[20px] font-bold ml-6">Message</h2>
+          <div className="flex gap-[12px]">
+            <img
+              src={images.searchIcon}
+              className="cursor-pointer"
+              alt="Search"
+              onClick={() => setShowSearch((prev) => !prev)}
+            />
+            <img src={images.threeDot} className="cursor-pointer" alt="Options" />
+          </div>
+        </div>
+
+        {/* Search Input */}
+        {showSearch && (
+          <div className="max-w-[1024px] mx-auto px-6">
+
+           <div className=" py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+              <img
+                src={images.searchIcon}
+
+                className="pl-[18px] cursor-pointer"
+                alt=""
+              />
+
+              <input
+                type="text"
+                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by name or message..."
+
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className={`${showSearch ? 'pt-[126px]' : 'pt-[80px]'} pb-[90px]  max-w-[1024px] px-6 max-md:px-2 mx-auto space-y-4`}>
+        {filteredMessages.length === 0 ? (
+          <p className="text-gray-500 text-center mt-10">No messages found.</p>
+        ) : (
+          filteredMessages.map((msg) => (
             <div
-              onClick={back}
-              className="p-[6px] border rounded-lg border-black cursor-pointer"
+              key={msg.id}
+              onClick={() => navigate("/message/messageinbox")}
+              className="flex items-center gap-[12px] bg-white p-[16px] rounded-xl cursor-pointer"
             >
-              <FaAngleLeft className="text-gray-500  size-[14px]" />
+              <img
+                src={msg.img}
+                alt={msg.name}
+                className="h-[44px] w-[44px] border border-green-800 rounded-full flex-shrink-0"
+              />
+              <div className="flex flex-col flex-grow">
+                <h1 className="text-[15px] font-bold leading-[18px]">{msg.name}</h1>
+                <p className="text-[12px] text-google truncate">{msg.msg}</p>
+              </div>
+              <div className="flex flex-col items-end text-google text-[11px] gap-[6px]">
+                <span>{msg.time}</span>
+                {msg.unreadCount ? (
+                  <span className="text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full bg-purple-600">
+                    {msg.unreadCount}
+                  </span>
+                ) : msg.type ? (
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : null}
+              </div>
             </div>
-            <h2 className="text-[20px] font-bold leading-[24px] ml-6">
-              Message
-            </h2>
-            <div className="flex  gap-[12px]">
-              <img src={images.searchIcon} className="cursor-pointer" alt="" />
-              <img src={images.threeDot} className="cursor-pointer" alt="" />
-            </div>
-          </div>
-        </div>
+          ))
+        )}
       </div>
 
-      <div className="text-[#121927] bg-opacity-70 rounded-xl lg:px-[232px] xl:px-[274px] px-[24px] flex-col mb-[100px] flex font-urbanist">
-       <div className=" bg-bgColor bg-opacity-60">
-        <div onClick={messageinbox} className="cursor-pointer flex justify-between w-full p-[16px] mb-[16px]  bg-white rounded-xl gap-[12px]">
-          <img
-            src={images.messenger5}
-            className="border h-[44px] w-[44px] flex-shrink-0  border-green-800 rounded-full"
-            alt=""
-          />
-          <div className="flex flex-col flex-grow gap-[6px] ">
-            <h1 className="text-[15px] leading-[18px] font-bold">
-              Sonu Nigam
-            </h1>
-            <h1 className="text-[12px] text-google">
-              Great I will have a look the{" "}
-            </h1>
-          </div>
-          <div className="flex flex-col text-google flex-shrink-0 gap-[8px]">
-            <h1 className="text-[11px] ">Just Now</h1>
-            <span className="flex justify-end text-white ">
-              <span className="text-[10px] h-4 w-4 pl-[5.5px] pt-[1px] rounded-full bg-purple-600">
-                2
-              </span>
-            </span>
-          </div>
-        </div>
-
-        {/* 1 */}
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger2} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Jane Cooper</h1>
-    <h1 className="text-[12px] text-google">I'll send you the files tonight.</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">5 mins ago</h1>
-    <svg className="w-4 h-4 text-green-600  " fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-
-{/* 2 */}
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger3} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Ronald Richards</h1>
-    <h1 className="text-[12px] text-google">Can we reschedule our meeting?</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">10 mins ago</h1>
-    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-
-{/* 3 */}
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger4} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Esther Howard</h1>
-    <h1 className="text-[12px] text-google">Let's catch up this weekend.</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">30 mins ago</h1>
-    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-
-{/* 4 */}
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger7} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Wade Warren</h1>
-    <h1 className="text-[12px] text-google">Thanks! That was really helpful.</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">1 hour ago</h1>
-    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-
-{/* 5 */}
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger6} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Courtney Henry</h1>
-    <h1 className="text-[12px] text-google">Check your inbox please.</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">2 hours ago</h1>
-    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-<div onClick={messageinbox} className="cursor-pointer flex w-full p-[16px] mb-[16px] bg-white rounded-xl gap-[12px] items-center">
-  <img src={images.messenger1} className="border h-[44px] w-[44px] flex-shrink-0 border-green-800 rounded-full" alt="" />
-  <div className="flex flex-col flex-grow gap-[6px]">
-    <h1 className="text-[15px] leading-[18px] font-bold">Courtney Henry</h1>
-    <h1 className="text-[12px] text-google">Check your inbox please.</h1>
-  </div>
-  <div className="flex flex-col text-google flex-shrink-0 gap-[8px] items-end">
-    <h1 className="text-[11px]">2 hours ago</h1>
-    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
-</div>
-</div>
-      </div>
-
-      <Footer />
-      </motion.div>
-    </>
+      <FooterRecruiter />
+      <Outlet />
+    </motion.div>
   );
 };
 

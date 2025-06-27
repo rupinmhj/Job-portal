@@ -8,6 +8,8 @@ const RecruiterNotification = () => {
   const navigate = useNavigate();
 
   const [notifications, setNotifications] = useState([]);
+  const [searchQuery,setSearchQuery]=useState("");
+  const [showSearch,setShowSearch]=useState(false);
 
   useEffect(() => {
     const fetchedNotifications = [
@@ -52,6 +54,12 @@ const RecruiterNotification = () => {
     navigate(-1);
   };
 
+  const filterNotifications=notifications.filter(noti=>
+    noti.title.toLowerCase().includes(searchQuery.toLowerCase())||
+    noti.message.toLowerCase().includes(searchQuery.toLowerCase())
+
+  )
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -69,12 +77,33 @@ const RecruiterNotification = () => {
               <FaAngleLeft className="text-gray-500 size-[14px]" />
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Notifications</h2>
-            <img src={images.searchIcon} className="cursor-pointer" alt="Search" />
+            <img
+              onClick={()=>setShowSearch((prev)=>!prev)}
+            src={images.searchIcon} className="cursor-pointer" alt="Search" />
           </div>
         </div>
+         {showSearch && (
+           <div className="max-w-[1024px] mx-auto px-6 py-[14px] mt-14  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+              <img
+                src={images.searchIcon}
+                className="pl-[18px] cursor-pointer"
+                alt=""
+              />
+              <input
+                type="text"
+                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by title or messages..."
 
-        <div className="w-full mt-[60px]">
-          {notifications.map((notification) => (
+              />
+            </div>
+        )}
+
+        <div className={`${showSearch?'mt-[10px]':'mt-[60px]'} w-full`} >
+
+          { filterNotifications.length===0? <p className="text-gray-500 text-center mt-10">No notification found.</p>:
+          filterNotifications.map((notification) => (
             <div
               key={notification.id}
               className="relative flex p-[16px] pr-[32px] mt-[16px] gap-[16px]"

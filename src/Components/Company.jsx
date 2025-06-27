@@ -12,7 +12,7 @@ const Company = () => {
         navigate("/alljob")
       }
   return (
-    <div className="lg:mx-[232px] px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px] bg-bgColor bg-opacity-80 rounded-2xl">
+    <div className="max-w-[1024px] mx-auto px-[24px] mt-[24px] flex font-urbanist items-center flex-col pb-[100px] bg-bgColor bg-opacity-80 rounded-2xl">
       
       <div className="flex justify-between w-full bg-white  ">
         <h1 className="text-black font-bold text-[18px] leading-[22px] mb-[24px] ">

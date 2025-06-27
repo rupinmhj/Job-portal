@@ -2,11 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion"
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import images from "../assets/images";
 import {
     FaPlus,
-    FaSearch,
-    FaFilter,
-    FaEllipsisH,
     FaUsers,
     FaEye,
     FaCalendarAlt,
@@ -101,8 +99,8 @@ const ManageJobs = () => {
         >
             <div className=" min-h-screen font-urbanist ">
                 <div className="fixed top-0 right-0 left-0 z-20">
-                    <header className="bg-white border-b px-[24px] py-[16px]">
-                        <div className="relative max-w-[1024px] mx-auto flex justify-between items-center h-[48px]">
+                    <header className="bg-white   py-[16px]">
+                        <div className="relative max-w-[1024px] px-[24px] mx-auto flex justify-between items-center h-[48px]">
                             {/* Back Button */}
                             <div
                                 onClick={back}
@@ -127,8 +125,8 @@ const ManageJobs = () => {
                 </div>
 
 
-                <main className="max-w-[1024px] mx-auto px-[24px] py-[24px] mt-[81px] " >
-                    <div className="flex flex-col sm:flex-row gap-4 mb-[24px]">
+                <main className="max-w-[1024px] mx-auto px-[24px] py-[24px] mt-[60px] " >
+                    {/* <div className="flex flex-col sm:flex-row gap-4 mb-[24px]">
                         <div className="relative flex-1">
                             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
                             <input
@@ -139,71 +137,87 @@ const ManageJobs = () => {
                                 className="w-full border border-gray-300 rounded-lg pl-10 py-[12px] text-[14px] focus:outline-none border focus:border-gray-400"
                             />
                         </div>
-                        {/* <button className="border border-gray-300 rounded-md text-[14px] px-4 flex items-center">
-            <FaFilter className="h-4 w-4 mr-2" />
-            Filters
-          </button> */}
+                    </div> */}
+                    <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center mb-10">
+                        <img
+                            src={images.searchIcon}
+                            className="pl-[18px] cursor-pointer"
+                            alt=""
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Search jobs by title or company..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                        />
+                        {/* <img src={images.option} className='pr-[14px]' alt="" /> */}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-6 ">
                         {filteredJobs.map((job) => (
-                            <div key={job.id} className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition-shadow">
+                            <div key={job.id} className=" p-5 rounded-xl shadow hover:shadow-lg transition-shadow border border-gray bg-bgColor bg-opacity-40">
                                 <div className="flex items-start justify-between mb-3">
                                     <div>
-                                        <h2 className="text-[16px] font-semibold text-gray-900 mb-1">{job.title}</h2>
-                                        <p className="text-[13px] text-gray-600">{job.company}</p>
+                                        <h2 className="text-[18px] font-semibold text-gray-900 mb-1">{job.title}</h2>
+                                        <p className="text-[14px] text-gray-800 font-medium">{job.company}</p>
                                     </div>
-                                    <span className={`${getStatusColor(job.status)} text-[12px] px-2 py-[2px] rounded-md`}>
+                                    <span className={`${getStatusColor(job.status)} text-[13px] px-2 py-[2px] rounded-md`}>
                                         {job.status}
                                     </span>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <div className="flex items-center justify-between text-[13px] text-gray-600">
+                                    <div className="flex items-center justify-between text-[14px] text-gray-800">
                                         <div className="flex items-center">
-                                            <FaMapMarkerAlt className="h-4 w-4 mr-1" />
+                                            <img
+                                                src={images.location}
+                                                className="size-[12px] mb-[2px] inline-block mr-[8px]"
+                                                alt=""
+                                            />
                                             {job.location}
                                         </div>
-                                        <div className="text-[13px] font-medium text-gray-900">
+                                        <div className="text-[14px] font-medium text-gray-900">
                                             {job.type}
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-3 gap-2 py-3 border-t border-b">
+                                    <div className="grid grid-cols-3 gap-3 py-3 border-t border-b">
                                         <div className="text-center">
-                                            <FaUsers className="h-4 w-4 text-blue-500 mx-auto mb-1" />
-                                            <div className="text-[14px] font-semibold text-gray-900">{job.applications}</div>
-                                            <div className="text-[11px] text-gray-500">Applications</div>
+                                            <FaUsers className="h-4 w-4  mx-auto mb-1 text-blue-600" />
+                                            <div className="text-[15px] font-semibold text-gray-900">{job.applications}</div>
+                                            <div className="text-[12px] text-gray-700">Applications</div>
                                         </div>
                                         <div className="text-center">
-                                            <FaEye className="h-4 w-4 text-green-500 mx-auto mb-1" />
+                                            <FaEye className="h-4 w-4  mx-auto mb-1 text-blue-600" />
                                             <div className="text-[14px] font-semibold text-gray-900">{job.views}</div>
-                                            <div className="text-[11px] text-gray-500">Views</div>
+                                            <div className="text-[11px] text-gray-700">Views</div>
                                         </div>
                                         <div className="text-center">
-                                            <FaCalendarAlt className="h-4 w-4 text-purple-500 mx-auto mb-1" />
+                                            <FaCalendarAlt className="h-4 w-4  mx-auto mb-1 text-blue-600" />
                                             <div className="text-[14px] font-semibold text-gray-900">{job.postedDays}</div>
-                                            <div className="text-[11px] text-gray-500">Days ago</div>
+                                            <div className="text-[11px] text-gray-700">Days ago</div>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2 text-[13px]">
+                                    <div className="space-y-2 text-[14px]">
                                         <div className="flex justify-between">
-                                            <span className="text-gray-600">Salary:</span>
+                                            <span className="text-gray-800 font-semibold">Salary:</span>
                                             <span className="font-medium text-gray-900">{job.salary}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-gray-600">Deadline:</span>
+                                            <span className="text-gray-800 font-semibold">Deadline:</span>
                                             <span className="font-medium text-gray-900">{job.deadline}</span>
                                         </div>
                                     </div>
 
                                     <div className="flex gap-2 pt-3">
-                                        <button onClick={() => navigate('/editjob')} className="flex-1 border border-gray-300 rounded-md text-[13px] py-1 flex items-center justify-center">
+                                        <button onClick={() => navigate('/editjob')} className="flex-1 border border-gray-300 rounded-md text-[13px] py-1 flex items-center justify-center bg-[#E5FAF5]">
                                             <FaEdit className="h-4 w-4 mr-1" />
                                             Edit
                                         </button>
-                                        <button onClick={() => navigate('/application')} className=" flex-1 border border-gray-300 rounded-md text-[13px] py-1 flex items-center justify-center ">
+                                        <button onClick={() => navigate('/application')} className=" flex-1 border border-gray-300 rounded-md text-[13px] py-1 flex items-center justify-center bg-[#E9F0FF] ">
                                             <FaUsers className="h-4 w-4 mr-1" />
                                             Applications
                                         </button>

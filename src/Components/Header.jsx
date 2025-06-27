@@ -18,9 +18,9 @@ const Header = ({toggleSidebar,isSideBarOpen}) => {
   }
   return (
 
-    <div className='lg:px-[232px] xl:px-[254px] px-[24px] pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] w-full fixed top-0 bg-white z-50 border-none'>
-        {/* left part */}
-      <div onClick={handleSetup} className="cursor-pointer flex gap-[12px] items-center">
+    <div className=' fixed top-0 right-0 left-0 z-50 '>
+      <div className="max-w-[1024px] px-[24px] mx-auto  pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] bg-white z-50 border-none">
+             <div onClick={handleSetup} className="cursor-pointer flex gap-[12px] items-center">
         <div>
             <img src={images.profileSmall} className="h-[38.4px] rounded-lg border border-blue-600" alt="" />
         </div>
@@ -52,6 +52,9 @@ const Header = ({toggleSidebar,isSideBarOpen}) => {
           </svg>
         </div>
       </div>
+      </div>
+        {/* left part */}
+ 
       {/* {ham && (
           <SideBar/>
       )

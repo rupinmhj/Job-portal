@@ -7,67 +7,75 @@ const SignUp = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
   const home = () => navigate("/");
-  const signin=()=> navigate("/signin")
+  const signin = () => navigate("/signin")
 
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [name,setName]=useState("")
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const [confirmPassword,setConfirmPassword]=useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [role, setRole] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
-  const [nameError,setNameError]=useState("")
-  const [emailError,setEmailError]=useState("")
-  const [passwordError,setPasswordError]=useState("")
-  const [confirmPasswordError,setConfirmPasswordError]=useState("")
+  const [nameError, setNameError] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [roleError, setRoleError] = useState("")
+  const [confirmPasswordError, setConfirmPasswordError] = useState("")
 
   //Validation function
-  const validate=()=>{
-    let valid=true;
-    console.log(name,email,password,confirmPassword)
+  const validate = () => {
+    let valid = true;
+    console.log(name, email, password, confirmPassword)
     setNameError('');
     setEmailError('');
     setPasswordError('');
     setConfirmPasswordError('');
-   
-    if(!name){
+    setRoleError('');
+
+    if (!name) {
       setNameError("Name is required");
-      valid=false;
-    }else if(!/^[A-Za-z\s'-]+$/.test(name)){
+      valid = false;
+    } else if (!/^[A-Za-z\s'-]+$/.test(name)) {
       setNameError("Enter a valid name.");
-      valid=false;
+      valid = false;
     }
 
-    if(!email){
+    if (!email) {
       setEmailError("Email is required");
-      valid=false;
-    }else if(!/^\S+@\S+\.\S+$/.test(email)){
+      valid = false;
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
       setEmailError("Enter a valid email");
-      valid=false;
+      valid = false;
     }
 
-    if(!password){
-      setPasswordError("Password is required.");
-      valid=false;
-    }else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
-    setPasswordError("Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and one of these special characters: @$!%*?&");
-    valid = false;
-}
-    if(!confirmPassword){
-      setConfirmPasswordError("Confirm Password is required");
-      valid=false;
+    if (!role) {
+      setRoleError("Please select a role (Job Seeker or Employer).");
+      valid = false;
     }
-    else if(password!==confirmPassword){
+
+    if (!password) {
+      setPasswordError("Password is required.");
+      valid = false;
+    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+      setPasswordError("Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and one of these special characters: @$!%*?&");
+      valid = false;
+    }
+    if (!confirmPassword) {
+      setConfirmPasswordError("Confirm Password is required");
+      valid = false;
+    }
+    else if (password !== confirmPassword) {
       setConfirmPasswordError("Password Not Matched!!")
-      valid=false;
+      valid = false;
     }
     return valid;
   }
 
-  const validateSignUp=()=>{
-    if(validate()){
+  const validateSignUp = () => {
+    if (validate()) {
       signin();
     }
   }
@@ -118,7 +126,7 @@ const SignUp = () => {
             <input
               type="text"
               value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your your full name"
             />
@@ -141,14 +149,42 @@ const SignUp = () => {
             <input
               type="email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
-          {emailError && <p className="text-red-500 text-[13px] pl-[12px]">{emailError}</p>}
+            {emailError && <p className="text-red-500 text-[13px] pl-[12px]">{emailError}</p>}
           </div>
 
         </div>
+        {/* Role Selection */}
+        <div className="mt-[px] w-full flex flex-col mb-6">
+          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Register As:</p>
+          <div className="flex gap-4 mt-[20px] px-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                value="job_seeker"
+                checked={role === "job_seeker"}
+                onChange={(e) => setRole(e.target.value)}
+              />
+              Job Seeker
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                value="employer"
+                checked={role === "employer"}
+                onChange={(e) => setRole(e.target.value)}
+              />
+              Employer
+            </label>
+          </div>
+          {roleError && (
+            <p className="text-red-500 text-[13px] pl-[12px]">{roleError}</p>
+          )}
+        </div>
+
 
         {/* Password Field */}
 
@@ -166,7 +202,7 @@ const SignUp = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
@@ -193,15 +229,15 @@ const SignUp = () => {
           <div className="relative mb-[20px]">
             <img
               src={images.password}
-             
+
               className="absolute z-20 inset-y-7 size-[20px] left-4"
               alt="Password"
             />
             <div className="relative w-full">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                 value={confirmPassword}
-              onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                value={confirmPassword}
+                onChange={(e) => { setConfirmPassword(e.target.value) }}
                 className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />

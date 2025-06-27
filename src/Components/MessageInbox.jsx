@@ -7,7 +7,7 @@ import {  motion } from "framer-motion";
 const MessageInbox = () => {
   const navigate = useNavigate();
   const back = () => {
-    navigate("/message");
+    navigate(-1);
   };
   return (
        <motion.div

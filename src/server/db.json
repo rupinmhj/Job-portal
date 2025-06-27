@@ -1,0 +1,15 @@
+{
+    "users":[{
+        "id":1,
+        "email":"rupinmaharjan@gmail.com",
+        "password":"2077",
+        "role":"job_seeker"
+    },
+    {
+        "id":2,
+        "email":"anita@gmail.com",
+        "password":"2072",
+        "role":"employer"
+    }
+]
+}

@@ -2,8 +2,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
 import { FaAngleLeft } from "react-icons/fa6";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FooterRecruiter from "./FooterRecruiter";
+import images from "../assets/images";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 import {
   FaSearch,
@@ -19,18 +25,22 @@ import {
 
 const Applications = () => {
   const navigate = useNavigate();
-  const location=useLocation();
+  const location = useLocation();
   const back = () => {
     navigate(-1);
   };
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
-  useEffect(()=>{
-    if(location.state?.searchTerm){
+  const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+  const [selectedAppId, setSelectedAppId] = useState(null);
+  const [selectedDateTime, setSelectedDateTime] = useState("");
+
+  useEffect(() => {
+    if (location.state?.searchTerm) {
       setSearchTerm(location.state.searchTerm);
     }
-  },[location.state]);
+  }, [location.state]);
   const applications = [
     {
       id: 1,
@@ -134,6 +144,7 @@ const Applications = () => {
   });
 
 
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -145,43 +156,61 @@ const Applications = () => {
 
       <div className=" min-h-screen font-urbanist scroll-container pb-16">
         <div className="fixed top-0 right-0 left-0 z-20">
-            <header className="bg-white max-w-[1024px] mx-auto px-6 py-4">
-          <div className="max-w-[1024px] mx-auto flex justify-between items-center">
-            <div
-              onClick={back}
-              className="p-[6px] border rounded-lg border-black cursor-pointer"
-            >
-              <FaAngleLeft className="text-gray-500  size-[14px]" />
-            </div>
-            <h1 className="text-[20px] leading-[24px] font-bold text-gray-900">Applications</h1>
+          <header className="bg-white max-w-[1024px] mx-auto px-6 py-4">
+            <div className="max-w-[1024px] mx-auto flex justify-between items-center">
+              <div
+                onClick={back}
+                className="p-[6px] border rounded-lg border-black cursor-pointer"
+              >
+                <FaAngleLeft className="text-gray-500  size-[14px]" />
+              </div>
+              <h1 className="text-[20px] leading-[24px] font-bold text-gray-900">Applications</h1>
 
-            <span className="text-[14px] text-google">{filteredApplications.length} Total</span>
-          </div>
-        </header>
+              <span className="text-[14px] text-google w-[60px] ">{filteredApplications.length} Total</span>
+            </div>
+          </header>
         </div>
-      
+
 
         <main className="max-w-[1024px] mx-auto px-6 py-6 mt-[61px]">
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-[16px] w-[16px]" />
+          <div className="flex flex-col  gap-6 mb-6">
+            {/* <div className="relative flex-1 ">
+              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-[16px] w-[16px] " />
               <input
                 type="text"
                 placeholder="Search by candidate or position"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 py-2 text-[14px] border rounded-md w-full outline-none border focus:border-gray-400"
+                className="pl-10 py-2 text-[14px] border rounded-xl w-full outline-none border focus:border-gray-400"
               />
+            </div> */}
+            <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+              <img
+                src={images.searchIcon}
+
+                className="pl-[18px] cursor-pointer"
+                alt=""
+              />
+
+              <input
+                type="text"
+                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                placeholder="Search by candidate or position"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+
+              />
+              {/* <img src={images.option} className='pr-[14px]' alt="" /> */}
             </div>
 
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex flex-wrap bg-[#EEF3FF]  p-[8px] rounded-[18px] gap-[12px] items-center">
               {statusOptions.map((status) => (
                 <button
                   key={status}
                   onClick={() => setSelectedStatus(status)}
-                  className={`px-3 py-[6px] text-[13px] rounded border font-medium transition-all duration-200 cursor-pointer ${selectedStatus === status
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-gray-600"
+                  className={`px-[14px] py-[8px] rounded-[12px] font-semibold leading-[24px] text-[14px] font-semibold ${selectedStatus === status
+                    ? "bg-[#2869FE] text-white"
+                    : "bg-white text-[#2869FEE6]"
                     }`}
                 >
                   {status}
@@ -194,7 +223,7 @@ const Applications = () => {
             {filteredApplications.map((app) => (
               <div
                 key={app.id}
-                className="bg-white rounded shadow-sm border p-4 flex flex-col gap-3"
+                className="bg-[#E9F0FF] bg-opacity-30 rounded-md shadow-sm border p-6 flex flex-col gap-4"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex gap-4">
@@ -203,7 +232,7 @@ const Applications = () => {
                       alt={app.candidateName}
                       className="h-[48px] w-[48px] rounded-full border-2 border-green-400"
                     />
-                    <div className="space-y-[4px]">
+                    <div className="space-y-[5px]">
                       <div className="flex justify-between items-center">
                         <h2 className="text-[15px] font-semibold leading-[18px]">
                           {app.candidateName}
@@ -216,11 +245,11 @@ const Applications = () => {
                           {app.status}
                         </span>
                       </div>
-                      <p className="text-[13px] text-gray-600 leading-[18px]">
+                      <p className="text-[14px] text-gray-800 leading-[18px]">
                         Applied for: {app.position}
                       </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[12px] text-gray-600">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] text-gray-800">
                         <div className="flex items-center">
                           <FaEnvelope className="mr-2 h-3 w-3" /> {app.email}
                         </div>
@@ -251,17 +280,24 @@ const Applications = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 text-[12px] font-medium ">
+                  <div className="flex flex-col gap-2 text-[14px] font-medium ">
                     <button className="border rounded px-2 py-1 flex items-center gap-1">
                       <FaFileAlt className="h-3 w-3" /> Resume
                     </button>
-                    <button className="border rounded px-2 py-1 flex items-center gap-1" onClick={()=>navigate('/message/messageinbox')}>
+                    <button className="border rounded px-2 py-1 flex items-center gap-1" onClick={() => navigate('/message/messageinbox')}>
                       <FaComments className="h-3 w-3" /> Message
                     </button>
-                    <button className="border rounded px-2 py-1 flex items-center gap-1">
+                    <button
+                      className="border rounded px-2 py-1 flex items-center gap-1"
+                      onClick={() => {
+                        setSelectedAppId(app.id);
+                        setShowDateTimePicker(true);
+                      }}
+                    >
                       <FaCalendarAlt className="h-3 w-3" /> Interview
                     </button>
-                    
+
+
                   </div>
                 </div>
               </div>
@@ -287,6 +323,51 @@ const Applications = () => {
         </main>
       </div>
       <FooterRecruiter />
+      {
+        showDateTimePicker && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-40 flex items-center justify-center z-50 font-urbanist">
+            <div className="bg-white p-4 rounded-xl shadow space-y-4">
+              <h2 className="text-lg font-bold">Set Interview Date & Time</h2>
+              <input
+                type="datetime-local"
+                value={selectedDateTime}
+                onChange={(e) => setSelectedDateTime(e.target.value)}
+                min={new Date().toISOString().slice(0, 16)}
+                className="border rounded p-2 w-full"
+              />
+              <div className="flex justify-end space-x-2">
+                <button
+                  onClick={() => {
+                    setShowDateTimePicker(false);
+                    setSelectedAppId(null);
+                    setSelectedDateTime("");
+                  }}
+                  className="border rounded px-3 py-1"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    if (!selectedDateTime) {
+                      toast.error("Please select a date and time", { autoClose: 1500 });
+                      return;
+                    }
+                    console.log(`Interview for app ${selectedAppId} set for ${selectedDateTime}`);
+                    toast.success("Interview Set", { autoClose: 1000 })
+                    setShowDateTimePicker(false);
+                    setSelectedAppId(null);
+                    setSelectedDateTime("");
+                  }}
+                  className="bg-blue-600 text-white rounded px-3 py-1"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      }
+      <ToastContainer />
     </motion.div>
   );
 };

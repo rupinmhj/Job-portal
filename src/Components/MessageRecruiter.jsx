@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import {  motion } from "framer-motion";
+import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
 import FooterRecruiter from "../Components/FooterRecruiter";
 
- const MessageRecruiter = () => {
-  const navigate=useNavigate();
-  const [messages,setMessages]=useState([]);
-  const [searchQuery,setSearchQuery]=useState("");
-  const [showSearch,setShowSearch]=useState(false);
+const MessageRecruiter = () => {
+  const navigate = useNavigate();
+  const [messages, setMessages] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const mockMessages = [
       {
         id: 1,
@@ -50,10 +50,10 @@ import FooterRecruiter from "../Components/FooterRecruiter";
     ];
 
     setMessages(mockMessages);
-  },[]);
+  }, []);
 
-  const filteredMessages=messages.filter(msg=>
-    msg.name.toLowerCase().includes(searchQuery.toLowerCase())||
+  const filteredMessages = messages.filter(msg =>
+    msg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     msg.message.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
@@ -63,11 +63,11 @@ import FooterRecruiter from "../Components/FooterRecruiter";
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
-      className="h-screen overflow-y-scroll font-urbanist"
+      className="h-screen overflow-y-scroll font-urbanist "
     >
-       {/* Header */}
+      {/* Header */}
       <div className="fixed top-0 left-0 right-0 bg-white z-10 ">
-        <div className="flex items-center justify-between max-w-[1024px] mx-auto px-6 pt-[16px] pb-[24px]">
+        <div className="flex items-center justify-between max-w-[1024px] mx-auto px-6  pt-[16px] pb-[24px]">
           <div
             onClick={() => navigate(-1)}
             className="p-[6px] border rounded-lg border-black cursor-pointer"
@@ -88,19 +88,29 @@ import FooterRecruiter from "../Components/FooterRecruiter";
 
         {/* Search Input */}
         {showSearch && (
-          <div className="px-6 max-w-[1024px] mx-auto mt-[-20px] ">
-            <input
-              type="text"
-              value={searchQuery}
+          <div className="px-6  max-w-[1024px] mx-auto ">
+           <div className="max-w-[1024px] mx-auto px-6 py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+              <img
+                src={images.searchIcon}
+
+                className="pl-[18px] cursor-pointer"
+                alt=""
+              />
+
+              <input
+                type="text"
+                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name or message..."
-              className="w-full px-4 py-2 mt-2 mb-2 border border-gray-300 rounded-lg focus:outline-none text-[14px]"
-            />
+
+              />
+            </div>
           </div>
         )}
       </div>
 
-       <div className={`${showSearch?'pt-[100px]':'pt-[80px]'} pb-[90px] px-6 max-w-[1024px] mx-auto space-y-4`}>
+      <div className={`${showSearch ? 'pt-[126px]' : 'pt-[80px]'} pb-[90px]  max-w-[1024px] mx-auto space-y-4 px-2 md:px-6`}>
         {filteredMessages.length === 0 ? (
           <p className="text-gray-500 text-center mt-10">No messages found.</p>
         ) : (

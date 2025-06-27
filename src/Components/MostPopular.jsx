@@ -12,7 +12,7 @@ const MostPopular = () => {
     navigate("/alljob")
   }
   return (
-    <div className="text-white lg:mx-[232px] pl-[24px] mt-[24px] font-urbanist">
+    <div className="text-white max-w-[1024px] mx-auto pl-[24px] mt-[24px] font-urbanist">
       <div className="flex justify-between pr-[24px]">
 
       <h1 className='text-black font-bold text-[18px] leading-[22px] mb-[24px] '>Most Popular</h1>

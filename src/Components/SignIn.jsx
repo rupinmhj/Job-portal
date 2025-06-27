@@ -1,55 +1,119 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import images from "../assets/images";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion"
 
 const SignIn = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
-  const home=()=>navigate("/home");
-  const signup=()=>navigate("/signup");
+  const home = () => navigate("/home");
+  const signup = () => navigate("/signup");
 
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [emailError,setEmailError]=useState("");
-  const [passwordError,setPasswordError]=useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  //Validation function
-  const validate=()=>{
-    let valid=true;
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [signInError, setSignInError] = useState("");
+
+  // Validation function
+  const validate = () => {
+    let valid = true;
     setEmailError("");
     setPasswordError("");
 
-    if(!email){
+    if (!email) {
       setEmailError("Email is required");
-      valid=false;
+      valid = false;
     }
 
-    if(!password){
+    if (!password) {
       setPasswordError("Password is required.");
-      valid=false;
+      valid = false;
     }
     return valid;
-  }
+  };
+
+  // const handleSignIn = async () => {
+  //   if (!validate()) return;
+
+  //   setLoading(true);
+  //   setSignInError("");
+
+  //   try {
+  //     const response = await axios.get("http://localhost:3001/users", {
+  //       params: {
+  //         email,
+  //         password,
+  //       }
+  //     });
+      
+  //     const data = response.data;
+  //     console.log(data);
+  //     if (data.length === 1) {
+  //       const loggedInUser = data[0];
+  //       localStorage.setItem("userRole", loggedInUser.role);
+
+  //       switch (loggedInUser.role) {
+  //         case "job_seeker":
+  //           toast.success("Logged in successfully as Job Seeker!");
+  //           setTimeout(() => navigate("/home"), 1000); 
+  //           break;
+  //         case "employer":
+  //           toast.success("Logged in successfully as Employer!");
+  //           setTimeout(() => navigate("/homerecruiter"), 1000); 
+  //           break;
+  //         default:
+  //           const invalidRoleError = "Invalid user role";
+  //           setSignInError(invalidRoleError);
+  //           toast.error(invalidRoleError);
+  //       }
+  //     } else {
+  //       const errorMessage = "Invalid email or password";
+  //       setSignInError(errorMessage);
+  //       toast.error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     console.error("Sign in error:", error);
+  //     const errorMessage = "Failed to sign in. Please try again.";
+  //     setSignInError(errorMessage);
+  //     toast.error(errorMessage);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleSignIn=()=>{
-    if(validate()){
-      home();
+    if(valid){
+      home()
     }
   }
 
   return (
     <>
+     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, delay: 0.15 }}
+      className="h-screen overflow-y-scroll scroll-container"
+    >
+
       <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] w-full">
         <div className="fixed top-0 left-0 right-0 bg-white z-10">
           <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
             <div onClick={back} className="p-[6px] border rounded-lg border-black cursor-pointer">
-              <FaAngleLeft  className="text-gray-500 size-[14px]" />
+              <FaAngleLeft className="text-gray-500 size-[14px]" />
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Sign In</h2>
             <h2 className="w-[14px]"></h2>
@@ -69,45 +133,47 @@ const SignIn = () => {
 
         {/* Email Field */}
         <div className="mt-[32px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Email  <span className="text-red-500">*</span></p>
+          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
+            Email <span className="text-red-500">*</span>
+          </p>
 
-          <div className=" relative mb-[20px]">
+          <div className="relative mb-[20px]">
             <img src={images.email} className="absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className="focus:outline-none border focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
-           
           </div>
           {emailError && <p className="text-red-600 text-[12px] pl-4">{emailError}</p>}
         </div>
 
         {/* Password Field */}
         <div className="mt-[10px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Password  <span className="text-red-500">*</span></p>
+          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
+            Password <span className="text-red-500">*</span>
+          </p>
           <div className="relative mb-[20px]">
             <img src={images.password} className="absolute z-20 inset-y-7 size-[20px] left-4" alt="Password" />
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-                className="w-full focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full focus:border-gray-400 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
                 placeholder="Type your password"
               />
               <span
                 className="absolute right-4 top-[42%] transform -translate-y-1/2 cursor-pointer text-gray-500"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4"/>}
+                {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4" />}
               </span>
             </div>
-            {emailError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
-
           </div>
+          {passwordError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
 
           {/* Remember Me */}
           <div className="flex items-center gap-2 mb-[20px]">
@@ -123,13 +189,19 @@ const SignIn = () => {
             </label>
           </div>
 
-          <p className="text-blue-600 font-semibold text-[14px] leading-[24px] cursor-pointer" onClick={()=>navigate('/forgetpassword')}>
+          <p className="text-blue-600 font-semibold text-[14px] leading-[24px] cursor-pointer" onClick={() => navigate('/forgetpassword')}>
             Forgot Password?
           </p>
         </div>
 
-        <button onClick={handleSignIn} className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]">
-          Sign In
+   
+
+        <button 
+          onClick={handleSignIn} 
+          disabled={loading}
+          className={`w-full cursor-pointer ${loading ? 'bg-gray-400' : 'bg-[#2869FE]'} p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]`}
+        >
+          {loading ? "Signing In..." : "Sign In"}
         </button>
 
         <div className="flex text-[#71757D] w-full my-[35px] justify-center">
@@ -155,7 +227,11 @@ const SignIn = () => {
             <span className="text-[#2869FE] cursor-pointer"> Sign Up</span>
           </p>
         </div>
+        <ToastContainer 
+          autoClose={1500}
+        />
       </div>
+      </motion.div>
     </>
   );
 };

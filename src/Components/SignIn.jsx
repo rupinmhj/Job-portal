@@ -94,8 +94,8 @@ const SignIn = () => {
   // };
 
   const handleSignIn=()=>{
-    if(valid){
-      home()
+    if(validate()){
+      home();
     }
   }
 

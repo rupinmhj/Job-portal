@@ -173,7 +173,7 @@ const ManageJobs = () => {
                                         <div className="flex items-center">
                                             <img
                                                 src={images.location}
-                                                className="size-[12px] mb-[2px] inline-block mr-[8px]"
+                                                className="size-[12px] mb-[2px] inline-block mr-[8px] "
                                                 alt=""
                                             />
                                             {job.location}

@@ -61,7 +61,7 @@ const ProfileRecruiter = () => {
             onClick={() => navigate(-1)}
             className="p-[6px] border rounded-lg border-black cursor-pointer"
           >
-            <FaAngleLeft className="text-gray-500 text-[14px]" />
+            <FaAngleLeft className="text-gray-500 size-[14px]" />
           </div>
           <h2 className="text-[20px] font-bold">Recruiter Profile</h2>
           <div className="flex gap-[12px]">
@@ -119,43 +119,47 @@ const ProfileRecruiter = () => {
         </button>
 
         {/* Menu */}
-        <div className="w-full bg-[#7D67FF] px-[24px] py-[24px] text-white space-y-4 rounded-t-3xl">
-          {[
-            {
-              label: "Manage Jobs",
-              icon: <CgBriefcase />,
-              action: () => navigate("/managejob"),
-            },
-            {
-              label: "View Applicants",
-              icon: <IoBagHandleOutline />,
-              action: () => navigate("/application"),
-            },
-            {
-              label: "Setup Profile",
-              icon: <MdOutlinePhonelinkSetup />,
-              action: () => navigate("/companyprofile"),
-            },
-            {
-              label: "Logout",
-              icon: <IoLogOutOutline />,
-              action: handleLogout,
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              onClick={item.action}
-              className="flex justify-between items-center cursor-pointer py-3 border-b border-white/20 last:border-none"
-            >
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-white/30 rounded-lg">{item.icon}</div>
-                <span className="font-medium text-[16px]">{item.label}</span>
+        <div className="w-full">
+
+          <div className="w-full bg-[#7D67FF] px-[24px] pt-[48px] pb-[150px] text-white space-y-4 rounded-t-3xl">
+            {[
+              {
+                label: "Manage Jobs",
+                icon: <CgBriefcase />,
+                action: () => navigate("/managejob"),
+              },
+              {
+                label: "View Applicants",
+                icon: <IoBagHandleOutline />,
+                action: () => navigate("/application"),
+              },
+              {
+                label: "Setup Profile",
+                icon: <MdOutlinePhonelinkSetup />,
+                action: () => navigate("/companyprofile"),
+              },
+              {
+                label: "Logout",
+                icon: <IoLogOutOutline />,
+                action: handleLogout,
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                onClick={item.action}
+                className="flex justify-between items-center cursor-pointer py-3 border-b border-white/20 last:border-none"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/30 rounded-lg">{item.icon}</div>
+                  <span className="font-medium text-[16px]">{item.label}</span>
+                </div>
+                <MdOutlineKeyboardArrowRight className="text-white" />
               </div>
-              <MdOutlineKeyboardArrowRight className="text-white" />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
 
       <FooterRecruiter />
       <Outlet />

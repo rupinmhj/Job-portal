@@ -7,7 +7,7 @@ import CategoryRecruiter from './CategoryRecruiter';
 import MostPopular from './MostPopular';
 import Company from './Company';
 import FooterRecruiter from './FooterRecruiter';
-import SideBar from './SideBar';
+import SideBarRecruiter from './SidebarRecruiter';
 import { Outlet } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RecruitmentStats } from './RecruitmentStats';
@@ -73,7 +73,7 @@ const HomeRecruiter = () => {
       transition={{ duration: 0.4, ease: 'easeInOut' }}
       className="fixed z-40 top-0 left-0 h-full"
     >
-      <SideBar
+      <SideBarRecruiter
         isPageOpen={isPageOpen}
         setIsPageOpen={setIsPageOpen}
         isSidebarOpen={isSidebarOpen}

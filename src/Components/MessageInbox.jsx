@@ -21,12 +21,14 @@ const MessageInbox = () => {
       <div className="fixed left-0 right-0 top-0">
         <div className="bg-white max-w-[1024px] flex p-[24px] pt-[16px] justify-between items-center mx-auto">
           <div
-            onClick={back}
             className="flex gap-[18px] items-center justify-between"
           >
-            <div className="h-[23px] flex justify-center items-center w-[23px] border rounded-lg border-gray-500 cursor-pointer">
-              <FaAngleLeft className="text-gray-500  h-[14px] w-[14px]" />
-            </div>
+             <div
+                        onClick={() => navigate(-1)}
+                        className="p-[6px] border rounded-lg border-black cursor-pointer"
+                      >
+                        <FaAngleLeft className="text-gray-500 size-[14px]" />
+                      </div>
             <div className="relative">
               <img
                 src={images.messenger5}

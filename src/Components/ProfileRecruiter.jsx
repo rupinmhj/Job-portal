@@ -61,7 +61,7 @@ const ProfileRecruiter = () => {
             onClick={() => navigate(-1)}
             className="p-[6px] border rounded-lg border-black cursor-pointer"
           >
-            <FaAngleLeft className="text-gray-500 size-[14px]" />
+            <FaAngleLeft className="text-gray-500 size-[14}" />
           </div>
           <h2 className="text-[20px] font-bold">Recruiter Profile</h2>
           <div className="flex gap-[12px]">

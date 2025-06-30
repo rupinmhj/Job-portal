@@ -110,8 +110,8 @@ const CompanyProfile = () => {
                 {/* Header */}
                 <div className="fixed top-0 left-0 right-0 bg-white z-10">
                     <div className="flex items-center justify-between max-w-[1024px] mx-auto px-6 py-[16px]">
-                        <div className="p-[6px] border rounded-lg border-black cursor-pointer">
-                            <FaAngleLeft onClick={back} className="text-gray-500 size-[14px]" />
+                        <div onClick={back} className="p-[6px] border rounded-lg border-black cursor-pointer">
+                            <FaAngleLeft  className="text-gray-500 size-[14px]" />
                         </div>
                         <h2 className="text-[20px] font-bold">Set Up Company</h2>
                         {/* <h2

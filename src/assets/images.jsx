@@ -103,6 +103,7 @@ import createjob from './createjob.png'
 import managejob from './management.png'
 import application from './application.png'
 import companyprofile from './companyprofile.png'
+import status from './status.png'
 const images={
     hello,
     profileSmall,
@@ -209,5 +210,6 @@ const images={
     managejob,
     application,
     companyprofile,
+    status,
 }
 export default images;

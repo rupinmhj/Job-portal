@@ -7,20 +7,12 @@ import FooterRecruiter from "./FooterRecruiter";
 import images from "../assets/images";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
-
-
 import {
-  FaSearch,
   FaEnvelope,
   FaPhone,
   FaCalendarAlt,
   FaFileAlt,
-  FaStar,
-  FaRegStar,
   FaComments,
-  FaEllipsisH,
 } from "react-icons/fa";
 
 const Applications = () => {
@@ -36,79 +28,91 @@ const Applications = () => {
   const [selectedAppId, setSelectedAppId] = useState(null);
   const [selectedDateTime, setSelectedDateTime] = useState("");
 
+  const [openStatusDropdownId, setOpenStatusDropdownId] = useState(null);
+
   useEffect(() => {
     if (location.state?.searchTerm) {
       setSearchTerm(location.state.searchTerm);
     }
   }, [location.state]);
-  const applications = [
-    {
-      id: 1,
-      candidateName: "John Smith",
-      email: "john.smith@email.com",
-      phone: "+977-9876543210",
-      position: "Senior Frontend Developer",
-      appliedDate: "2024-06-20",
-      status: "New",
-      experience: "5 years",
-      skills: ["React", "TypeScript", "Node.js"],
-      avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face",
-    },
-    {
-      id: 2,
-      candidateName: "Sarah Johnson",
-      email: "sarah.j@email.com",
-      phone: "+977-9876543211",
-      position: "UX Designer",
-      appliedDate: "2024-06-19",
-      status: "Reviewed",
-      experience: "3 years",
-      skills: ["Figma", "Adobe XD", "Prototyping"],
-      avatar:
-        "https://static.vecteezy.com/system/resources/thumbnails/026/911/382/small_2x/happy-student-boy-with-books-isolated-free-photo.jpg",
-    },
-    {
-      id: 3,
-      candidateName: "Michael Chen",
-      email: "m.chen@email.com",
-      phone: "+977-9876543212",
-      position: "Product Manager",
-      appliedDate: "2024-06-18",
-      status: "Interview",
-      experience: "7 years",
-      skills: ["Product Strategy", "Agile", "Analytics"],
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face"
-    },
-    {
-      id: 4,
-      candidateName: "Emily Davis",
-      email: "emily.davis@email.com",
-      phone: "+977-9876543213",
-      position: "Backend Engineer",
-      appliedDate: "2024-06-17",
-      status: "Shortlisted",
-      experience: "4 years",
-      skills: ["Python", "Django", "PostgreSQL"],
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face"
-    },
-    {
-      id: 5,
-      candidateName: "David Wilson",
-      email: "d.wilson@email.com",
-      phone: "+977-9876543214",
-      position: "Senior Frontend Developer",
-      appliedDate: "2024-06-16",
-      status: "Rejected",
-      experience: "2 years",
-      skills: ["JavaScript", "Vue.js", "CSS"],
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face"
-    }
-  ];
+  const [applicationsData, setApplicationsData] = useState(
+    [
+      {
+        id: 1,
+        candidateName: "John Smith",
+        email: "john.smith@email.com",
+        phone: "+977-9876543210",
+        position: "Senior Frontend Developer",
+        appliedDate: "2024-06-20",
+        status: "New",
+        experience: "5 years",
+        skills: ["React", "TypeScript", "Node.js"],
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face",
+      },
+      {
+        id: 2,
+        candidateName: "Sarah Johnson",
+        email: "sarah.j@email.com",
+        phone: "+977-9876543211",
+        position: "UX Designer",
+        appliedDate: "2024-06-19",
+        status: "Reviewed",
+        experience: "3 years",
+        skills: ["Figma", "Adobe XD", "Prototyping"],
+        avatar:
+          "https://static.vecteezy.com/system/resources/thumbnails/026/911/382/small_2x/happy-student-boy-with-books-isolated-free-photo.jpg",
+      },
+      {
+        id: 3,
+        candidateName: "Michael Chen",
+        email: "m.chen@email.com",
+        phone: "+977-9876543212",
+        position: "Product Manager",
+        appliedDate: "2024-06-18",
+        status: "Interview",
+        experience: "7 years",
+        skills: ["Product Strategy", "Agile", "Analytics"],
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face"
+      },
+      {
+        id: 4,
+        candidateName: "Emily Davis",
+        email: "emily.davis@email.com",
+        phone: "+977-9876543213",
+        position: "Backend Engineer",
+        appliedDate: "2024-06-17",
+        status: "Shortlisted",
+        experience: "4 years",
+        skills: ["Python", "Django", "PostgreSQL"],
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face"
+      },
+      {
+        id: 5,
+        candidateName: "David Wilson",
+        email: "d.wilson@email.com",
+        phone: "+977-9876543214",
+        position: "Senior Frontend Developer",
+        appliedDate: "2024-06-16",
+        status: "Rejected",
+        experience: "2 years",
+        skills: ["JavaScript", "Vue.js", "CSS"],
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face"
+      }
+    ]
+  )
 
   const statusOptions = [
     "All",
     "New",
+    "Reviewed",
+    "Interview",
+    "Shortlisted",
+    "Rejected",
+    "Hired",
+  ];
+
+  const statusOptions2 = [
     "Reviewed",
     "Interview",
     "Shortlisted",
@@ -135,16 +139,13 @@ const Applications = () => {
     }
   };
 
-  const filteredApplications = applications.filter((app) => {
+  const filteredApplications = applicationsData.filter((app) => {
     const matchesSearch =
       app.candidateName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.position.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = selectedStatus === "All" || app.status === selectedStatus;
     return matchesSearch && matchesStatus;
   });
-
-
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -174,16 +175,6 @@ const Applications = () => {
 
         <main className="max-w-[1024px] mx-auto px-6 py-6 mt-[61px]">
           <div className="flex flex-col  gap-6 mb-6">
-            {/* <div className="relative flex-1 ">
-              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-[16px] w-[16px] " />
-              <input
-                type="text"
-                placeholder="Search by candidate or position"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 py-2 text-[14px] border rounded-xl w-full outline-none border focus:border-gray-400"
-              />
-            </div> */}
             <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
               <img
                 src={images.searchIcon}
@@ -259,6 +250,7 @@ const Applications = () => {
                         <div className="flex items-center">
                           <FaCalendarAlt className="mr-2 h-3 w-3" /> Applied: {app.appliedDate}
                         </div>
+
                       </div>
 
                       <div className="flex items-center gap-1 mt-2 text-[13px] pb-2">
@@ -296,6 +288,41 @@ const Applications = () => {
                     >
                       <FaCalendarAlt className="h-3 w-3" /> Interview
                     </button>
+
+                    <div className="relative">
+                      <button
+                        className="border rounded px-2 py-1 flex items-center gap-1 w-[91.05px]"
+                        onClick={() =>
+                          setOpenStatusDropdownId(openStatusDropdownId === app.id ? null : app.id)
+                        }
+                      >
+                        <img src={images.status} className="h-3 w-3" alt="" />
+                        Status
+                      </button>
+
+                      {openStatusDropdownId === app.id && (
+                        <div className="absolute mt-1 w-[120px] bg-white border rounded shadow z-30">
+                          {statusOptions2.map((status, index) => (
+                            <div
+                              key={index}
+                              className={`px-3 py-2 cursor-pointer text-sm hover:opacity-50 ${getStatusColor(status)}`}
+                              onClick={() => {
+                                setApplicationsData(prev =>
+                                  prev.map(a =>
+                                    a.id === app.id ? { ...a, status: status } : a
+                                  )
+                                );
+                                setOpenStatusDropdownId(null);
+                              }}
+                            >
+                              {status}
+                            </div>
+                          ))}
+
+                        </div>
+                      )}
+                    </div>
+
 
 
                   </div>

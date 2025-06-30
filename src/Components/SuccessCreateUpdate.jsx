@@ -38,8 +38,8 @@ const SuccessCreateUpdate = () => {
 
              <div className="fixed bottom-0 right-0 left-0 ">
          <div className="p-[24px] max-w-[1024px] mx-auto ">
-          <div className="bg-[#2869FE] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer" onClick={()=>navigate('/homerecruiter')}>
-                <h1 className="text-[16px] leading-[26px] font-bold" >Back To Home</h1>
+          <div className="bg-[#2869FE] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer" onClick={()=>navigate('/managejob')}>
+                <h1 className="text-[16px] leading-[26px] font-bold" >Back To Manage Jobs</h1>
           </div>
         </div>
       </div>

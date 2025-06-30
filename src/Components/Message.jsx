@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
-import FooterRecruiter from "../Components/FooterRecruiter";
+import Footer from "../Components/Footer";
 
 const Message = () => {
   const navigate = useNavigate();
@@ -171,7 +171,7 @@ const Message = () => {
         )}
       </div>
 
-      <FooterRecruiter />
+      <Footer />
       <Outlet />
     </motion.div>
   );

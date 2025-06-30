@@ -114,7 +114,7 @@ const CreateJob = () => {
   {/* Required Skills */}
   <label className="pl-3 text-[15px] font-semibold">Required Skills</label>
   <textarea name="skills" value={form.skills} onChange={handleChange} placeholder="List required skills..."
-    className="w-full mt-2 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
+    className="w-full h-[200px] mt-2 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
 
   {/* Job Facilities */}
   <label className="pl-3 text-[15px] font-semibold">Job Facilities</label>
@@ -124,12 +124,12 @@ const CreateJob = () => {
   {/* About the Role */}
   <label className="pl-3 text-[15px] font-semibold">About the Role</label>
   <textarea name="about" value={form.about} onChange={handleChange} placeholder="Describe the job responsibilities..."
-    className="w-full mt-2 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
+    className="w-full h-[200px] mt-2 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
 
   {/* Requirement Skills for Role */}
   <label className="pl-3 text-[15px] font-semibold">Requirement Skills for the Role</label>
   <textarea name="requirements" value={form.requirements} onChange={handleChange} placeholder="e.g. Fluent English, Teamwork"
-    className="w-full mt-2 mb-[120px] p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
+    className="w-full h-[200px] mt-2 mb-[120px] p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none" />
 
   {/* Submit Button */}
   <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">

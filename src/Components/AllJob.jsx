@@ -3,10 +3,12 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
+import Select from 'react-select';
 
 const AllJob = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -76,33 +78,83 @@ const AllJob = () => {
   const back = () => navigate(-1);
   const details = () => navigate("/details");
 
+
+
+  const filterJobs = jobs.filter((job) => {
+    const matchSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchSearch;
+  })
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.1 }}
-      className="h-screen overflow-y-scroll scroll-container"
+      className="h-screen overflow-y-scroll scroll-container max-w-[1024px] mx-auto px-6"
     >
-      <div className="bg-white lg:px-[232px] xl:px-[274px] text-[#121927] font-urbanist w-full">
-        <div className="fixed top-0 left-0 right-0 bg-white z-10">
-          <div className="flex items-center justify-between px-[24px] pb-[24px] lg:px-[252px] py-[16px]">
+      <div className="bg-white  text-[#121927] font-urbanist w-full">
+        <div className="fixed top-0 left-0 right-0 bg-white z-50">
+          <div className="max-w-[1024px] flex items-center justify-between px-[24px] pb-[24px] mx-auto py-[16px]">
             <div className="p-[6px] border rounded-lg border-black cursor-pointer" onClick={back}>
               <FaAngleLeft className="text-gray-500 size-[14px]" />
             </div>
-            <h2 className="text-[20px] font-bold leading-[24px]">All Job</h2>
-            <h2 className="w-[28px]"></h2>
+            <h2 className="text-[20px] font-bold leading-[24px] pl-10">All Job</h2>
+            <p className="text-[15px] font-semibold leading-[18px]">{filterJobs.length} Jobs Found</p>
+
           </div>
         </div>
 
-        <div className="flex justify-between items-center mt-[74px] px-[24px]">
-          <p className="text-[15px] font-semibold leading-[18px]">{jobs.length} Jobs Found</p>
-          <img src={images.arrow} alt="" />
-        </div>
+     
+          <div className="flex justify-between items-center mt-[74px] gap-10 w-full">
+            <div className="w-full relative">
+               <img
+                src={images.searchIcon}
 
-        <div className="mt-[24px] px-[24px]">
+                className="pl-[18px] cursor-pointer absolute top-[15px] z-20 "
+                alt=""
+              />
+              <Select
+                
+                options={[...new Set(filterJobs.map((job) => job.title))].map((title) => ({
+                  value: title,
+                  label: title,
+                }))}
+                onChange={(selectedOption) =>
+                  setSearchTerm(selectedOption ? selectedOption.value : "")
+                }
+                isClearable
+                placeholder="Search or select job title"
+                className="outline-none w-full "
+                classNamePrefix=""
+                 styles={{
+    control: (base,state) => ({
+      ...base,
+      boxShadow: "white",
+      borderColor: state.isFocused ? "#ccc" : "#ccc",
+      paddingLeft:"40px",
+      paddingTop:"5px",
+      paddingBottom:"5px",
+      borderRadius: "0.75rem",
+      fontSize:"14px",
+   
+      
+    }),
+  }}
+              />
+            </div>
+
+            <img src={images.arrow} alt="" />
+          </div>
+
+
+
+
+
+
+        <div className="mt-[24px] ">
           <div className="bg-bgColor bg-opacity-65">
-            {jobs.map((job) => (
+            {filterJobs.map((job) => (
               <div key={job.id} className="relative bg-white flex p-[16px] mb-[16px] gap-[16px]">
                 <div className="flex justify-center items-start">
                   <div

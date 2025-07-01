@@ -1,4 +1,3 @@
-import React from 'react'
 import images from '../assets/images'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -14,8 +13,6 @@ const SearchRecruiter = () => {
   const filter=()=>{
     navigate("/setfilters")
   }
-
-
   return (
     <div className='max-w-[1024px] mx-auto px-6 flex font-urbanist items-center pt-[88px] bg-white'>
       
@@ -27,11 +24,8 @@ const SearchRecruiter = () => {
               onChange={(e)=>setSearchTerm(e.target.value)}
               onKeyDown={handleSearch}
         className='text-[14px] px-[14px] text-textSearch  outline-none  w-full' placeholder='Search applicants, jobs, or applications…'/>
-        {/* <img onClick={filter} src={images.option} className='pr-[14px]' alt="" /> */}
-      
       </div>
     </div>
   )
 }
-
 export default SearchRecruiter

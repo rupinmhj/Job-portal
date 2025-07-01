@@ -1,9 +1,7 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { LiaAwardSolid } from "react-icons/lia";
@@ -17,7 +15,6 @@ const Profile = () => {
     navigate("/home");
   };
   const boarding=()=>navigate("/")
- 
   return (
     <motion.div
       initial={{opacity:0}}
@@ -48,7 +45,6 @@ const Profile = () => {
           className="size-[80.4px] mb-[12px] border border-blue-500 rounded-xl"
           alt=""
         />
-       
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-[18px] font-bold leading-[22px] mb-[8px]">
             Jonathan Smith
@@ -67,14 +63,12 @@ const Profile = () => {
             </div>
             <h2>Applied</h2>
           </div>
-
           <div className="flex-col flex gap-[6px] justify-center items-center">
             <div className="py-[13px] px-[32px] rounded-xl bg-[#FFEFF8]">
               <h2 className="text-[#FF5FBF] text-[28px] font-bold ">20</h2>
             </div>
             <h2>Reviewed</h2>
           </div>
-
           <div className="flex-col flex gap-[6px] justify-center items-center">
             <div className="py-[13px] px-[32px] rounded-xl bg-[#E5FAF5]">
               <h2 className="text-[#00CC9A] text-[28px] font-bold ">36</h2>
@@ -83,13 +77,11 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
       <div className=" rounded-t-3xl  bg-[#7D67FF] text-white text-[16px] font-urbanist  leading-[19px] mt-[24px] pt-[32px] h-full ">
         <div className="px-[24px] pb-[20px]">
         <li className=" mt-[0px] flex justify-between cursor-pointer items-center pb-[16px] border-b border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate("/personalinfo")}>
           <div className="flex gap-[16px]" >
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
-              
               <CgProfile  className="h-[24px] w-[24px]"/>
             </div>
             <span className="flex items-center text-[16px] font-bold">Personal Information</span>
@@ -98,7 +90,6 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
-
         <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/skilltest')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
@@ -110,7 +101,6 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
-
         <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/workexperience')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
@@ -123,7 +113,6 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
-
         <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2  border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/education')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
@@ -135,7 +124,6 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
-
         <li className=" mt-[16px] flex justify-between cursor-pointer items-center pb-[16px] border-b-2 border-gray-200 border-opacity-35 mb-[16px]" onClick={()=>navigate('/awards')}>
           <div className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
@@ -147,7 +135,6 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </div>
         </li>
-
         <li onClick={boarding} className=" mt-[16px] pb-[116px] flex justify-between cursor-pointer items-center   mb-[16px]">
           <div  className="flex gap-[16px]">
             <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
@@ -160,18 +147,14 @@ const Profile = () => {
           </div>
         </li>
         </div>
-        
         <div className="">
-
        <Footer className="mx-[10px]"/>
         </div>
       </div>
-
       <Outlet />
     </div>
       </motion.div>
     
   );
 };
-
 export default Profile;

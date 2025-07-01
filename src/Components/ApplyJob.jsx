@@ -1,16 +1,12 @@
-import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
-
 import { motion } from 'framer-motion';
-
 const ApplyJob = () => {
   const navigate = useNavigate();
   const back = () => {
     navigate(-1);
   };
-
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -24,7 +20,6 @@ const ApplyJob = () => {
         <div className="flex items-center justify-between px-[24px] lg:px-[252px] xl:px-[294px] py-[16px]">
           <div className="p-[6px] border rounded-lg border-black cursor-pointer"   onClick={back}>
             <FaAngleLeft
-            
               className="text-gray-500  size-[14px]"
             />
           </div>
@@ -34,11 +29,9 @@ const ApplyJob = () => {
           <h2
             className="w-[28px]"
           >
-            
           </h2>
         </div>
       </div>
-
       <div className="px-[24px] mt-[74px] ">
         <form>
           <label
@@ -49,7 +42,6 @@ const ApplyJob = () => {
             <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-[20px]">
-            
             <input
               type="text"
               required
@@ -65,7 +57,6 @@ const ApplyJob = () => {
             <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-[20px]">
-           
             <input
               type="text"
               required
@@ -73,7 +64,6 @@ const ApplyJob = () => {
               placeholder="Type your portfolio address"
             />
           </div>
-
           <label
             className="pl-[12px]  text-[15px] leading-[18px] font-semibold "
             htmlFor=""
@@ -92,7 +82,6 @@ const ApplyJob = () => {
   <p className="text-gray-600 mt-[16px] text-[12px] font-medium">Format DOC, PDF, JPG</p>
   <p className="text-[#2869FE] font-semibold text-[14px] mt-[2px]">Browse Files</p>
 </div>
-
 <label
             className="pl-[12px]  text-[15px] leading-[18px] font-semibold "
             htmlFor=""
@@ -109,10 +98,8 @@ const ApplyJob = () => {
           </div> 
         </form>
       </div>
-     
     </div>
     </motion.div>
   );
 };
-
 export default ApplyJob;

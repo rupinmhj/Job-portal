@@ -169,7 +169,7 @@ const CompanyProfile = () => {
                                         onChange={handleChange}
                                         placeholder={placeholder}
                                         className={`mt-[12px] focus:outline-none border border-gray-400 ${errors[id] ? "border-red-500" : "focus:border-gray-400"
-                                            } shadow-sm rounded-xl p-[14px] w-full h-[100px]`}
+                                            } shadow-sm rounded-xl p-[14px] w-full h-[150px]`}
                                     />
                                 ) : (
                                     <input

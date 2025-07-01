@@ -1,14 +1,7 @@
-import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import images from "../assets/images";
-
 const Footer = () => {
   const navigate = useNavigate();
-
-  const applyjob = () => {
-    navigate('/applyjob');
-  };
-
   return (
     <div className="transition-all duration-300 ease-in-out">
       <div className="lg:px-[140px] flex py-[24px] h-[72px] w-full fixed bottom-0 bg-white rounded-t-2xl z-10">
@@ -23,7 +16,6 @@ const Footer = () => {
                 />
               )}
             </NavLink>
-
             <NavLink to="/clipboard" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
@@ -33,7 +25,6 @@ const Footer = () => {
                 />
               )}
             </NavLink>
-
             <NavLink to="/message" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
@@ -43,7 +34,6 @@ const Footer = () => {
                 />
               )}
             </NavLink>
-
             <NavLink to="/profile" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
@@ -54,19 +44,16 @@ const Footer = () => {
               )}
             </NavLink>
           </div>
-
           <div 
             onClick={()=>navigate('/setfilters')} 
             className="flex p-2 rounded-full bg-white bottom-0 left-1/2 -translate-x-1/2 absolute transition-transform duration-200 hover:scale-110"
           >
             <button className="flex items-center justify-center bg-[#2869FE] h-[60px] w-[60px] text-[24px] font-normal text-white rounded-full">
               <span className="mb-1">+</span>
-              
             </button>
           </div>
         </div>
       </div>
-
       {/* Add animation wrapper for the content */}
       <div className="animate-fadeIn">
         <Outlet />
@@ -74,5 +61,4 @@ const Footer = () => {
     </div>
   );
 };
-
 export default Footer;

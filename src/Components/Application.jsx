@@ -301,7 +301,7 @@ const Applications = () => {
                       </button>
 
                       {openStatusDropdownId === app.id && (
-                        <div className="absolute mt-1 w-[120px] bg-white border rounded shadow z-30">
+                        <div className="absolute mt-1 top-[-120px] right-[100px] w-[120px] bg-white border rounded shadow z-30">
                           {statusOptions2.map((status, index) => (
                             <div
                               key={index}
@@ -351,49 +351,53 @@ const Applications = () => {
       </div>
       <FooterRecruiter />
       {
-        showDateTimePicker && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-40 flex items-center justify-center z-50 font-urbanist">
-            <div className="bg-white p-4 rounded-xl shadow space-y-4">
-              <h2 className="text-lg font-bold">Set Interview Date & Time</h2>
-              <input
-                type="datetime-local"
-                value={selectedDateTime}
-                onChange={(e) => setSelectedDateTime(e.target.value)}
-                min={new Date().toISOString().slice(0, 16)}
-                className="border rounded p-2 w-full"
-              />
-              <div className="flex justify-end space-x-2">
-                <button
-                  onClick={() => {
-                    setShowDateTimePicker(false);
-                    setSelectedAppId(null);
-                    setSelectedDateTime("");
-                  }}
-                  className="border rounded px-3 py-1"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    if (!selectedDateTime) {
-                      toast.error("Please select a date and time", { autoClose: 1500 });
-                      return;
-                    }
-                    console.log(`Interview for app ${selectedAppId} set for ${selectedDateTime}`);
-                    toast.success("Interview Set", { autoClose: 1000 })
-                    setShowDateTimePicker(false);
-                    setSelectedAppId(null);
-                    setSelectedDateTime("");
-                  }}
-                  className="bg-blue-600 text-white rounded px-3 py-1"
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
-        )
-      }
+  showDateTimePicker && (
+    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 font-urbanist">
+      <div className="bg-gray-200 p-6 rounded-2xl shadow-lg w-[320px] max-w-full space-y-4">
+        <h2 className="text-[18px] font-bold text-gray-800">Set Interview Date & Time</h2>
+
+        <input
+          type="datetime-local"
+          value={selectedDateTime}
+          onChange={(e) => setSelectedDateTime(e.target.value)}
+          min={new Date().toISOString().slice(0, 16)}
+          className="w-full px-4 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-blue-500"
+        />
+
+        <div className="flex justify-end gap-3 pt-2">
+          <button
+            onClick={() => {
+              setShowDateTimePicker(false);
+              setSelectedAppId(null);
+              setSelectedDateTime("");
+            }}
+            className="px-4 py-2 text-sm border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100"
+          >
+            Cancel
+          </button>
+
+          <button
+            onClick={() => {
+              if (!selectedDateTime) {
+                toast.error("Please select a date and time", { autoClose: 1500 });
+                return;
+              }
+              console.log(`Interview for app ${selectedAppId} set for ${selectedDateTime}`);
+              toast.success("Interview Set", { autoClose: 1000 });
+              setShowDateTimePicker(false);
+              setSelectedAppId(null);
+              setSelectedDateTime("");
+            }}
+            className="px-4 py-2 text-sm text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
       <ToastContainer />
     </motion.div>
   );

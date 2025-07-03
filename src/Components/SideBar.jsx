@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import images from "../assets/images";
 import Pages from "./Pages";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Component from "./Component";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
+import ThemeContext from "./ThemeContext";
 const SideBar = ({
   isPageOpen,
   setIsPageOpen,
@@ -17,6 +17,7 @@ const SideBar = ({
 }) => {
   console.log("Sidebar activated");
   // const [isPageOpen,setIsPageOpen]=useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handelPages = () => {
     setIsPageOpen(true);
@@ -36,7 +37,7 @@ const SideBar = ({
   const handleProfile = () => {
     navigate("/profile");
   };
-  const signin=()=>{
+  const signin = () => {
     navigate("/signin")
   }
 
@@ -47,11 +48,11 @@ const SideBar = ({
           <img src={images.jobkoLogo} className="h-[60px]" alt="" />
         </div>
         <div className="flex text-[12px] leading-[20px] font-semibold text-white ml-[16px] justify-start items-center">
-          Jobko-Job Finder Mobile App
+          Jobko - Job Finder Mobile App
         </div>
       </div>
       {/* Goodmorning */}
-      <div className="flex flex-col px-[15px] py-[30px]">
+      <div className="flex flex-col px-[15px] py-[30px] dark:bg-[#111d39] h-screen dark:text-white">
         <div className="flex gap-[12px] items-center pb-[20px]">
           <div>
             <img
@@ -125,8 +126,14 @@ const SideBar = ({
           <p className="text-[12px] font-bold leading-[20px]  flex  w-[100%]">
             SETTING
           </p>
-          <div className="flex full justify-between">
+          <div className="flex full justify-between ">
             <h2 className="text-[16px] font-medium mt-[16px]">Dark Mode</h2>
+            <div onClick={toggleTheme} className="h-[17px] w-[27px] bg-gray-300 dark:bg-[#2869fe] rounded-sm mt-[16px] cursor-pointer">
+              <div
+                className="h-[10px] w-[10px] bg-white dark:bg-[#111d39] mt-[4px] rounded-sm transition-all duration-300  ml-1 dark:ml-3"
+                  
+              ></div>
+            </div>
           </div>
         </div>
       </div>
@@ -145,19 +152,19 @@ const SideBar = ({
       </AnimatePresence>
 
       <AnimatePresence>
-      {isComponentOpen && (
-         <motion.div
-         initial={{ x: -280, opacity: 0 }}
-         animate={{ x: 0, opacity: 1 }}
-         exit={{ x: -280, opacity: 0 }}
-         transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="absolute top-0  z-50"
-       >
-          <Component back={back} />
-        </motion.div>
-      )}
+        {isComponentOpen && (
+          <motion.div
+            initial={{ x: -280, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -280, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="absolute top-0  z-50"
+          >
+            <Component back={back} />
+          </motion.div>
+        )}
       </AnimatePresence>
-     
+
 
       <AnimatePresence>
         {isPageOpen && (
@@ -172,19 +179,19 @@ const SideBar = ({
         )}
       </AnimatePresence>
 
-        <AnimatePresence>
+      <AnimatePresence>
         {isComponentOpen && (
-        <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
-          onClick={() => setIsComponentOpen(false)}
-        ></motion.div>
-      )}
-        </AnimatePresence>
-      
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+            onClick={() => setIsComponentOpen(false)}
+          ></motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 };

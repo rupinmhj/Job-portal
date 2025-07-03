@@ -4,39 +4,54 @@ import {useNavigate} from "react-router-dom"
 const PagesRecruiter = ({back}) => {
   const navigate=useNavigate();
   console.log("pages is seen")
-  return (
-    <div className='w-[280px]  bg-white font-urbanist shadow-lg h-screen overflow-y-scroll scroll-container'>
-
+ return (
+    <div className="w-[280px] bg-white dark:bg-[#111d39] dark:text-white font-urbanist shadow-lg h-screen overflow-y-scroll scroll-container">
+      
+      {/* Header */}
       <div className="flex pt-[16px] p-[24px]">
-        <div onClick={back} className='p-[6px] border border-1/2 rounded-lg border-black '>
-        <FaAngleLeft   className='text-gray-500 cursor-pointer size-[14px]'/>
+        <div
+          onClick={back}
+          className="p-[6px] border rounded-lg border-black dark:border-white cursor-pointer"
+        >
+          <FaAngleLeft className="text-gray-500 dark:text-white size-[14px]" />
         </div>
-        <h2 className='text-[18px] font-bold ml-14'>Pages</h2>
+        <h2 className="text-[18px] font-bold ml-14 dark:text-white">Pages</h2>
       </div>
-      <div className="flex px-[24px] flex-col">
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/boarding")}>Boarding</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Boarding 01</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Boarding 02</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/signin")}>Sign In</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/signup")}>Sign Up</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/forgetpassword")}>Forgot Password</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/verification")}>Verification</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/resetpassword")}>Reset Password</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/homerecruiter")}>Home Recruiter</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/setupcompany")}>Set Up Company</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer'  onClick={()=>navigate("/setup/interest")}>Interest</h2>
-  <h2 className='pt-[16px] font-medium text-[15px]'>Success Account</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/successskill")}>Success Applied</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer ' onClick={()=>navigate('/emptynotification')}>Empty Notification</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/messagerecruiter")}>Message </h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/message/messageinbox")}>Message Inbox</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/groupmessage")}>Group Message</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/profilecompany")}>Profile</h2>
-  <h2 className='pt-[16px] font-medium text-[15px] cursor-pointer' onClick={()=>navigate("/setup/interest/confirmnewaccount/success")}>Success</h2>
-</div>
 
+      {/* Links */}
+      <div className="flex px-[24px] flex-col text-custBlackBold dark:text-white">
+        {[
+          { label: "Boarding", path: "/boarding" },
+          { label: "Boarding 01" },
+          { label: "Boarding 02" },
+          { label: "Sign In", path: "/signin" },
+          { label: "Sign Up", path: "/signup" },
+          { label: "Forgot Password", path: "/forgetpassword" },
+          { label: "Verification", path: "/verification" },
+          { label: "Reset Password", path: "/resetpassword" },
+          { label: "Home Recruiter", path: "/homerecruiter" },
+          { label: "Set Up Company", path: "/setupcompany" },
+          { label: "Interest", path: "/setup/interest" },
+          { label: "Success Account" },
+          { label: "Success Applied", path: "/successskill" },
+          { label: "Empty Notification", path: "/emptynotification" },
+          { label: "Message", path: "/messagerecruiter" },
+          { label: "Message Inbox", path: "/message/messageinbox" },
+          { label: "Group Message", path: "/groupmessage" },
+          { label: "Profile", path: "/profilecompany" },
+          { label: "Success", path: "/setup/interest/confirmnewaccount/success" },
+        ].map(({ label, path }, i) => (
+          <h2
+            key={i}
+            className={`pt-[16px] font-medium text-[15px] ${path ? "cursor-pointer" : ""}`}
+            onClick={() => path && navigate(path)}
+          >
+            {label}
+          </h2>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
 export default PagesRecruiter

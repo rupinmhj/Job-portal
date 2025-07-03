@@ -6,16 +6,16 @@ const SuccessApplied = () => {
          const navigate = useNavigate();
   const back = () => navigate(-1);
   return (
-    <div className='font-urbanist h-[100dvh]'>
+    <div className='font-urbanist h-[100dvh] dark:bg-[#111d39] dark:text-white'>
       <div className="max-w-[1024px] mx-auto">
               <div className="flex items-center justify-between p-[24px] pt-[16px] ">
                 <div
                   onClick={back}
-                  className="p-[6px] border h-[30px] w-[30px] flex justify-center items-center rounded-lg border-gray-700 cursor-pointer"
+                  className="p-[6px] border h-[30px] w-[30px] flex justify-center items-center rounded-lg border-gray-700 cursor-pointer dark:border-white"
                 >
-                  <FaAngleLeft className="text-gray-700 size-[14px]" />
+                  <FaAngleLeft className="text-gray-700 size-[14px] dark:text-white" />
                 </div>
-                <h2 className="text-[20px] font-bold  leading-[24px]">
+                <h2 className="text-[20px] font-bold  leading-[24px] dark:text-white">
                   Success
                 </h2>
                   <div className="w-[27.6px] h-[27.6px]"></div>

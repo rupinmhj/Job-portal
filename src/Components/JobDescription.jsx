@@ -2,10 +2,10 @@ import React from "react";
 
 const JobDescription = () => {
   return (
-    <div className="font-urbanist">
+    <div className="font-urbanist dark:text-white">
       <div className="mt-[24px] ">
         <h1 className="text-[16px] font-bold leading-[19px]">About the Role</h1>
-        <p className="mt-[14px] text-[12px] text-[#12192799]">
+        <p className="mt-[14px] text-[12px] text-[#12192799] dark:text-white">
           We are looking for a senior UX Designer. They say no man is an island,
           and this holds particulary true of this role. As a UX Designer, you’ll
           be part of the team that manages Go Pay - Southeast Asia’s largest
@@ -17,7 +17,7 @@ const JobDescription = () => {
           Requirement Skill For The Role
         </h1>
 
-        <ul className="mt-[12px] text-[12px] text-[#12192799] space-y-2">
+        <ul className="mt-[12px] text-[12px] text-[#12192799] dark:text-white space-y-2">
           <li className="flex items-center">
             <span className="inline-block h-[7px] w-[7px] bg-green-500 rounded-full mr-2"></span>
             Create information architecture and UX strategy

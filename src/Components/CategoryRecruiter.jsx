@@ -7,10 +7,10 @@ const CategoryRecruiter = () => {
     navigate("/alljob")
   }
   return (
-    <div className='max-w-[1024px] mx-auto px-[24px] mt-[14px] flex font-urbanist items-center pb-12  '>
+    <div className='max-w-[1024px] dark:bg-[#111d39] mx-auto px-[24px] mt-[14px] flex font-urbanist items-center pb-12  '>
       <div className='w-full'>
         <h1 className='font-bold text-[18px] leading-[22px] mb-[24px] '>Manage Your Workspace	</h1>
-        <div className="flex w-[100%] flex-wrap bg-bgColor pt-10 rounded-xl pb-20 ">
+        <div className="flex w-[100%] flex-wrap bg-bgColor dark:bg-[#111d39]  pt-10 rounded-xl pb-20 ">
           <div onClick={()=>navigate('/companyprofile')} className="  flex justify-center flex-1 flex-col items-center gap-[8px] w-1/4 ">
             <img src={images.company} className=" cursor-pointer hover:border-blue-500  border-2 transition-all duration-300 hover:shadow-sm size-[65.6px]  border-gray-200 p-[9px] rounded-lg" alt="" />
             <h2 className='text-[12px] font-medium'>Company Profile</h2>

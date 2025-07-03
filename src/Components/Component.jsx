@@ -5,29 +5,27 @@ const Component = ({ back }) => {
   console.log("pages is seen");
 
   return (
-    <div className='absolute top-0 w-[280px] h-screen overflow-y-auto z-50 bg-white font-urbanist'>
+    <div className='absolute top-0 w-[280px] h-screen overflow-y-auto z-50 bg-white dark:bg-[#111d39] font-urbanist'>
       <div className="flex pt-[16px] p-[24px]">
-        <div className='p-[6px] border border-1/2 rounded-lg border-black '>
-          <FaAngleLeft onClick={back} className='text-gray-500 cursor-pointer size-[14px]' />
+        <div className='p-[6px] border border-1/2 rounded-lg border-black dark:border-white'>
+          <FaAngleLeft
+            onClick={back}
+            className='text-gray-500 dark:text-white cursor-pointer size-[14px]'
+          />
         </div>
-        <h2 className='text-[18px] font-bold ml-14'>Components</h2>
+        <h2 className='text-[18px] font-bold ml-14 dark:text-white'>Components</h2>
       </div>
-      <div className="flex px-[24px] flex-col">
-        <h2 className='pt-[16px] font-medium text-[15px]'>Alert</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Avatar</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Button</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Radio button</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Input</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Badge</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Dropdown</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Modal</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Progressbar</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Typography</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Switch</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Stepper</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Spinner</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Range slider</h2>
-        <h2 className='pt-[16px] font-medium text-[15px]'>Language</h2>
+
+      <div className="flex px-[24px] flex-col text-custBlackBold dark:text-white">
+        {[
+          'Alert', 'Avatar', 'Button', 'Radio button', 'Input', 'Badge',
+          'Dropdown', 'Modal', 'Progressbar', 'Typography', 'Switch',
+          'Stepper', 'Spinner', 'Range slider', 'Language'
+        ].map((item, index) => (
+          <h2 key={index} className='pt-[16px] font-medium text-[15px] cursor-pointer'>
+            {item}
+          </h2>
+        ))}
       </div>
     </div>
   );

@@ -39,12 +39,12 @@ const SkillAssessment3 = () => {
           <div className=" relative h-[7px] w-full bg-[#6757D4] rounded-2xl mt-[12px] ">
                 <div className="absolute left-0 top-0 h-[7px] bg-green-400 rounded-2xl w-[70%]"></div>
           </div>
-          <div className="mt-8 bg-white p-6 rounded-[28px] flex flex-col gap-6 text-custBlackBold ">
+          <div className="mt-8 bg-white dark:bg-[#111d39] p-6 rounded-[28px] flex flex-col gap-6 text-custBlackBold ">
             <div className="">
               <h1 className="text-[12px] leading-[20px] font-medium text-gray-500">
                 Select and answer
               </h1>
-              <p className="text-[24px] leading-9 font-bold">
+              <p className="text-[24px] leading-9 font-bold dark:text-white">
                What is your current experience level?
               </p>
             </div>
@@ -75,8 +75,8 @@ const SkillAssessment3 = () => {
                        <button className="p-[12px] rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE]" onClick={()=>navigate('/successskill')}>Next</button>
 
           </div>
-          <div className="bg-gray-200 h-[16px] w-[92%] mx-auto rounded-b-[40px] bg-opacity-70"></div>
-          <div className="bg-gray-200 h-[16px] w-[84%] mx-auto rounded-b-[40px] bg-opacity-30"></div>
+          <div className="bg-gray-200 dark:bg-gray-800 h-[16px] w-[92%] mx-auto rounded-b-[40px] bg-opacity-70 dark:bg-opacity-70"></div>
+          <div className="bg-gray-200 dark:bg-gray-900 h-[16px] w-[84%] mx-auto rounded-b-[40px] bg-opacity-30 dark:bg-opacity-30"></div>
         </div>
       </div>
     </div>

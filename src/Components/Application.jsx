@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useContext} from "react";
 import { motion } from "framer-motion"
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import FooterRecruiter from "./FooterRecruiter";
 import images from "../assets/images";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeContext from "./ThemeContext";
 import {
   FaEnvelope,
   FaPhone,
@@ -14,10 +15,11 @@ import {
   FaFileAlt,
   FaComments,
 } from "react-icons/fa";
-
 const Applications = () => {
+  const {theme}=useContext(ThemeContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const dropdownRef=useRef(null);
   const back = () => {
     navigate(-1);
   };
@@ -29,7 +31,20 @@ const Applications = () => {
   const [selectedDateTime, setSelectedDateTime] = useState("");
 
   const [openStatusDropdownId, setOpenStatusDropdownId] = useState(null);
-
+  useEffect(()=>{
+    const handleClickOutside=(e)=>{
+      if(dropdownRef.current && 
+        !dropdownRef.current.contains(e.target)
+      ){
+        setOpenStatusDropdownId(null);
+      }
+    }
+    document.addEventListener("mousedown",handleClickOutside);
+    return()=>{
+      document.removeEventListener("mousedown",handleClickOutside);
+    }
+    // console.log(dropdownRef.current)
+  },[])
   useEffect(() => {
     if (location.state?.searchTerm) {
       setSearchTerm(location.state.searchTerm);
@@ -152,20 +167,20 @@ const Applications = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
-      className="h-screen overflow-y-scroll scroll-container"
+      className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39]"
     >
 
       <div className=" min-h-screen font-urbanist scroll-container pb-16">
         <div className="fixed top-0 right-0 left-0 z-20">
-          <header className="bg-white max-w-[1024px] mx-auto px-6 py-4">
+          <header className="bg-white max-w-[1024px] mx-auto px-6 py-4 dark:bg-[#111d39] ">
             <div className="max-w-[1024px] mx-auto flex justify-between items-center">
               <div
                 onClick={back}
-                className="p-[6px] border rounded-lg border-black cursor-pointer"
+                className="p-[6px] border rounded-lg border-black cursor-pointer dark:border-white"
               >
-                <FaAngleLeft className="text-gray-500  size-[14px]" />
+                <FaAngleLeft className="text-gray-500 dark:text-white size-[14px]" />
               </div>
-              <h1 className="text-[20px] leading-[24px] font-bold text-gray-900">Applications</h1>
+              <h1 className="text-[20px] leading-[24px] font-bold text-gray-900 dark:text-white">Applications</h1>
 
               <span className="text-[14px] text-google w-[60px] ">{filteredApplications.length} Total</span>
             </div>
@@ -177,7 +192,7 @@ const Applications = () => {
           <div className="flex flex-col  gap-6 mb-6">
             <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
               <img
-                src={images.searchIcon}
+                src={theme==='light'?images.searchIcon:images.searchIconDark}
 
                 className="pl-[18px] cursor-pointer"
                 alt=""
@@ -185,7 +200,7 @@ const Applications = () => {
 
               <input
                 type="text"
-                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                className="text-[14px] px-[14px] text-textSearch dark:bg-[#111d39]  focus:outline-none   w-full"
                 placeholder="Search by candidate or position"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -194,14 +209,14 @@ const Applications = () => {
               {/* <img src={images.option} className='pr-[14px]' alt="" /> */}
             </div>
 
-            <div className="flex flex-wrap bg-[#EEF3FF]  p-[8px] rounded-[18px] gap-[12px] items-center">
+            <div className="flex flex-wrap bg-[#EEF3FF] dark:bg-[#1f2a49]  p-[8px] rounded-[18px] gap-[12px] items-center">
               {statusOptions.map((status) => (
                 <button
                   key={status}
                   onClick={() => setSelectedStatus(status)}
                   className={`px-[14px] py-[8px] rounded-[12px] font-semibold leading-[24px] text-[14px] font-semibold ${selectedStatus === status
                     ? "bg-[#2869FE] text-white"
-                    : "bg-white text-[#2869FEE6]"
+                    : "bg-white text-[#2869FEE6] dark:bg-[#2e3c61] dark:text-[#93b1ff]"
                     }`}
                 >
                   {status}
@@ -301,7 +316,8 @@ const Applications = () => {
                       </button>
 
                       {openStatusDropdownId === app.id && (
-                        <div className="absolute mt-1 top-[-120px] right-[100px] w-[120px] bg-white border rounded shadow z-30">
+                        <div ref={dropdownRef} className="absolute mt-1 top-[-120px] right-[100px] w-[120px] bg-white border rounded shadow z-30">
+                          
                           {statusOptions2.map((status, index) => (
                             <div
                               key={index}
@@ -322,9 +338,6 @@ const Applications = () => {
                         </div>
                       )}
                     </div>
-
-
-
                   </div>
                 </div>
               </div>

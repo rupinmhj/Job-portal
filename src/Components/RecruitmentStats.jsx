@@ -43,16 +43,16 @@ export const RecruitmentStats = () => {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="p-4 bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border"
+          className="p-4 bg-white dark:bg-[#1f2a44] dark:border-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-shadow border"
         >
           <div className="flex items-center justify-between  mb-2">
-            <h3 className="text-md font-medium text-gray-600">{stat.title}</h3>
+            <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">{stat.title}</h3>
             <div className={`p-2 rounded-lg ${stat.bgColor}`}>
               <stat.icon className={`h-4 w-4 ${stat.color}`} />
             </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-          <p className="text-sm text-gray-500 mt-1">{stat.change}</p>
+          <div className="text-2xl font-bold text-gray-900 dark:text-gray-200">{stat.value}</div>
+          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{stat.change}</p>
         </div>
       ))}
     </div>

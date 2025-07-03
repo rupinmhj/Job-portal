@@ -26,7 +26,7 @@ const Home = () => {
     exit={{ opacity: 0 }}
     transition={{ duration: 0.3,delay:0.15 }}
   >
-    <div className='relative h-screen overflow-y-scroll scroll-container'>
+    <div className='relative h-screen overflow-y-scroll scroll-container dark:bg-[#111d39]'>
       {/* Main content */}
       <div className="relative z-10 ">
         <Header

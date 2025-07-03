@@ -6,13 +6,13 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoLogOutOutline, IoBagHandleOutline } from "react-icons/io5";
 import { MdOutlinePhonelinkSetup } from "react-icons/md";
 import { CgBriefcase } from "react-icons/cg";
-
+import { useContext } from "react";
 import FooterRecruiter from "../Components/FooterRecruiter";
 import images from "../assets/images";
-
+import ThemeContext from "./ThemeContext";
 const ProfileRecruiter = () => {
   const navigate = useNavigate();
-
+  const {theme}=useContext(ThemeContext)
   const [profile, setProfile] = useState({
     name: "TechCorp (Recruiter)",
     email: "recruiter@techcorp.com",
@@ -46,32 +46,42 @@ const ProfileRecruiter = () => {
     navigate("/");
   };
 
-  return (
+ return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="h-screen overflow-y-scroll bg-[#F7F9FF] font-urbanist"
+      className={`h-screen overflow-y-scroll font-urbanist scroll-container ${
+        theme === "dark" ? "bg-[#111d39] text-white" : "bg-[#F7F9FF]"
+      }`}
     >
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 bg-white z-20 shadow-sm">
+      <div
+        className={`fixed top-0 left-0 right-0 z-20 shadow-sm ${
+          theme === "dark" ? "bg-[#111d39]" : "bg-white"
+        }`}
+      >
         <div className="flex items-center justify-between px-[24px] py-[16px] max-w-[1024px] mx-auto">
           <div
             onClick={() => navigate(-1)}
-            className="p-[6px] border rounded-lg border-black cursor-pointer"
+            className={`p-[6px] border rounded-lg cursor-pointer ${
+              theme === "dark" ? "border-white" : "border-black"
+            }`}
           >
-            <FaAngleLeft className="text-gray-500 size-[14}" />
+            <FaAngleLeft
+              className={`size-[14px] ${
+                theme === "dark" ? "text-white" : "text-gray-500"
+              }`}
+            />
           </div>
           <h2 className="text-[20px] font-bold">Recruiter Profile</h2>
           <div className="flex gap-[12px]">
-            {/* <img
-              src={images.searchIcon}
-              alt="Search"
+            <img
+              src={images.threeDot}
+              alt="Options"
               className="cursor-pointer"
-              onClick={() => navigate("/searchapplicants")}
-            /> */}
-            <img src={images.threeDot} alt="Options" className="cursor-pointer" />
+            />
           </div>
         </div>
       </div>
@@ -85,22 +95,46 @@ const ProfileRecruiter = () => {
         />
         <div className="text-center mb-[16px]">
           <h2 className="text-[18px] font-bold">{profile.name}</h2>
-          <p className="text-[12px] text-gray-500">{profile.email}</p>
+          <p
+            className={`text-[12px] ${
+              theme === "dark" ? "text-white/60" : "text-gray-500"
+            }`}
+          >
+            {profile.email}
+          </p>
         </div>
 
         {/* Stats */}
         <div className="flex justify-around w-full max-w-[320px] mb-[24px]">
           {[
-            { label: "Posted Jobs", count: stats.postedJobs, bg: "#F6EFFF", color: "#a55fff" },
-            { label: "Applications", count: stats.applications, bg: "#E5FAF5", color: "#00CC9A" },
-            { label: "Views", count: stats.views, bg: "#FFEFF8", color: "#FF5FBF" },
+            {
+              label: "Posted Jobs",
+              count: stats.postedJobs,
+              bg: theme === "dark" ? "#42366b" : "#F6EFFF",
+              color: "#a55fff"
+            },
+            {
+              label: "Applications",
+              count: stats.applications,
+              bg: theme === "dark" ? "#265148" : "#E5FAF5",
+              color: "#00CC9A"
+            },
+            {
+              label: "Views",
+              count: stats.views,
+              bg: theme === "dark" ? "#50384f" : "#FFEFF8",
+              color: "#FF5FBF"
+            }
           ].map((item, i) => (
             <div key={i} className="flex flex-col items-center">
               <div
                 className="py-2 px-4 rounded-xl mb-1"
                 style={{ backgroundColor: item.bg }}
               >
-                <h2 className="text-[20px] font-bold" style={{ color: item.color }}>
+                <h2
+                  className="text-[20px] font-bold"
+                  style={{ color: item.color }}
+                >
                   {item.count}
                 </h2>
               </div>
@@ -120,29 +154,28 @@ const ProfileRecruiter = () => {
 
         {/* Menu */}
         <div className="w-full">
-
           <div className="w-full bg-[#7D67FF] px-[24px] pt-[48px] pb-[150px] text-white space-y-4 rounded-t-3xl">
             {[
               {
                 label: "Manage Jobs",
                 icon: <CgBriefcase />,
-                action: () => navigate("/managejob"),
+                action: () => navigate("/managejob")
               },
               {
                 label: "View Applicants",
                 icon: <IoBagHandleOutline />,
-                action: () => navigate("/application"),
+                action: () => navigate("/application")
               },
               {
                 label: "Setup Profile",
                 icon: <MdOutlinePhonelinkSetup />,
-                action: () => navigate("/companyprofile"),
+                action: () => navigate("/companyprofile")
               },
               {
                 label: "Logout",
                 icon: <IoLogOutOutline />,
-                action: handleLogout,
-              },
+                action: handleLogout
+              }
             ].map((item, i) => (
               <div
                 key={i}
@@ -160,8 +193,9 @@ const ProfileRecruiter = () => {
         </div>
       </div>
 
-
+      {/* Footer */}
       <FooterRecruiter />
+
       <Outlet />
     </motion.div>
   );

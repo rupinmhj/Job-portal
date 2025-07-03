@@ -7,7 +7,7 @@ const Category = () => {
     navigate("/alljob")
   }
   return (
-    <div className='max-w-[1024px] mx-auto px-[24px] mt-[24px] flex font-urbanist items-center mt-'>
+    <div className='max-w-[1024px] dark:text-white mx-auto px-[24px] mt-[24px] flex font-urbanist items-center mt-'>
       <div className='w-full'>
         <h1 className='font-bold text-[18px] leading-[22px] mb-[24px] '>Browse By Category</h1>
         <div className="flex w-[100%] flex-wrap ">

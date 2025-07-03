@@ -19,11 +19,14 @@ import adobe from './adobe.png'
 import wings from './wings.png'
 import airbnb from './airbnb.png'
 import threeDot from './threeDot.svg'
+import threeDotDark from './threedotDark.svg'
 import jobkoLogo from './jobkoLogo.png'
 import home from './home.svg'
 import clipboard from './clipboard.svg'
 import message from './message.svg'
 import profile from './profile.svg'
+import profilefillWhite from './profilefillWhite.svg'
+import profileWhite from './profileWhite.svg'
 import homefill from './homefill.svg'
 import clipboardfill from './clipboardfill.svg'
 import messagefill from './messagefill.svg'
@@ -72,7 +75,7 @@ import wallet2 from './wallet2.svg'
 import calender3 from './calendar3.svg'
 import review from './reviews.svg'
 import star from './star-rating.svg'
-import star2 from './stargray.svg' 
+import star2 from './stargray.svg'
 import arrow from './arrow.svg'
 import mailchimp from './mailchimp.png'
 import evernote from './evernote.png'
@@ -104,7 +107,14 @@ import managejob from './management.png'
 import application from './application.png'
 import companyprofile from './companyprofile.png'
 import status from './status.png'
-const images={
+import searchIconDark from './searchIconDark.svg'
+import homefillWhite from './homefillWhite.svg'
+import clipboardWhite from './clipboardWhite.svg'
+import clipboardfillWhite from './clipboardfillWhite.svg'
+import messageWhite from './messageWhite.svg'
+import messagefillWhite from './messagefillWhite.svg'
+import logoDark from './logo-dark.png'
+const images = {
     hello,
     profileSmall,
     hamBurger,
@@ -130,7 +140,10 @@ const images={
     jobkoLogo,
     home,
     clipboard,
+    clipboardWhite,
     message,
+    messageWhite,
+    messagefillWhite,
     profile,
     listComponent,
     listHome,
@@ -150,6 +163,7 @@ const images={
     education,
     profilefill,
     clipboardfill,
+    clipboardfillWhite,
     messagefill,
     homefill,
     location,
@@ -211,5 +225,12 @@ const images={
     application,
     companyprofile,
     status,
+    searchIconDark,
+    homefillWhite,
+    profilefillWhite,
+    profileWhite,
+    threeDotDark,
+    logoDark,
+
 }
 export default images;

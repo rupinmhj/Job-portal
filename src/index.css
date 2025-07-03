@@ -118,4 +118,13 @@ html{
           }
 /* Remove blue outline from react-select */
 
+.select-arrow-left {
+  background-position: right 12px center !important;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
 
+.react-datepicker__input-container {
+  width: 100%;
+}

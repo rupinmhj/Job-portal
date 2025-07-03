@@ -10,7 +10,7 @@ const LearnMoreRecruiter = () => {
     navigate("/details")
   }
   return (
-    <div className="max-w-[1024px] mx-auto px-[24px] mt-[24px] flex font-urbanist items-center bg-white">
+    <div className="max-w-[1024px] dark:bg-[#111d39] mx-auto px-[24px] mt-[24px] flex font-urbanist items-center bg-white">
       <div className="px-[24px] pt-[20px] pb-[24px] bg-backGreen w-full rounded-2xl relative overflow-hidden ">
         <div className="flex items-center justify-between">
              <div className="">

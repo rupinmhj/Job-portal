@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
-
+import {motion} from 'framer-motion'
+import ThemeContext from './ThemeContext'
 const SignUp = () => {
+  const {theme}=useContext(ThemeContext)
   const navigate = useNavigate();
   const back = () => navigate("/");
   const home = () => navigate("/");
@@ -76,21 +78,23 @@ const SignUp = () => {
 
   const validateSignUp = () => {
     if (validate()) {
-      signin();
+      navigate('/verificationSignup');
     }
   }
-
-
-  return (
+return (
     <>
-      <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] w-full">
-        <div className="fixed top-0 left-0 right-0 bg-white z-10">
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      transition={{duration:0.3,delay:0.15}}
+      >
+          <div className="h-screen dark:bg-[#111d39] ">
+      <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] dark:text-white w-full">
+        <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
           <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
-            <div
-              onClick={back}
-              className="p-[6px] border rounded-lg border-black cursor-pointer"
-            >
-              <FaAngleLeft className="text-gray-500 size-[14px]" />
+            <div onClick={back} className="p-[6px] border rounded-lg border-black dark:border-white cursor-pointer">
+              <FaAngleLeft className="text-gray-500 dark:text-gray-300 size-[14px]" />
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Sign Up</h2>
             <h2 className="w-[14px]"></h2>
@@ -98,163 +102,98 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className="bg-white lg:px-[232px] xl:px-[274px] px-[24px] font-urbanist text-[#121927]">
+      <div className="bg-white dark:bg-[#111d39] lg:px-[232px] xl:px-[274px] px-[24px] font-urbanist text-[#121927] dark:text-white">
         <div className="w-full">
-          <img
-            src={images.logolight}
-            className="w-[117px] h-[32px]"
-            alt="Logo"
-          />
-          <div className="w-full mt-[16px]">
-            <h2 className="text-[#71757D] text-[14px] leading-[24px] font-medium">
-              Give credential to sign in your account
-            </h2>
-          </div>
+          <img src={theme==='light'?images.logolight:images.logoDark} className="w-[117px] h-[32px]" alt="Logo" />
+          <h2 className="mt-[16px] text-[#71757D] dark:text-gray-400 text-[14px] leading-[24px] font-medium">
+            Give credential to sign in your account
+          </h2>
         </div>
 
-        {/* Name Field */}
+        {/* Name */}
         <div className="mt-[32px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
-            Full Name
-          </p>
+          <p className="pl-[12px] text-[16px] font-bold">Full Name</p>
           <div className="relative mb-[20px]">
-            <img
-              src={images.profile}
-              className="absolute inset-y-7 size-[20px] left-4"
-              alt="Email"
-            />
+            <img src={images.profile} className="dark:invert absolute inset-y-7 size-[20px] left-4" alt="Name" />
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
-              placeholder="Type your your full name"
+              className="dark:bg-[#1f2937] dark:focus-within:border-gray-200 dark:text-white dark:border-gray-600 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              placeholder="Type your full name"
             />
             {nameError && <p className="text-red-500 text-[13px] pl-[12px]">{nameError}</p>}
-
           </div>
-
         </div>
 
+        {/* Email */}
         <div className="mt-[2px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
-            Type your email
-          </p>
+          <p className="pl-[12px] text-[16px] font-bold">Email</p>
           <div className="relative mb-[20px]">
-            <img
-              src={images.email}
-              className="absolute inset-y-7 size-[20px] left-4"
-              alt="Email"
-            />
+            <img src={images.email} className="dark:invert absolute inset-y-7 size-[20px] left-4" alt="Email" />
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:border-gray-400  focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+              className="dark:bg-[#1f2937] dark:text-white dark:focus-within:border-gray-200 dark:border-gray-600 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
               placeholder="Type your email"
             />
             {emailError && <p className="text-red-500 text-[13px] pl-[12px]">{emailError}</p>}
           </div>
-
         </div>
-        {/* Role Selection */}
-        <div className="mt-[px] w-full flex flex-col mb-6">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">Register As:</p>
+
+        {/* Role */}
+        <div className="mt-[2px] w-full flex flex-col mb-6">
+          <p className="pl-[12px] text-[16px] font-bold">Register As:</p>
           <div className="flex gap-4 mt-[20px] px-4">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                value="job_seeker"
-                checked={role === "job_seeker"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              Job Seeker
+              <input type="radio" value="job_seeker" checked={role === "job_seeker"} onChange={(e) => setRole(e.target.value)} />
+              <span className="dark:text-white">Job Seeker</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                value="employer"
-                checked={role === "employer"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              Employer
+              <input type="radio" value="employer" checked={role === "employer"} onChange={(e) => setRole(e.target.value)} />
+              <span className="dark:text-white">Employer</span>
             </label>
           </div>
-          {roleError && (
-            <p className="text-red-500 text-[13px] pl-[12px]">{roleError}</p>
-          )}
+          {roleError && <p className="text-red-500 text-[13px] pl-[12px]">{roleError}</p>}
         </div>
 
-
-        {/* Password Field */}
-
+        {/* Password */}
         <div className="mt-[2px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
-            Password
-          </p>
+          <p className="pl-[12px] text-[16px] font-bold">Password</p>
           <div className="relative mb-[20px]">
-            <img
-              src={images.password}
-              className="absolute z-20 inset-y-7 size-[20px] left-4"
-              alt="Password"
+            <img src={images.password} className="dark:invert absolute inset-y-7 size-[20px] left-4" alt="Password" />
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="dark:bg-[#1f2937] dark:focus-within:border-gray-200 dark:text-white dark:border-gray-600 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px] w-full"
+              placeholder="Type your password"
             />
-            <div className="relative w-full">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
-                placeholder="Type your password"
-              />
-              <span
-                className="absolute right-4 top-[42%] transform -translate-y-1/2 cursor-pointer text-gray-500"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <FaRegEye size={20} className="mt-4" />
-                ) : (
-                  <FaRegEyeSlash size={20} className="mt-4" />
-                )}
-              </span>
-            </div>
+            <span onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-[42%] cursor-pointer text-gray-500">
+              {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            </span>
             {passwordError && <p className="text-red-500 text-[13px] pl-[12px]">{passwordError}</p>}
-
           </div>
         </div>
 
+        {/* Confirm Password */}
         <div className="mt-[2px] w-full flex flex-col">
-          <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
-            Confirm Password
-          </p>
+          <p className="pl-[12px] text-[16px] font-bold">Confirm Password</p>
           <div className="relative mb-[20px]">
-            <img
-              src={images.password}
-
-              className="absolute z-20 inset-y-7 size-[20px] left-4"
-              alt="Password"
+            <img src={images.password} className="dark:invert absolute inset-y-7 size-[20px] left-4" alt="Confirm Password" />
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="dark:bg-[#1f2937] dark:focus-within:border-gray-200 dark:text-white dark:border-gray-600 focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px] w-full"
+              placeholder="Confirm your password"
             />
-            <div className="relative w-full">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => { setConfirmPassword(e.target.value) }}
-                className="focus:border-gray-400  w-full focus:outline-none border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[45px]"
-                placeholder="Type your password"
-              />
-              <span
-                className="absolute right-4 top-[42%] transform -translate-y-1/2 cursor-pointer text-gray-500"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
-                {showConfirmPassword ? (
-                  <FaRegEye size={20} className="mt-4" />
-                ) : (
-                  <FaRegEyeSlash size={20} className="mt-4" />
-                )}
-              </span>
-            </div>
+            <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-[42%] cursor-pointer text-gray-500">
+              {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            </span>
+            {confirmPasswordError && <p className="text-red-500 text-[13px] pl-[12px]">{confirmPasswordError}</p>}
           </div>
-          {confirmPasswordError && <p className="text-red-500 text-[13px] pl-[12px]">{confirmPasswordError}</p>}
-
         </div>
 
         <button
@@ -264,40 +203,33 @@ const SignUp = () => {
           Sign Up
         </button>
 
-        <div className="flex text-[#71757D] w-full my-[35px] justify-center">
+        <div className="flex text-[#71757D]  dark:text-gray-400 w-full my-[35px] justify-center">
           or continue with
         </div>
 
-        {/* Social Logins */}
         <div className="flex justify-center gap-[16px]">
-          <div className="items-center rounded-lg cursor-pointer border border-gray-200 shadow-sm h-[52px] w-[80px] flex justify-center">
-            <img
-              src={images.facebook}
-              className="w-[24px] h-[24px]"
-              alt="Facebook"
-            />
-          </div>
-          <div className="items-center rounded-lg cursor-pointer border border-gray-200 shadow-sm h-[52px] w-[80px] flex justify-center">
-            <img
-              src={images.googlelogo}
-              className="w-[24px] h-[24px]"
-              alt="Google"
-            />
-          </div>
-          <div className="items-center rounded-lg cursor-pointer border border-gray-200 shadow-sm h-[52px] w-[80px] flex justify-center">
-            <img src={images.apple} className="w-[24px] h-[24px]" alt="Apple" />
-          </div>
+          {[images.facebook, images.googlelogo, images.apple].map((img, idx) => (
+            <div key={idx} className="items-center rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm h-[52px] w-[80px] flex justify-center dark:bg-[#1f2937]">
+              <img src={img} className="w-[24px] h-[24px]" alt="Social" />
+            </div>
+          ))}
         </div>
 
-        <div onClick={signin} className="flex mt-[35px] justify-center mb-4">
-          <p className="text-[#71757D] text-[14px] font-medium leading-[24px]">
-            Already have an account
+        <div onClick={signin} className="flex mt-[35px] justify-center ">
+          <p className="text-[#71757D] dark:text-gray-400 text-[14px] font-medium">
+            Already have an account?
             <span className="text-[#2869FE] cursor-pointer"> Sign In</span>
           </p>
         </div>
+        <div className="h-6"></div>
       </div>
+    </div>
+      </motion.div>
+  
+      
     </>
   );
+
 };
 
 export default SignUp;

@@ -10,23 +10,24 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const slideAnimation = {
-  hidden: { opacity: 0, y:0 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay:0.1 } },
+  hidden: { opacity: 0, y: 0 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.1 } },
 };
 
 const Boarding = () => {
-    const navigate=useNavigate();
-    const signIn=()=>{
-        navigate('/signin')
-    }
+  const navigate = useNavigate();
+  const signIn = () => {
+    navigate("/signin");
+  };
+
   return (
-    <div className="relative h-full">
+    <div className="relative h-screen dark:bg-[#111d39]  transition-colors duration-300 ">
       <Swiper
         slidesPerView={1}
         modules={[Pagination]}
         pagination={{ clickable: true }}
         style={{ paddingBottom: "40px" }}
-         speed={800}
+        speed={800}
       >
         <SwiperSlide>
           {({ isActive }) => (
@@ -65,10 +66,12 @@ const Boarding = () => {
         </SwiperSlide>
       </Swiper>
 
-      {/* Pagination already handled by Swiper — no need for extra div */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white py-4 z-10">
+      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-[#1b2a47]  py-4 z-10 transition-colors duration-300">
         <div className="px-[24px] lg:px-[252px]">
-          <button onClick={signIn} className="w-full bg-[#2869FE] text-[16px] leading-[26px] font-bold p-[16px] text-white rounded-xl">
+          <button
+            onClick={signIn}
+            className="w-full bg-[#2869FE] text-[16px] leading-[26px] font-bold p-[16px] text-white rounded-xl hover:bg-[#1e56d3] transition-all duration-200"
+          >
             Get Started
           </button>
         </div>

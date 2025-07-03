@@ -47,6 +47,7 @@ import MessageRecruiter from "./Components/MessageRecruiter";
 import ProfileRecruiter from "./Components/ProfileRecruiter";
 import CompanyProfile from "./Components/CompanyProfile";
 import NotificationRecruiter from "./Components/NotificationRecruiter"
+import VerificationSignup from "./Components/VerificationSignup"
 const router = createBrowserRouter([
    {
     path:"/",
@@ -233,6 +234,10 @@ const router = createBrowserRouter([
 {
   path:'/notificationrecruiter',
   element: <NotificationRecruiter />
+},
+{
+  path:'verificationsignup',
+  element: <VerificationSignup/>
 }
 
    

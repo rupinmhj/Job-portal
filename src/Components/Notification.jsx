@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
-import ThemeContext from "./Themecontext";
+import ThemeContext from "./ThemeContext";
 
 const Notification = () => {
   const { theme } = useContext(ThemeContext);
@@ -102,8 +102,8 @@ const Notification = () => {
         </div>
 
         {showSearch && (
-          <div className="max-w-[1024px] mx-auto px-6 py-[14px] mt-14 focus-within:border-gray-400 border border-gray-200 dark:border-gray-600 dark:focus-within:border-gray-200 w-full rounded-xl flex items-center bg-white dark:bg-[#2A2A40]">
-            <img src={images.searchIcon} className="pl-[18px] cursor-pointer dark:invert" alt="" />
+          <div className="max-w-[1024px] mx-auto px-6 py-[14px] mt-14 focus-within:border-gray-400 border border-gray-200 dark:border-gray-600 dark:focus-within:border-gray-200 dark:border-gray-600 dark:focus-within:border-gray-200 w-full rounded-xl flex items-center bg-white dark:bg-[#2A2A40]">
+            <img src={images.searchIcon} className=" cursor-pointer dark:invert" alt="" />
             <input
               type="text"
               className="text-[14px] px-[14px] text-textSearch dark:bg-[#2A2A40] dark:text-white focus:outline-none w-full "
@@ -123,10 +123,10 @@ const Notification = () => {
             filterNotifications.map((notification) => (
               <div
                 key={notification.id}
-                className="relative flex p-[16px] pr-[32px] mt-[16px] gap-[16px]"
+                className="relative flex p-[16px] pr-[32px] mt-[16px] gap-[16px] rounded-lg dark:bg-[#242f49]"
               >
                 <div className="flex justify-center items-start">
-                  <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 dark:border-gray-600 rounded-xl">
+                  <div className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 dark:border-gray-800 rounded-xl">
                     <img src={notification.icon} className="size-[24px]" alt="" />
                   </div>
                 </div>

@@ -15,7 +15,7 @@ const SearchRecruiter = () => {
   };
 
   const filter = () => {
-    navigate("/setfilters");
+    navigate("/application");
   };
 
   return (

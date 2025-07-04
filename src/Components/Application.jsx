@@ -190,7 +190,7 @@ const Applications = () => {
 
         <main className="max-w-[1024px] mx-auto px-6 py-6 mt-[61px]">
           <div className="flex flex-col  gap-6 mb-6">
-            <div className="py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+            <div className="py-[14px]  focus-within:border-gray-400 border  w-full rounded-xl leading-[20px] flex items-center dark:border-gray-500 dark:focus-within:border-gray-200">
               <img
                 src={theme==='light'?images.searchIcon:images.searchIconDark}
 
@@ -200,7 +200,7 @@ const Applications = () => {
 
               <input
                 type="text"
-                className="text-[14px] px-[14px] text-textSearch dark:bg-[#111d39]  focus:outline-none   w-full"
+                className="text-[14px] px-[14px] text-textSearch dark:bg-[#111d39]  focus:outline-none dark:text-white  w-full "
                 placeholder="Search by candidate or position"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -229,7 +229,7 @@ const Applications = () => {
             {filteredApplications.map((app) => (
               <div
                 key={app.id}
-                className="bg-[#E9F0FF] bg-opacity-30 rounded-md shadow-sm border p-6 flex flex-col gap-4"
+                className="bg-[#E9F0FF] dark:bg-black dark:bg-opacity-40 dark:border-gray-600 bg-opacity-30 rounded-md shadow-sm border p-6 flex flex-col gap-4"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex gap-4">
@@ -240,22 +240,22 @@ const Applications = () => {
                     />
                     <div className="space-y-[5px]">
                       <div className="flex justify-between items-center">
-                        <h2 className="text-[15px] font-semibold leading-[18px]">
+                        <h2 className="text-[15px] font-semibold leading-[18px] dark:text-gray-100">
                           {app.candidateName}
                         </h2>
                         <span
-                          className={`ml-2 px-2 py-1 text-xs font-medium rounded ${getStatusColor(
+                          className={`ml-2 px-2 py-1 text-xs font-medium rounded dark:bg-gray-400 ${getStatusColor(
                             app.status
                           )}`}
                         >
                           {app.status}
                         </span>
                       </div>
-                      <p className="text-[14px] text-gray-800 leading-[18px]">
+                      <p className="text-[14px] text-gray-800 leading-[18px] dark:text-gray-300">
                         Applied for: {app.position}
                       </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] text-gray-800">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] text-gray-800 dark:text-gray-300">
                         <div className="flex items-center">
                           <FaEnvelope className="mr-2 h-3 w-3" /> {app.email}
                         </div>
@@ -276,7 +276,7 @@ const Applications = () => {
                         {app.skills.map((skill, index) => (
                           <span
                             key={index}
-                            className="px-2 py-[2px] text-xs bg-gray-100 rounded"
+                            className="px-2 py-[2px] text-xs bg-gray-100 dark:bg-gray-700 rounded"
                           >
                             {skill}
                           </span>
@@ -287,15 +287,15 @@ const Applications = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 text-[14px] font-medium ">
-                    <button className="border rounded px-2 py-1 flex items-center gap-1">
+                  <div className="flex flex-col gap-2 text-[14px] font-medium text-gray-800 dark:text-gray-300 ">
+                    <button className="border dark:border-gray-700  rounded px-2 py-1 flex items-center gap-1">
                       <FaFileAlt className="h-3 w-3" /> Resume
                     </button>
-                    <button className="border rounded px-2 py-1 flex items-center gap-1" onClick={() => navigate('/message/messageinbox')}>
+                    <button className="border dark:border-gray-700  rounded px-2 py-1 flex items-center gap-1" onClick={() => navigate('/message/messageinbox')}>
                       <FaComments className="h-3 w-3" /> Message
                     </button>
                     <button
-                      className="border rounded px-2 py-1 flex items-center gap-1"
+                      className="border dark:border-gray-700  rounded px-2 py-1 flex items-center gap-1"
                       onClick={() => {
                         setSelectedAppId(app.id);
                         setShowDateTimePicker(true);
@@ -306,12 +306,12 @@ const Applications = () => {
 
                     <div className="relative">
                       <button
-                        className="border rounded px-2 py-1 flex items-center gap-1 w-[91.05px]"
+                        className="border rounded px-2 py-1 flex items-center gap-1 w-[91.05px] dark:border-gray-700 "
                         onClick={() =>
                           setOpenStatusDropdownId(openStatusDropdownId === app.id ? null : app.id)
                         }
                       >
-                        <img src={images.status} className="h-3 w-3" alt="" />
+                        <img src={images.status} className="h-3 w-3 dark:invert dark:opacity-80" alt="" />
                         Status
                       </button>
 

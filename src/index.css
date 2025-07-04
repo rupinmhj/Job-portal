@@ -128,3 +128,10 @@ html{
 .react-datepicker__input-container {
   width: 100%;
 }
+
+/* Hide Chrome's calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+

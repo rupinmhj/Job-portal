@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
 import FooterRecruiter from "../Components/FooterRecruiter";
+import ThemeContext from "./ThemeContext";
 
 const MessageRecruiter = () => {
+  const {theme}=useContext(ThemeContext)
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,68 +59,86 @@ const MessageRecruiter = () => {
     msg.message.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  return (
+ return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
-      className="h-screen overflow-y-scroll font-urbanist "
+      className={`h-screen overflow-y-scroll font-urbanist ${
+        theme === "dark" ? "bg-[#111d39] text-white" : "bg-white text-black"
+      }`}
     >
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 bg-white z-10 ">
-        <div className="flex items-center justify-between max-w-[1024px] mx-auto px-6  pt-[16px] pb-[24px]">
+      <div className={`fixed top-0 left-0 right-0 z-10 ${
+        theme === "dark" ? "bg-[#111d39]" : "bg-white"
+      }`}>
+        <div className={`flex items-center justify-between max-w-[1024px] mx-auto px-6 pt-[16px] pb-[24px] ${
+          theme === "dark" ? "text-white" : ""
+        }`}>
           <div
             onClick={() => navigate(-1)}
-            className="p-[6px] border rounded-lg border-black cursor-pointer"
+            className={`p-[6px] border rounded-lg cursor-pointer ${
+              theme === "dark" ? "border-white" : "border-black"
+            }`}
           >
-            <FaAngleLeft className="text-gray-500 size-[14px]" />
+            <FaAngleLeft className={`size-[14px] ${
+              theme === "dark" ? "text-white" : "text-gray-500"
+            }`} />
           </div>
           <h2 className="text-[20px] font-bold ml-6">Message</h2>
           <div className="flex gap-[12px]">
             <img
-              src={images.searchIcon}
+              src={theme === "dark" ? images.searchIconDark : images.searchIcon}
               className="cursor-pointer"
               alt="Search"
-              onClick={() => setShowSearch((prev) => !prev)}
+              onClick={() => setShowSearch(prev => !prev)}
             />
-            <img src={images.threeDot} className="cursor-pointer" alt="Options" />
+            <img
+              src={theme === "dark" ? images.threeDotDark : images.threeDot}
+              className="cursor-pointer"
+              alt="Options"
+            />
           </div>
         </div>
 
         {/* Search Input */}
         {showSearch && (
-          <div className="px-6  max-w-[1024px] mx-auto ">
-           <div className="max-w-[1024px] mx-auto px-6 py-[14px]  focus-within:border-gray-400 border border-gray-200 w-full rounded-xl leading-[20px] flex items-center">
+          <div className="px-6 max-w-[1024px] mx-auto">
+            <div className={`py-[14px] border w-full rounded-xl leading-[20px] flex items-center ${
+              theme === "dark"
+                ? "border-gray-600 focus-within:border-white bg-[#111d39] text-white"
+                : "border-gray-200 focus-within:border-gray-400 bg-white text-black"
+            }`}>
               <img
-                src={images.searchIcon}
-
+                src={theme === "dark" ? images.searchIconDark : images.searchIcon}
                 className="pl-[18px] cursor-pointer"
                 alt=""
               />
-
               <input
                 type="text"
-                className="text-[14px] px-[14px] text-textSearch  focus:outline-none   w-full"
+                className="text-[14px] px-[14px] bg-transparent focus:outline-none w-full"
                 value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by name or message..."
-
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by name or message..."
               />
             </div>
           </div>
         )}
       </div>
 
-      <div className={`${showSearch ? 'pt-[126px]' : 'pt-[80px]'} pb-[90px]  max-w-[1024px] mx-auto space-y-4 px-2 md:px-6`}>
+      {/* Message List */}
+      <div className={`${showSearch ? "pt-[136px]" : "pt-[80px]"} pb-[90px] max-w-[1024px] mx-auto space-y-4 px-2 md:px-6`}>
         {filteredMessages.length === 0 ? (
-          <p className="text-gray-500 text-center mt-10">No messages found.</p>
+          <p className="text-center mt-10 text-gray-500 dark:text-white/60">No messages found.</p>
         ) : (
           filteredMessages.map((msg) => (
             <div
               key={msg.id}
               onClick={() => navigate("/message/messageinbox")}
-              className="flex items-center gap-[12px] bg-white p-[16px] rounded-xl cursor-pointer"
+              className={`flex items-center gap-[12px] p-[16px] rounded-xl cursor-pointer ${
+                theme === "dark" ? "bg-[#242f49]" : "bg-white"
+              }`}
             >
               <img
                 src={msg.avatar}
@@ -127,9 +147,15 @@ const MessageRecruiter = () => {
               />
               <div className="flex flex-col flex-grow">
                 <h1 className="text-[15px] font-bold leading-[18px]">{msg.name}</h1>
-                <p className="text-[12px] text-google truncate">{msg.message}</p>
+                <p className={`text-[12px] truncate ${
+                  theme === "dark" ? "text-[#ffffff80]" : "text-google"
+                }`}>
+                  {msg.message}
+                </p>
               </div>
-              <div className="flex flex-col items-end text-google text-[11px] gap-[6px]">
+              <div className={`flex flex-col items-end text-[11px] gap-[6px] ${
+                theme === "dark" ? "text-[#ffffff80]" : "text-google"
+              }`}>
                 <span>{msg.time}</span>
                 {msg.unreadCount ? (
                   <span className="text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full bg-purple-600">

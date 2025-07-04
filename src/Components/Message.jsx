@@ -145,7 +145,7 @@ const Message = () => {
         )}
       </div>
 
-      <div className={`${showSearch ? "pt-[126px]" : "pt-[80px]"} pb-[90px] max-w-[1024px] px-6 max-md:px-2 mx-auto space-y-4`}>
+      <div className={`${showSearch ? "pt-[136px]" : "pt-[80px]"} pb-[90px] max-w-[1024px] px-6 max-md:px-2 mx-auto space-y-4`}>
         {filteredMessages.length === 0 ? (
           <p className="text-gray-500 text-center mt-10">No messages found.</p>
         ) : (

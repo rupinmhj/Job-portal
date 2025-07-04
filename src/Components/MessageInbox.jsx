@@ -54,7 +54,7 @@ const MessageInbox = () => {
       <div className="h-[100dvh]">
         {/* Header */}
         <div className="fixed left-0 right-0 top-0 z-10">
-          <div className="bg-white dark:bg-gray-800 max-w-[1024px] flex p-[24px] pt-[16px] justify-between items-center mx-auto">
+          <div className="bg-white dark:bg-[#0e172e] max-w-[1024px] flex p-[24px] pt-[16px] justify-between items-center mx-auto">
             <div className="flex gap-[18px] items-center">
               <div
                 onClick={() => navigate(-1)}
@@ -121,7 +121,7 @@ const MessageInbox = () => {
 
         {/* Message Input */}
         <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-[#111d39]">
-          <div className="relative flex items-center max-w-[1024px] mx-auto px-[14px] dark:bg-gray-800 py-[16px]">
+          <div className="relative flex items-center max-w-[1024px] mx-auto px-[14px] dark:bg-[#0e172e] py-[16px]">
             <img
               src={images.attachfile}
               alt=""

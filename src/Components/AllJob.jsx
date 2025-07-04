@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import Select from "react-select";
-import ThemeContext from "./Themecontext"; // Ensure this is the correct path
+import ThemeContext from "./ThemeContext"; // Ensure this is the correct path
 
 const AllJob = () => {
   const navigate = useNavigate();
@@ -136,10 +136,10 @@ const AllJob = () => {
               styles={{
                 control: (base, state) => ({
                   ...base,
-                  backgroundColor: theme === "dark" ? "#2A2A40" : "#fff",
+                  backgroundColor: theme === "dark" ? "#111d39" : "#fff",
                   color: theme === "dark" ? "white" : "black",
                   boxShadow: "none",
-                  borderColor: "#ccc",
+                  // borderColor: "#ccc",
                   paddingLeft: "40px",
                   paddingTop: "5px",
                   paddingBottom: "5px",
@@ -160,21 +160,21 @@ const AllJob = () => {
                   color: theme === "dark" ? "white" : "black",
                 }),
                 option: (base, state) => ({
-    ...base,
-    backgroundColor: state.isFocused
-      ? theme === "dark"
-        ? "#3F3F5E"   // Hover bg in dark
-        : "#f0f0f0"   // Hover bg in light
-      : theme === "dark"
-      ? "#2A2A40"     // Default bg in dark
-      : "#fff",       // Default bg in light
-    color: theme === "dark" ? "white" : "black",
-    cursor: "pointer",
-  }),
+                  ...base,
+                  backgroundColor: state.isFocused
+                    ? theme === "dark"
+                      ? "#3F3F5E"   // Hover bg in dark
+                      : "#f0f0f0"   // Hover bg in light
+                    : theme === "dark"
+                      ? "#2A2A40"     // Default bg in dark
+                      : "#fff",       // Default bg in light
+                  color: theme === "dark" ? "white" : "black",
+                  cursor: "pointer",
+                }),
               }}
             />
           </div>
-          <img src={images.arrow} alt="" className="dark:invert" />
+          <img src={images.arrow} alt="" />
         </div>
 
         {/* Job Cards */}
@@ -183,28 +183,28 @@ const AllJob = () => {
             {filterJobs.map((job) => (
               <div
                 key={job.id}
-                className="relative bg-white dark:bg-[#2A2A40] flex p-[16px] mb-[16px] gap-[16px] rounded-xl"
+                className="relative bg-white dark:bg-[#242f49] flex p-[16px] mb-[16px] gap-[16px] rounded-xl"
               >
                 <div className="flex justify-center items-start">
                   <div
-                    className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer"
+                    className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer dark:border-gray-500"
                     onClick={details}
                   >
                     <img src={job.icon} className="size-[24px]  " alt="" />
                   </div>
                 </div>
                 <div className="flex flex-col flex-1">
-                  <span className="text-google font-medium leading-[12px] text-[10px]">
+                  <span className="text-google dark:text-gray-400 font-medium leading-[12px] text-[10px]">
                     {job.company}
                   </span>
-                  <span className="text-[15px] leading-[18px] font-semibold">
+                  <span className="text-[15px] leading-[18px] font-semibold mt-1">
                     {job.title}
                   </span>
-                  <div className="flex mt-[10px] text-google gap-[6px] font-medium leading-[14px] text-[12px]">
+                  <div className="flex mt-[10px] text-google gap-[6px] font-medium leading-[14px] text-[12px] dark:text-gray-400">
                     <p>
                       <img
                         src={images.wallet}
-                        className="size-[12px] mb-1 inline-block mr-[4px] dark:invert"
+                        className="size-[12px] mb-1 inline-block mr-[4px]  "
                         alt=""
                       />
                       {job.salary}
@@ -212,7 +212,7 @@ const AllJob = () => {
                     <p>
                       <img
                         src={images.location}
-                        className="size-[12px] mb-1 inline-block mr-[4px] dark:invert"
+                        className="size-[12px] mb-1 inline-block mr-[4px] "
                         alt=""
                       />
                       {job.location}

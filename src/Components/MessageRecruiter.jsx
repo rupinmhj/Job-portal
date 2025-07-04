@@ -1,15 +1,15 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import { FaAngleLeft } from "react-icons/fa6";
-import FooterRecruiter from "../Components/FooterRecruiter";
 import ThemeContext from "./ThemeContext";
+import FooterRecruiter from "./FooterRecruiter";
 
 const MessageRecruiter = () => {
-  const {theme}=useContext(ThemeContext)
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext); 
   const [messages, setMessages] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
@@ -19,35 +19,59 @@ const MessageRecruiter = () => {
       {
         id: 1,
         name: "Sonu Nigam",
-        message: "Great I will have a look",
+        msg: "Great I will have a look the",
         time: "Just Now",
-        unreadCount: 2,
-        avatar: images.messenger5,
-        seen: false,
+        unread: 2,
+        img: images.messenger5,
+        type: "unread",
       },
       {
         id: 2,
         name: "Jane Cooper",
-        message: "I'll send you the files tonight.",
+        msg: "I'll send you the files tonight.",
         time: "5 mins ago",
-        avatar: images.messenger2,
-        seen: true,
+        img: images.messenger2,
+        type: "read",
       },
       {
         id: 3,
         name: "Ronald Richards",
-        message: "Can we reschedule our meeting?",
+        msg: "Can we reschedule our meeting?",
         time: "10 mins ago",
-        avatar: images.messenger3,
-        seen: true,
+        img: images.messenger3,
+        type: "read",
       },
       {
         id: 4,
         name: "Esther Howard",
-        message: "Let's catch up this weekend.",
+        msg: "Let's catch up this weekend.",
         time: "30 mins ago",
-        avatar: images.messenger4,
-        seen: true,
+        img: images.messenger4,
+        type: "read",
+      },
+      {
+        id: 5,
+        name: "Wade Warren",
+        msg: "Thanks! That was really helpful.",
+        time: "1 hour ago",
+        img: images.messenger7,
+        type: "read",
+      },
+      {
+        id: 6,
+        name: "Courtney Henry",
+        msg: "Check your inbox please.",
+        time: "2 hours ago",
+        img: images.messenger6,
+        type: "read",
+      },
+      {
+        id: 7,
+        name: "Courtney Henry",
+        msg: "Check your inbox please.",
+        time: "2 hours ago",
+        img: images.messenger1,
+        type: "read",
       },
     ];
 
@@ -56,17 +80,17 @@ const MessageRecruiter = () => {
 
   const filteredMessages = messages.filter(msg =>
     msg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    msg.message.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+    msg.msg.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
- return (
+  return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
-      className={`h-screen overflow-y-scroll font-urbanist ${
-        theme === "dark" ? "bg-[#111d39] text-white" : "bg-white text-black"
+      className={`h-screen overflow-y-scroll font-urbanist scroll-container ${
+        theme === "dark" ? "dark bg-[#111d39] text-white" : ""
       }`}
     >
       {/* Header */}
@@ -82,9 +106,7 @@ const MessageRecruiter = () => {
               theme === "dark" ? "border-white" : "border-black"
             }`}
           >
-            <FaAngleLeft className={`size-[14px] ${
-              theme === "dark" ? "text-white" : "text-gray-500"
-            }`} />
+            <FaAngleLeft className={`size-[14px] ${theme === "dark" ? "text-white" : "text-gray-500"}`} />
           </div>
           <h2 className="text-[20px] font-bold ml-6">Message</h2>
           <div className="flex gap-[12px]">
@@ -92,24 +114,20 @@ const MessageRecruiter = () => {
               src={theme === "dark" ? images.searchIconDark : images.searchIcon}
               className="cursor-pointer"
               alt="Search"
-              onClick={() => setShowSearch(prev => !prev)}
+              onClick={() => setShowSearch((prev) => !prev)}
             />
-            <img
-              src={theme === "dark" ? images.threeDotDark : images.threeDot}
-              className="cursor-pointer"
-              alt="Options"
-            />
+            <img src={theme==='light'?images.threeDot:images.threeDotDark} className="cursor-pointer" alt="Options" />
           </div>
         </div>
 
         {/* Search Input */}
         {showSearch && (
-          <div className="px-6 max-w-[1024px] mx-auto">
-            <div className={`py-[14px] border w-full rounded-xl leading-[20px] flex items-center ${
-              theme === "dark"
+          <div className="max-w-[1024px] mx-auto px-6">
+            <div className={`py-[14px] border w-full rounded-xl leading-[20px] flex items-center
+              ${theme === "dark"
                 ? "border-gray-600 focus-within:border-white bg-[#111d39] text-white"
                 : "border-gray-200 focus-within:border-gray-400 bg-white text-black"
-            }`}>
+              }`}>
               <img
                 src={theme === "dark" ? images.searchIconDark : images.searchIcon}
                 className="pl-[18px] cursor-pointer"
@@ -127,10 +145,9 @@ const MessageRecruiter = () => {
         )}
       </div>
 
-      {/* Message List */}
-      <div className={`${showSearch ? "pt-[136px]" : "pt-[80px]"} pb-[90px] max-w-[1024px] mx-auto space-y-4 px-2 md:px-6`}>
+      <div className={`${showSearch ? "pt-[136px]" : "pt-[80px]"} pb-[90px] max-w-[1024px] px-6 max-md:px-2 mx-auto space-y-4`}>
         {filteredMessages.length === 0 ? (
-          <p className="text-center mt-10 text-gray-500 dark:text-white/60">No messages found.</p>
+          <p className="text-gray-500 text-center mt-10">No messages found.</p>
         ) : (
           filteredMessages.map((msg) => (
             <div
@@ -141,7 +158,7 @@ const MessageRecruiter = () => {
               }`}
             >
               <img
-                src={msg.avatar}
+                src={msg.img}
                 alt={msg.name}
                 className="h-[44px] w-[44px] border border-green-800 rounded-full flex-shrink-0"
               />
@@ -150,7 +167,7 @@ const MessageRecruiter = () => {
                 <p className={`text-[12px] truncate ${
                   theme === "dark" ? "text-[#ffffff80]" : "text-google"
                 }`}>
-                  {msg.message}
+                  {msg.msg}
                 </p>
               </div>
               <div className={`flex flex-col items-end text-[11px] gap-[6px] ${
@@ -161,7 +178,7 @@ const MessageRecruiter = () => {
                   <span className="text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full bg-purple-600">
                     {msg.unreadCount}
                   </span>
-                ) : msg.seen ? (
+                ) : msg.type ? (
                   <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>

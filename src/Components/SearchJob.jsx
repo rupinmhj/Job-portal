@@ -124,33 +124,7 @@ const SearchJob = () => {
           )}
         </div>
 
-        {/* Categories */}
-        <div className="mt-[24px] px-[24px] max-w-[1024px] mx-auto">
-          <div className="w-full">
-            <h1 className="font-bold text-[18px] leading-[22px] mb-[24px]">Browse By Category</h1>
-            <div className="flex w-full flex-wrap">
-              {[
-                { label: "Company", image: images.company },
-                { label: "Full Time", image: images.fullTime },
-                { label: "Part Time", image: images.partTime },
-                { label: "Freelance", image: images.freelancer },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  onClick={allJob}
-                  className="flex justify-center flex-1 flex-col items-center gap-[8px] w-1/4"
-                >
-                  <img
-                    src={item.image}
-                    className="cursor-pointer hover:border-blue-500 border-2 dark:border-gray-600 border-gray-200 p-[9px] rounded-lg transition-all duration-300 hover:shadow-sm size-[65.6px]"
-                    alt={item.label}
-                  />
-                  <h2 className="text-[12px] font-medium">{item.label}</h2>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      
       </div>
     </motion.div>
   );

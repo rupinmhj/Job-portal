@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef, useContext} from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { motion } from "framer-motion"
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -16,10 +16,10 @@ import {
   FaComments,
 } from "react-icons/fa";
 const Applications = () => {
-  const {theme}=useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const dropdownRef=useRef(null);
+  const dropdownRef = useRef(null);
   const back = () => {
     navigate(-1);
   };
@@ -31,20 +31,20 @@ const Applications = () => {
   const [selectedDateTime, setSelectedDateTime] = useState("");
 
   const [openStatusDropdownId, setOpenStatusDropdownId] = useState(null);
-  useEffect(()=>{
-    const handleClickOutside=(e)=>{
-      if(dropdownRef.current && 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current &&
         !dropdownRef.current.contains(e.target)
-      ){
+      ) {
         setOpenStatusDropdownId(null);
       }
     }
-    document.addEventListener("mousedown",handleClickOutside);
-    return()=>{
-      document.removeEventListener("mousedown",handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     // console.log(dropdownRef.current)
-  },[])
+  }, [])
   useEffect(() => {
     if (location.state?.searchTerm) {
       setSearchTerm(location.state.searchTerm);
@@ -117,6 +117,7 @@ const Applications = () => {
     ]
   )
 
+
   const statusOptions = [
     "All",
     "New",
@@ -128,6 +129,7 @@ const Applications = () => {
   ];
 
   const statusOptions2 = [
+    "New",
     "Reviewed",
     "Interview",
     "Shortlisted",
@@ -171,7 +173,7 @@ const Applications = () => {
     >
 
       <div className=" min-h-screen font-urbanist scroll-container pb-16">
-        <div className="fixed top-0 right-0 left-0 z-20">
+        <div className="fixed top-0 right-0 left-0 z-30">
           <header className="bg-white max-w-[1024px] mx-auto px-6 py-4 dark:bg-[#111d39] ">
             <div className="max-w-[1024px] mx-auto flex justify-between items-center">
               <div
@@ -182,7 +184,7 @@ const Applications = () => {
               </div>
               <h1 className="text-[20px] leading-[24px] font-bold text-gray-900 dark:text-white">Applications</h1>
 
-              <span className="text-[14px] text-google w-[60px] ">{filteredApplications.length} Total</span>
+              <span className="text-[14px] text-google w-[60px] dark:text-gray-300">{filteredApplications.length} Total</span>
             </div>
           </header>
         </div>
@@ -192,7 +194,7 @@ const Applications = () => {
           <div className="flex flex-col  gap-6 mb-6">
             <div className="py-[14px]  focus-within:border-gray-400 border  w-full rounded-xl leading-[20px] flex items-center dark:border-gray-500 dark:focus-within:border-gray-200">
               <img
-                src={theme==='light'?images.searchIcon:images.searchIconDark}
+                src={theme === 'light' ? images.searchIcon : images.searchIconDark}
 
                 className="pl-[18px] cursor-pointer"
                 alt=""
@@ -244,7 +246,7 @@ const Applications = () => {
                           {app.candidateName}
                         </h2>
                         <span
-                          className={`ml-2 px-2 py-1 text-xs font-medium rounded dark:bg-gray-400 ${getStatusColor(
+                          className={`ml-2 px-2 py-1 text-xs font-medium rounded dark:bg-gray-100 ${getStatusColor(
                             app.status
                           )}`}
                         >
@@ -316,27 +318,35 @@ const Applications = () => {
                       </button>
 
                       {openStatusDropdownId === app.id && (
-                        <div ref={dropdownRef} className="absolute mt-1 top-[-120px] right-[100px] w-[120px] bg-white border rounded shadow z-30">
-                          
-                          {statusOptions2.map((status, index) => (
-                            <div
-                              key={index}
-                              className={`px-3 py-2 cursor-pointer text-sm hover:opacity-50 ${getStatusColor(status)}`}
-                              onClick={() => {
-                                setApplicationsData(prev =>
-                                  prev.map(a =>
-                                    a.id === app.id ? { ...a, status: status } : a
-                                  )
-                                );
-                                setOpenStatusDropdownId(null);
-                              }}
-                            >
-                              {status}
-                            </div>
-                          ))}
+                        <>
+                          {/* Blur background */}
+                          <div className="fixed inset-0 bg-black/30 backdrop-blur-[1px] z-10"></div>
 
-                        </div>
+                          {/* Dropdown itself */}
+                          <div
+                            ref={dropdownRef}
+                            className="absolute mt-1 top-[-120px] right-[100px] w-[120px] bg-white border rounded shadow z-20"
+                          >
+                            {statusOptions2.map((status, index) => (
+                              <div
+                                key={index}
+                                className={`px-3 py-2 cursor-pointer text-sm hover:opacity-50 ${getStatusColor(status)}`}
+                                onClick={() => {
+                                  setApplicationsData(prev =>
+                                    prev.map(a =>
+                                      a.id === app.id ? { ...a, status: status } : a
+                                    )
+                                  );
+                                  setOpenStatusDropdownId(null);
+                                }}
+                              >
+                                {status}
+                              </div>
+                            ))}
+                          </div>
+                        </>
                       )}
+
                     </div>
                   </div>
                 </div>
@@ -362,54 +372,54 @@ const Applications = () => {
           )}
         </main>
       </div>
-      <FooterRecruiter />
+      <FooterRecruiter  />
       {
-  showDateTimePicker && (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 font-urbanist">
-      <div className="bg-gray-200 p-6 rounded-2xl shadow-lg w-[320px] max-w-full space-y-4">
-        <h2 className="text-[18px] font-bold text-gray-800">Set Interview Date & Time</h2>
+        showDateTimePicker && (
+          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 font-urbanist">
+            <div className="bg-gray-200 p-6 rounded-2xl shadow-lg w-[320px] max-w-full space-y-4">
+              <h2 className="text-[18px] font-bold text-gray-800">Set Interview Date & Time</h2>
 
-        <input
-          type="datetime-local"
-          value={selectedDateTime}
-          onChange={(e) => setSelectedDateTime(e.target.value)}
-          min={new Date().toISOString().slice(0, 16)}
-          className="w-full px-4 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-blue-500"
-        />
+              <input
+                type="datetime-local"
+                value={selectedDateTime}
+                onChange={(e) => setSelectedDateTime(e.target.value)}
+                min={new Date().toISOString().slice(0, 16)}
+                className="w-full px-4 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-blue-500"
+              />
 
-        <div className="flex justify-end gap-3 pt-2">
-          <button
-            onClick={() => {
-              setShowDateTimePicker(false);
-              setSelectedAppId(null);
-              setSelectedDateTime("");
-            }}
-            className="px-4 py-2 text-sm border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100"
-          >
-            Cancel
-          </button>
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  onClick={() => {
+                    setShowDateTimePicker(false);
+                    setSelectedAppId(null);
+                    setSelectedDateTime("");
+                  }}
+                  className="px-4 py-2 text-sm border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100"
+                >
+                  Cancel
+                </button>
 
-          <button
-            onClick={() => {
-              if (!selectedDateTime) {
-                toast.error("Please select a date and time", { autoClose: 1500 });
-                return;
-              }
-              console.log(`Interview for app ${selectedAppId} set for ${selectedDateTime}`);
-              toast.success("Interview Set", { autoClose: 1000 });
-              setShowDateTimePicker(false);
-              setSelectedAppId(null);
-              setSelectedDateTime("");
-            }}
-            className="px-4 py-2 text-sm text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
+                <button
+                  onClick={() => {
+                    if (!selectedDateTime) {
+                      toast.error("Please select a date and time", { autoClose: 1500 });
+                      return;
+                    }
+                    console.log(`Interview for app ${selectedAppId} set for ${selectedDateTime}`);
+                    toast.success("Interview Set", { autoClose: 1000 });
+                    setShowDateTimePicker(false);
+                    setSelectedAppId(null);
+                    setSelectedDateTime("");
+                  }}
+                  className="px-4 py-2 text-sm text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      }
 
       <ToastContainer />
     </motion.div>

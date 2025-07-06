@@ -5,3 +5,4 @@ body {
   #scrollable::-webkit-scrollbar{
     display: none;
   }
+@import "react-datepicker/dist/react-datepicker.css";

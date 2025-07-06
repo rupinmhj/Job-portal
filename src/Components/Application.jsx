@@ -8,6 +8,9 @@ import images from "../assets/images";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeContext from "./ThemeContext";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; 
+import './custom-datepicker.css'
 import {
   FaEnvelope,
   FaPhone,
@@ -29,6 +32,8 @@ const Applications = () => {
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [selectedAppId, setSelectedAppId] = useState(null);
   const [selectedDateTime, setSelectedDateTime] = useState("");
+
+  
 
   const [openStatusDropdownId, setOpenStatusDropdownId] = useState(null);
   useEffect(() => {
@@ -192,7 +197,7 @@ const Applications = () => {
 
         <main className="max-w-[1024px] mx-auto px-6 py-6 mt-[61px]">
           <div className="flex flex-col  gap-6 mb-6">
-            <div className="py-[14px]  focus-within:border-gray-400 border  w-full rounded-xl leading-[20px] flex items-center dark:border-gray-500 dark:focus-within:border-gray-200">
+            <div className="py-[14px]  focus-within:border-gray-700 border  w-full rounded-xl leading-[20px] flex items-center dark:border-gray-500 dark:focus-within:border-gray-200">
               <img
                 src={theme === 'light' ? images.searchIcon : images.searchIconDark}
 
@@ -231,7 +236,7 @@ const Applications = () => {
             {filteredApplications.map((app) => (
               <div
                 key={app.id}
-                className="bg-[#E9F0FF] dark:bg-black dark:bg-opacity-40 dark:border-gray-600 bg-opacity-30 rounded-md shadow-sm border p-6 flex flex-col gap-4"
+                className="bg-[#E9F0FF] dark:bg-[#242f49] dark:bg-opacity-90 dark:border-gray-600 bg-opacity-30 rounded-md shadow-sm border p-6 flex flex-col gap-4"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex gap-4">
@@ -372,19 +377,22 @@ const Applications = () => {
           )}
         </main>
       </div>
-      <FooterRecruiter  />
+      <FooterRecruiter />
       {
         showDateTimePicker && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 font-urbanist">
-            <div className="bg-gray-200 p-6 rounded-2xl shadow-lg w-[320px] max-w-full space-y-4">
-              <h2 className="text-[18px] font-bold text-gray-800">Set Interview Date & Time</h2>
+            <div className="bg-gray-200 dark:bg-[#1e293b] p-6 rounded-2xl shadow-lg w-[320px] max-w-full space-y-4">
+              <h2 className="text-[18px] font-bold text-gray-800 dark:text-white">
+                Set Interview Date & Time
+              </h2>
 
-              <input
-                type="datetime-local"
-                value={selectedDateTime}
-                onChange={(e) => setSelectedDateTime(e.target.value)}
-                min={new Date().toISOString().slice(0, 16)}
-                className="w-full px-4 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-blue-500"
+              <DatePicker
+                selected={selectedDateTime}
+                onChange={(date) => setSelectedDateTime(date)}
+                showTimeSelect
+                dateFormat="Pp"
+                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#334155] text-sm text-black dark:text-white"
+          
               />
 
               <div className="flex justify-end gap-3 pt-2">
@@ -394,7 +402,7 @@ const Applications = () => {
                     setSelectedAppId(null);
                     setSelectedDateTime("");
                   }}
-                  className="px-4 py-2 text-sm border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100"
+                  className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   Cancel
                 </button>
@@ -420,6 +428,7 @@ const Applications = () => {
           </div>
         )
       }
+
 
       <ToastContainer />
     </motion.div>

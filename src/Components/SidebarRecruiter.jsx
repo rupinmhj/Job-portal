@@ -66,7 +66,7 @@ const SideBarRecruiter = ({
               Good morning!
             </span>
             <span className="inline-flex text-[16px] font-bold leading-[19px] items-center ">
-              Hello! Smith{" "}
+              Welcome Google!{" "}
             </span>
           </div>
         </div>

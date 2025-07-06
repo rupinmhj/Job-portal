@@ -78,8 +78,8 @@ html{
 
 .swiper .swiper-pagination-bullet-active {
   background: #2869FE;
-  width: 28px;
-  border-radius: 5px;
+  /* width: 28px; */
+  /* border-radius: 5px; */
 }
 
 .swiper-slide {
@@ -130,8 +130,7 @@ html{
 }
 
 /* Hide Chrome's calendar icon */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  cursor: pointer;
-}
+
+
+
 

@@ -110,9 +110,9 @@ const SignIn = () => {
         transition={{ duration: 0.3, delay: 0.15 }}
         className="h-screen overflow-y-scroll scroll-container bg-white dark:bg-[#111d39] transition-colors duration-300"
       >
-        <div className="dark:bg-[#111d39] bg-white lg:px-[232px] xl:px-[274px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] dark:text-white w-full">
+        <div className="dark:bg-[#111d39] bg-white max-w-[430px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] dark:text-white w-full">
           <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
-            <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
+            <div className="flex items-center justify-between px-6 max-w-[430px] mx-auto py-[16px]">
               <div onClick={back} className="p-[6px] border rounded-lg border-black dark:border-white cursor-pointer">
                 <FaAngleLeft className="text-gray-500 dark:text-gray-300 size-[14px]" />
               </div>
@@ -122,7 +122,7 @@ const SignIn = () => {
           </div>
         </div>
 
-        <div className="dark:bg-[#111d39] bg-white lg:px-[232px] xl:px-[274px] px-[24px] font-urbanist text-[#121927] dark:text-white">
+        <div className="dark:bg-[#111d39] bg-white max-w-[430px] mx-auto px-[24px] font-urbanist text-[#121927] dark:text-white">
           <div className="w-full">
             <img src={theme==='light'?images.logolight:images.logoDark} className="w-[117px] h-[32px]" alt="Logo" />
             <div className="w-full mt-[16px]">
@@ -147,8 +147,8 @@ const SignIn = () => {
                 className="focus:outline-none border dark:focus-within:border-gray-200 focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full dark:bg-[#1f2937] dark:text-white dark:border-gray-600"
                 placeholder="Type your email"
               />
-            </div>
             {emailError && <p className="text-red-600 text-[12px] pl-4">{emailError}</p>}
+            </div>
           </div>
 
           {/* Password Field */}
@@ -173,8 +173,8 @@ const SignIn = () => {
                   {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4" />}
                 </span>
               </div>
-            </div>
             {passwordError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
+            </div>
 
             {/* Remember Me */}
             <div className="flex items-center gap-2 mb-[20px]">

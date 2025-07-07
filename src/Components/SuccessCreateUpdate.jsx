@@ -17,9 +17,9 @@ const SuccessCreateUpdate = () => {
               <div className="flex items-center justify-between p-[24px] pt-[16px] ">
                 <div
                   onClick={back}
-                  className="p-[6px] border rounded-lg border-gray-700 cursor-pointer"
+                  className="p-[6px] border rounded-lg border-gray-700 cursor-pointer dark:border-white"
                 >
-                  <FaAngleLeft className="text-gray-700 size-[14px]" />
+                  <FaAngleLeft className="text-gray-700 size-[14px] dark:text-white" />
                 </div>
                 <h2 className="text-[20px] font-bold  leading-[24px]">
                   Success

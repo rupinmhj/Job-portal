@@ -225,13 +225,20 @@ const CreateJob = () => {
 
                 {/* Deadline */}
                 <label className="pl-3 text-[15px] font-semibold">Application Deadline</label>
-                <input
+                <div className="relative">
+                   <input
                   name="deadline"
                   value={form.deadline}
                   onChange={handleChange}
                   type="date"
-                  className="w-full mt-2 mb-4 p-3 pr-10 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white appearance-none"
+                  className="w-full mt-2 mb-4 p-3 pr-10 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white appearance-none remove-date-icon"
                 />
+                <div className="absolute top-6 right-4">
+
+                <img src={images.calender} className="dark:invert"  alt="" />
+                </div>
+                </div>
+               
 
                 {/* Email */}
                 <label className="pl-3 text-[15px] font-semibold">Contact Email</label>
@@ -326,5 +333,4 @@ const CreateJob = () => {
     </motion.div>
   );
 };
-
 export default CreateJob;

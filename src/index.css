@@ -116,20 +116,13 @@ html{
           .green-radio:focus {
             box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
           }
-/* Remove blue outline from react-select */
-
-.select-arrow-left {
-  background-position: right 12px center !important;
-}
-.react-datepicker-wrapper {
-  width: 100%;
+.remove-date-icon::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+  -webkit-appearance: none;
 }
 
-.react-datepicker__input-container {
-  width: 100%;
-}
 
-/* Hide Chrome's calendar icon */
 
 
 

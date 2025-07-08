@@ -10,7 +10,6 @@
   overflow: hidden;
 }
 
-/* ✅ Dark mode override */
 .dark .react-datepicker {
   background-color: #111d39;
   color: white;
@@ -23,7 +22,6 @@
   border-top-left-radius: 16px;
 }
 
-/* ✅ Dark mode header */
 .dark .react-datepicker__header {
   background-color: #1e293b;
   color: white;
@@ -39,7 +37,6 @@
   opacity: 0.9;
 }
 
-/* ✅ Dark mode selected & hover consistency */
 .dark .react-datepicker__day--selected,
 .dark .react-datepicker__day:hover,
 .dark .react-datepicker__time-list-item:hover {
@@ -56,7 +53,6 @@
   color: white;
 }
 
-/* ✅ Dark mode time container */
 .dark .react-datepicker__time-container .react-datepicker__time {
   background-color: #1f2937;
   color: white;
@@ -98,7 +94,7 @@
   color: black;
 }
 
-/* ✅ Dark mode day text */
+
 .dark .react-datepicker__day {
   border: 1px solid #334155;
   color: white;
@@ -139,13 +135,12 @@
   color: white !important;
 }
 
-/* ✅ Dark mode month container */
+
 .dark .react-datepicker__month-container {
   background-color: #1e293b;
   color: white !important;
 }
 
-/* ✅ Make sure text inside months and headers is white */
 .dark .react-datepicker__current-month,
 .dark .react-datepicker-time__header,
 .dark .react-datepicker-year-header,

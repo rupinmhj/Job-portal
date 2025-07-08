@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
@@ -9,7 +9,7 @@ import { motion } from "framer-motion"
 import ThemeContext from "./ThemeContext";
 
 const SignIn = () => {
-  const {theme}=useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const back = () => navigate("/");
   const home = () => navigate("/home");
@@ -46,62 +46,15 @@ const SignIn = () => {
     return valid;
   };
 
-  // const handleSignIn = async () => {
-  //   if (!validate()) return;
 
-  //   setLoading(true);
-  //   setSignInError("");
 
-  //   try {
-  //     const response = await axios.get("http://localhost:3001/users", {
-  //       params: {
-  //         email,
-  //         password,
-  //       }
-  //     });
-      
-  //     const data = response.data;
-  //     console.log(data);
-  //     if (data.length === 1) {
-  //       const loggedInUser = data[0];
-  //       localStorage.setItem("userRole", loggedInUser.role);
-
-  //       switch (loggedInUser.role) {
-  //         case "job_seeker":
-  //           toast.success("Logged in successfully as Job Seeker!");
-  //           setTimeout(() => navigate("/home"), 1000); 
-  //           break;
-  //         case "employer":
-  //           toast.success("Logged in successfully as Employer!");
-  //           setTimeout(() => navigate("/homerecruiter"), 1000); 
-  //           break;
-  //         default:
-  //           const invalidRoleError = "Invalid user role";
-  //           setSignInError(invalidRoleError);
-  //           toast.error(invalidRoleError);
-  //       }
-  //     } else {
-  //       const errorMessage = "Invalid email or password";
-  //       setSignInError(errorMessage);
-  //       toast.error(errorMessage);
-  //     }
-  //   } catch (error) {
-  //     console.error("Sign in error:", error);
-  //     const errorMessage = "Failed to sign in. Please try again.";
-  //     setSignInError(errorMessage);
-  //     toast.error(errorMessage);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  const handleSignIn=()=>{
-    if(validate()){
+  const handleSignIn = () => {
+    if (validate()) {
       home();
     }
   }
 
-   return (
+  return (
     <>
       <motion.div
         initial={{ opacity: 0 }}
@@ -124,7 +77,7 @@ const SignIn = () => {
 
         <div className="dark:bg-[#111d39] bg-white max-w-[430px] mx-auto px-[24px] font-urbanist text-[#121927] dark:text-white">
           <div className="w-full">
-            <img src={theme==='light'?images.logolight:images.logoDark} className="w-[117px] h-[32px]" alt="Logo" />
+            <img src={theme === 'light' ? images.logolight : images.logoDark} className="w-[117px] h-[32px]" alt="Logo" />
             <div className="w-full mt-[16px]">
               <h2 className="text-[#71757D] dark:text-gray-400 text-[14px] leading-[24px] font-medium">
                 Give credential to sign in your account
@@ -147,7 +100,7 @@ const SignIn = () => {
                 className="focus:outline-none border dark:focus-within:border-gray-200 focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full dark:bg-[#1f2937] dark:text-white dark:border-gray-600"
                 placeholder="Type your email"
               />
-            {emailError && <p className="text-red-600 text-[12px] pl-4">{emailError}</p>}
+              {emailError && <p className="text-red-600 text-[12px] pl-4">{emailError}</p>}
             </div>
           </div>
 
@@ -173,7 +126,7 @@ const SignIn = () => {
                   {showPassword ? <FaRegEye size={20} className="mt-4" /> : <FaRegEyeSlash size={20} className="mt-4" />}
                 </span>
               </div>
-            {passwordError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
+              {passwordError && <p className="text-red-600 text-[12px] pl-4">{passwordError}</p>}
             </div>
 
             {/* Remember Me */}
@@ -202,9 +155,8 @@ const SignIn = () => {
           <button
             onClick={handleSignIn}
             disabled={loading}
-            className={`w-full cursor-pointer ${
-              loading ? "bg-gray-400" : "bg-[#2869FE]"
-            } p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]`}
+            className={`w-full cursor-pointer ${loading ? "bg-gray-400" : "bg-[#2869FE]"
+              } p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]`}
           >
             {loading ? "Signing In..." : "Sign In"}
           </button>

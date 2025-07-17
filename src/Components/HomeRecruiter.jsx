@@ -1,5 +1,5 @@
 // src/Components/HomeRecruiter.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import HeaderRecruiter from './HeaderRecruiter';
 import SearchRecruiter from './SearchRecruiter';
 import LearnMoreRecruiter from './LearnMoreRecruiter';
@@ -11,6 +11,7 @@ import SideBarRecruiter from './SidebarRecruiter';
 import { Outlet } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RecruitmentStats } from './RecruitmentStats';
+
 const HomeRecruiter = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPageOpen, setIsPageOpen] = useState(false);

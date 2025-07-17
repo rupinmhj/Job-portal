@@ -5,14 +5,19 @@
 @keyframes circleGrow {
   0% {
     transform: scale(0.2);
-    opacity: 0; /* Start completely transparent */
+    opacity: 0;
+    /* Start completely transparent */
   }
+
   20% {
-    opacity: 0.3; /* Fade in smoothly */
+    opacity: 0.3;
+    /* Fade in smoothly */
   }
+
   100% {
     transform: scale(1.5);
-    opacity: 0; /* End completely transparent */
+    opacity: 0;
+    /* End completely transparent */
   }
 }
 
@@ -23,7 +28,8 @@
   border: 8px solid rgba(255, 255, 255, 0.3);
   width: 120%;
   height: 120%;
-  opacity: 0; /* Ensure circles start invisible */
+  opacity: 0;
+  /* Ensure circles start invisible */
 }
 
 .animate-circle {
@@ -35,23 +41,32 @@
   overflow: hidden;
   width: 300px;
   height: 300px;
-  pointer-events: none; /* Prevents interference with UI interactions */
+  pointer-events: none;
+  /* Prevents interference with UI interactions */
 }
 
 body {
   background-color: white;
 }
+
 /* Add this to your global CSS */
 @keyframes fadeIn {
-  from { opacity: 0.8; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0.8;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -64,6 +79,7 @@ html{
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 /* Fix pagination position */
 
 
@@ -73,7 +89,7 @@ html{
   height: 6px;
   background: #D9D9D9;
   opacity: 1;
-   transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .swiper .swiper-pagination-bullet-active {
@@ -86,44 +102,49 @@ html{
   transition: opacity 1000ms ease !important;
 }
 
- .green-radio {
-            position: relative;
-            appearance: none;
-            width: 13px;
-            height: 13px;
-            border: 1px solid #999;
-            border-radius: 50%;
-            outline: none;
-            margin-right: 5px;
-            cursor: pointer;
-          }
-          
-          .green-radio:checked {
-            border-color: #22c55e;
-          }
-          
-          .green-radio:checked::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background-color: #22c55e;
-          }
-          
-          .green-radio:focus {
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
-          }
+.green-radio {
+  position: relative;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #999;
+  border-radius: 50%;
+  outline: none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.green-radio:checked {
+  border-color: #22c55e;
+}
+
+.green-radio:checked::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22c55e;
+}
+
+.green-radio:focus {
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+}
+
 .remove-date-icon::-webkit-calendar-picker-indicator {
   opacity: 0;
   display: none;
   -webkit-appearance: none;
 }
 
-
-
-
-
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #1f2a45 inset !important; /* keeps dark background */
+  transition: background-color 9999s ease-in-out 0s;
+  -webkit-text-fill-color: white !important;
+  caret-color: white;
+}

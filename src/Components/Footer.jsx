@@ -42,7 +42,7 @@ dark:text-white rounded-t-2xl z-10">
             <NavLink to="/profile" className="transition-transform duration-200 hover:scale-110">
               {({ isActive }) => (
                 <img
-                  src={isActive ? theme === 'light' ? images.profilefill : images.profilefillWhite : theme === 'light' ? images.profileWhite : images.profileWhite}
+                  src={isActive ? theme === 'light' ? images.profilefill : images.profilefillWhite : theme === 'light' ? images.profile: images.profileWhite}
                   className="cursor-pointer"
                   alt="Profile"
                 />

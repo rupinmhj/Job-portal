@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaAngleLeft, FaPlus } from "react-icons/fa";
@@ -6,13 +6,18 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoLogOutOutline, IoBagHandleOutline } from "react-icons/io5";
 import { MdOutlinePhonelinkSetup } from "react-icons/md";
 import { CgBriefcase } from "react-icons/cg";
-import { useContext } from "react";
 import FooterRecruiter from "../Components/FooterRecruiter";
 import images from "../assets/images";
 import ThemeContext from "./ThemeContext";
+import AuthContext from "../Context/authContext";
 const ProfileRecruiter = () => {
+  const {logout,companyDetails}=useContext(AuthContext)
   const navigate = useNavigate();
-  const {theme}=useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
+
+  const [notificationPreference, setNotificationPreference] = useState("both");
+  const [showSettings, setShowSettings] = useState(false);
+
   const [profile, setProfile] = useState({
     name: "TechCorp (Recruiter)",
     email: "recruiter@techcorp.com",
@@ -26,12 +31,11 @@ const ProfileRecruiter = () => {
   });
 
   useEffect(() => {
-    // Replace this with API call later
     setTimeout(() => {
       setProfile({
-        name: "Google",
-        email: "google@company.com",
-        logo: images.google || images.googlelogo,
+        name: companyDetails?.name||"Company name" ,
+        email: companyDetails?.email||"Company email" ,
+        logo: companyDetails?.logo||images.companyprofile ,
       });
 
       setStats({
@@ -43,10 +47,63 @@ const ProfileRecruiter = () => {
   }, []);
 
   const handleLogout = () => {
-    navigate("/");
+    logout();
+    navigate('/signin');
+    
   };
 
- return (
+  const menuItems = [
+    {
+      label: "Manage Jobs",
+      icon: <CgBriefcase />,
+      action: () => navigate("/managejob"),
+    },
+    {
+      label: "View Applicants",
+      icon: <IoBagHandleOutline />,
+      action: () => navigate("/application"),
+    },
+   {
+  label: "Settings",
+  icon: <MdOutlinePhonelinkSetup />,
+  action: () => setShowSettings((prev) => !prev),
+  custom: showSettings && (
+    <div className="w-full mt-2 space-y-2 pl-10">
+      <p className="text-[13px] font-semibold mb-1">Notification Preference</p>
+      {["app", "email", "both"].map((option) => (
+        <label
+          key={option}
+          className="flex items-center gap-2 text-[14px] cursor-pointer"
+        >
+          <input
+            type="radio"
+            name="notification"
+            value={option}
+            checked={notificationPreference === option}
+            onChange={() => setNotificationPreference(option)}
+            className="accent-blue-600 dark:accent-white"
+          />
+          <span className="capitalize">
+            {option === "app"
+              ? "App Notification"
+              : option === "email"
+              ? "Email Notification"
+              : "Both"}
+          </span>
+        </label>
+      ))}
+    </div>
+  ),
+},
+,
+    {
+      label: "Logout",
+      icon: <IoLogOutOutline />,
+      action: handleLogout,
+    },
+  ];
+
+  return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -111,20 +168,20 @@ const ProfileRecruiter = () => {
               label: "Posted Jobs",
               count: stats.postedJobs,
               bg: theme === "dark" ? "#42366b" : "#F6EFFF",
-              color: "#a55fff"
+              color: "#a55fff",
             },
             {
               label: "Applications",
               count: stats.applications,
               bg: theme === "dark" ? "#265148" : "#E5FAF5",
-              color: "#00CC9A"
+              color: "#00CC9A",
             },
             {
               label: "Views",
               count: stats.views,
               bg: theme === "dark" ? "#50384f" : "#FFEFF8",
-              color: "#FF5FBF"
-            }
+              color: "#FF5FBF",
+            },
           ].map((item, i) => (
             <div key={i} className="flex flex-col items-center">
               <div
@@ -155,38 +212,23 @@ const ProfileRecruiter = () => {
         {/* Menu */}
         <div className="w-full">
           <div className="w-full bg-[#7D67FF] px-[24px] pt-[48px] pb-[150px] text-white space-y-4 rounded-t-3xl">
-            {[
-              {
-                label: "Manage Jobs",
-                icon: <CgBriefcase />,
-                action: () => navigate("/managejob")
-              },
-              {
-                label: "View Applicants",
-                icon: <IoBagHandleOutline />,
-                action: () => navigate("/application")
-              },
-              {
-                label: "Setup Profile",
-                icon: <MdOutlinePhonelinkSetup />,
-                action: () => navigate("/companyprofile")
-              },
-              {
-                label: "Logout",
-                icon: <IoLogOutOutline />,
-                action: handleLogout
-              }
-            ].map((item, i) => (
-              <div
-                key={i}
-                onClick={item.action}
-                className="flex justify-between items-center cursor-pointer py-3 border-b border-white/20 last:border-none"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white/30 rounded-lg">{item.icon}</div>
-                  <span className="font-medium text-[16px]">{item.label}</span>
+            {menuItems.map((item, i) => (
+              <div key={i} className="space-y-2">
+                <div
+                  onClick={item.action}
+                  className={`flex justify-between items-center py-3 border-b border-white/20 last:border-none ${
+                    item.custom ? "cursor-default" : "cursor-pointer"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-white/30 rounded-lg">{item.icon}</div>
+                    <span className="font-medium text-[16px]">{item.label}</span>
+                  </div>
+                  {!item.custom && (
+                    <MdOutlineKeyboardArrowRight className="text-white" />
+                  )}
                 </div>
-                <MdOutlineKeyboardArrowRight className="text-white" />
+                {item.custom && item.custom}
               </div>
             ))}
           </div>
@@ -195,7 +237,6 @@ const ProfileRecruiter = () => {
 
       {/* Footer */}
       <FooterRecruiter />
-
       <Outlet />
     </motion.div>
   );

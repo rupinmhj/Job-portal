@@ -1,23 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
-import images from "../assets/images";
-
+import { useNavigate, useLocation } from "react-router-dom";
+// import api from "../api/api"; // import your axios instance
+import useAxiosAuth from "../hooks/useAxiosAuth";
+import { toast, ToastContainer } from "react-toastify";
 const VerificationSignup = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const api=useAxiosAuth();
+  // Email passed from signup page (fallback empty)
+  const [email, setEmail] = useState(location.state?.email || "");
+
   const back = () => navigate(-1);
-  const signup = () => navigate("/signup");
 
-  const [remember, setRemember] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
+  // OTP input refs and state
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+  const [otpValues, setOtpValues] = useState(["", "", "", ""]);
 
   useEffect(() => {
     inputRefs[0].current?.focus();
   }, []);
 
+  // Timer for resend OTP
   const [seconds, setSeconds] = useState(59);
   useEffect(() => {
     if (seconds > 0) {
@@ -26,19 +30,65 @@ const VerificationSignup = () => {
     }
   }, [seconds]);
 
+  // Handle OTP input change
   const handleInput = (index, e) => {
-    const inputElement = e.target;
-    inputElement.value = inputElement.value.replace(/[^\d]/g, "");
-    if (inputElement.value && index < 3) {
+    const val = e.target.value.replace(/[^\d]/g, "");
+    setOtpValues((prev) => {
+      const newOtp = [...prev];
+      newOtp[index] = val;
+      return newOtp;
+    });
+
+    if (val && index < 3) {
       inputRefs[index + 1].current?.focus();
     }
   };
 
+  // Handle backspace key behavior
   const handleKeyDown = (index, e) => {
-    if (e.key === "Backspace" && !e.target.value && index > 0) {
-      const prevInput = inputRefs[index - 1].current;
-      prevInput.value = "";
-      prevInput.focus();
+    if (e.key === "Backspace" && !otpValues[index] && index > 0) {
+      inputRefs[index - 1].current?.focus();
+    }
+  };
+
+  // Combine OTP digits
+  const otpCode = otpValues.join("");
+
+  // Verify OTP by calling backend
+  const verifyOtp = async () => {
+    if (otpCode.length !== 4) {
+      toast.warning("Please enter a 4-digit code");
+      return;
+    }
+
+    try {
+      const response = await api.post("/accounts/verify-email/", {
+        email,
+        user_input_otp: otpCode,
+      });
+      if (response.status === 200) {
+        // OTP verified successfully
+        toast.success("Verification successful! Please sign in.");
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.error("OTP verification failed:", error);
+      toast.error("Invalid or expired OTP. Please try again.");
+    }
+  };
+
+  // Resend OTP handler
+  const resendOtp = async () => {
+    try {
+      await api.post("/accounts/resend-otp/", { email });
+      toast.info("Verification code resent to your email.");
+      setSeconds(59);
+      // Clear OTP inputs
+      setOtpValues(["", "", "", ""]);
+      inputRefs[0].current?.focus();
+    } catch (error) {
+      console.error("Failed to resend OTP:", error);
+      toast.error("Failed to resend code. Please try later.");
     }
   };
 
@@ -64,8 +114,8 @@ const VerificationSignup = () => {
           <h2 className="text-[#71757D] dark:text-gray-400 text-[14px] leading-[24px] font-medium">
             We’ve sent you the verification code on
           </h2>
-          <h2 className="text-[14px] leading-[24px] font-medium">
-            rupinmaharjan@gmail.com
+          <h2 className="text-[14px] leading-[24px] font-medium break-words">
+            {email || "your email"}
           </h2>
         </div>
 
@@ -77,26 +127,36 @@ const VerificationSignup = () => {
               type="text"
               maxLength={1}
               inputMode="numeric"
+              value={otpValues[index]}
               className="h-[55px] w-[55px] text-center text-[24px] font-bold border border-gray-300 dark:border-gray-600 dark:bg-[#1f2a45] dark:text-white rounded-[12px] focus:outline-custBlackBold"
-              onInput={(e) => handleInput(index, e)}
+              onChange={(e) => handleInput(index, e)}
               onKeyDown={(e) => handleKeyDown(index, e)}
             />
           ))}
         </div>
 
         <button
-          onClick={() => navigate("/signin")}
+          onClick={verifyOtp}
           className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[20px]"
         >
-          Sign In
+          Verify
         </button>
 
         <div className="text-[14px] mt-[48px] leading-[24px] font-medium text-google dark:text-gray-400 flex gap-2 justify-center">
-          <h1>Code expires in 00:{seconds}</h1>
+          <h1>Code expires in 00:{seconds < 10 ? `0${seconds}` : seconds}</h1>
           {seconds === 0 && (
-            <p className="text-[#2869FE] cursor-pointer">Resend code</p>
+            <p
+              className="text-[#2869FE] cursor-pointer"
+              onClick={resendOtp}
+              role="button"
+              tabIndex={0}
+              onKeyPress={(e) => e.key === "Enter" && resendOtp()}
+            >
+              Resend code
+            </p>
           )}
         </div>
+        <ToastContainer />
       </div>
     </>
   );

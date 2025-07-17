@@ -76,9 +76,9 @@ const SetFilters = () => {
       transition={{ duration: 0.3 }}
       className={theme === "dark" ? "dark" : ""}
     >
-      <div className="bg-white dark:bg-[#111d39] font-urbanist w-full text-[#121927] dark:text-white lg:px-[232px]">
+      <div className="bg-white dark:bg-[#111d39] font-urbanist w-full text-[#121927] dark:text-white max-w-[1024px] mx-auto">
         <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
-          <div className="flex items-center justify-between px-[24px] lg:px-[252px] py-[16px]">
+          <div className="flex items-center justify-between px-[24px] max-w-[1024px] px-6 py-[16px] mx-auto">
             <div
               className="p-[4px] border rounded-lg border-black dark:border-white cursor-pointer"
               onClick={handleBack}
@@ -90,7 +90,7 @@ const SetFilters = () => {
           </div>
         </div>
 
-        <div className="pt-[80px] pb-[80px] px-[24px]">
+        <div className="pt-[80px] pb-[80px] px-[24px] mx-auto max-w-[1024px] ">
           <label className="pl-[12px] text-[15px] leading-[18px] font-semibold">
             Category <span className="text-red-500">*</span>
           </label>

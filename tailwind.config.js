@@ -43,6 +43,7 @@ export default {
       animation: {
         circle: 'circle 1.2s infinite ease-in-out',
         'slide-in': 'slideIn 4s ',
+        'spin-slow': 'spin 5s linear infinite',
       },
 
     },

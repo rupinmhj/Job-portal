@@ -7,6 +7,7 @@ import Component from "./Component";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeContext from "./ThemeContext";
+import AuthContext from "../Context/authContext";
 const SideBarRecruiter = ({
   isPageOpen,
   setIsPageOpen,
@@ -15,10 +16,10 @@ const SideBarRecruiter = ({
   isComponentOpen,
   setIsComponentOpen,
 }) => {
-  console.log("Sidebar activated");
+  // console.log("Sidebar activated");
   // const [isPageOpen,setIsPageOpen]=useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  const {logout,companyDetails}=useContext(AuthContext)
   const handelPages = () => {
     setIsPageOpen(true);
   };
@@ -37,8 +38,9 @@ const SideBarRecruiter = ({
   const handleProfile = () => {
     navigate("/profilerecruiter");
   };
-  const signin = () => {
-    navigate("/signin")
+  const handleLogout = () => {
+    logout();
+    navigate("/signin");
   }
 
   return (
@@ -56,7 +58,7 @@ const SideBarRecruiter = ({
         <div className="flex gap-[12px] items-center pb-[20px]">
           <div>
             <img
-              src={images.google}
+              src={companyDetails.logo}
               className="h-[40px] rounded-lg "
               alt=""
             />
@@ -66,7 +68,7 @@ const SideBarRecruiter = ({
               Good morning!
             </span>
             <span className="inline-flex text-[16px] font-bold leading-[19px] items-center ">
-              Welcome Google!{" "}
+              Welcome {companyDetails.name}!{" "}
             </span>
           </div>
         </div>
@@ -115,7 +117,7 @@ const SideBarRecruiter = ({
               <img src={images.listProfile} className="" alt="" />
               <span>Profile</span>
             </li>
-            <li onClick={signin} className="mt-[16px] flex gap-[10px] cursor-pointer">
+            <li onClick={handleLogout} className="mt-[16px] flex gap-[10px] cursor-pointer">
               <img src={images.listLogout} className="" alt="" />
               <span>Logout</span>
             </li>

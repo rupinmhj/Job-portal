@@ -48,15 +48,21 @@ import ProfileRecruiter from "./Components/ProfileRecruiter";
 import CompanyProfile from "./Components/CompanyProfile";
 import NotificationRecruiter from "./Components/NotificationRecruiter"
 import VerificationSignup from "./Components/VerificationSignup"
+import ProtectedRoute from "./Components/ProtectedRoute";
+import Loading from "./Components/Loading";
 const router = createBrowserRouter([
    {
     path:"/",
     element:<Boarding/>
-
   },
   {
     path: "/home",
-    element: <Home />,
+    element: 
+   (
+     <ProtectedRoute allowedRoles={["jobseeker"]} >
+        <Home />
+  </ProtectedRoute>
+   )
   },
   {
     path: "/setup",
@@ -191,7 +197,11 @@ const router = createBrowserRouter([
   },
   {
     path:'/homerecruiter',
-    element:<HomeRecruiter />
+    element:(
+      <ProtectedRoute allowedRoles={["jobcreator"]}>
+        <HomeRecruiter />
+      </ProtectedRoute>
+     )
   },
   {
     path:'/createjob',
@@ -210,7 +220,7 @@ const router = createBrowserRouter([
   element: <ManageJobs />
 },
 {
-  path:'/editjob',
+  path:'/jobs/:id/edit',
   element: <EditJob />
 },
 {
@@ -238,6 +248,10 @@ const router = createBrowserRouter([
 {
   path:'verificationsignup',
   element: <VerificationSignup/>
+},
+{
+  path:'loading',
+  element: <Loading />
 }
 
    

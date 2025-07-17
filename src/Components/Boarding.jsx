@@ -3,7 +3,7 @@ import Boarding1 from "./Boarding1";
 import Boarding2 from "./Boarding2";
 import Boarding3 from "./Boarding3";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination,Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
@@ -24,8 +24,9 @@ const Boarding = () => {
     <div className="relative h-screen dark:bg-[#111d39]  transition-colors duration-300 ">
       <Swiper
         slidesPerView={1}
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         style={{ paddingBottom: "40px" }}
         speed={800}
       >

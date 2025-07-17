@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 // useState
 import images from '../assets/images';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../Context/authContext';
+import CompanyProfile from './CompanyProfile';
 // import profileSmall from "../assets/profileSmall.jpg"
 const HeaderRecruiter = ({toggleSidebar,isSideBarOpen}) => {
   const [ham,setHam]=useState(false);
@@ -9,13 +11,16 @@ const HeaderRecruiter = ({toggleSidebar,isSideBarOpen}) => {
   //   setHam(prev => !prev);
   // }
   // console.log(ham);
+    const {companyDetails}=useContext(AuthContext);
   const navigate=useNavigate();
+  
   const handleSetup=()=>{
       navigate('/companyprofile');
   }
   const handleNotification=()=>{
     navigate('/notificationrecruiter');
   }
+
  return (
     <div className="w-full fixed top-0 bg-white dark:bg-[#111d39] dark:text-white z-50 border-none">
       <div className='max-w-[1024px] mx-auto pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] px-6 z-50 border-none'>
@@ -23,18 +28,19 @@ const HeaderRecruiter = ({toggleSidebar,isSideBarOpen}) => {
         <div onClick={handleSetup} className="cursor-pointer flex gap-[12px] items-center">
           <div>
             <img
-              src={images.google}
+              src={companyDetails?.logo||images.companyprofile}
               className="h-[38.4px] rounded-lg border border-blue-600"
-              alt="Google"
+              
             />
           </div>
           <div className='flex flex-col'>
             <span className='text-[12px] font-medium leading-[20px] text-custGrey dark:text-white'>
-              Welcome back Google
+              Welcome {companyDetails?.name||"Company name"} 
             </span>
             <span className='inline-flex text-[14px] font-bold leading-[22px] items-center gap-[4px]'>
               Manage your hiring in one place
             </span>
+            
           </div>
         </div>
 

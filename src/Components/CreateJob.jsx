@@ -1,29 +1,40 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-
-import { Editor } from '@tinymce/tinymce-react';
 import images from "../assets/images";
-
+import useAxiosAuth from "../hooks/useAxiosAuth";
 import { motion } from 'framer-motion';
-import { useContext } from "react";
-import ThemeContext from './ThemeContext'
-import { getTinyMCEConfig } from "../utils/tinymceConfig";
-
+import ThemeContext from './ThemeContext';
+import AuthContext from "../Context/authContext";
+import JoditEditor from 'jodit-react'
+import 'jodit/es2021/jodit.min.css';
+import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+import './custom-datepickerOnly.css'
+import { format } from 'date-fns';
 const CreateJob = () => {
-  const { theme } = useContext(ThemeContext)
+  const api = useAxiosAuth();
+  const editorRef = useRef(null);
+  const datePickerRef = useRef(null);
+  const { theme } = useContext(ThemeContext);
+  const { companyDetails } = useContext(AuthContext);
   const navigate = useNavigate();
-  const back = () => {
-    navigate(-1)
+  const handleDateChange = (date) => {
+    const formatted = format(date, 'yyyy-MM-dd');
+    setForm((prev) => ({ ...prev, deadline: formatted }))
   }
+  const back = () => {
+    navigate(-1);
+  };
+
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     position: '',
-    company: 'Google',
+    company: companyDetails?.name || '',
     location: '',
-    status: 'Open',
-    type: 'Full-time',
+    status: 'open',
+    type: 'full_time',
     vacancy: '',
     salary: '',
     deadline: '',
@@ -33,58 +44,97 @@ const CreateJob = () => {
     about: '',
     requirements: ''
   });
+
   const [positionError, setPositionError] = useState("");
   const [companyError, setCompanyError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [skillError, setSkillError] = useState("");
+
+  const isTextareaEmpty = (text) => !text || text.trim().length === 0;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentStep < 3) {
+    if (isSubmitting) return;
+    if (currentStep === 1) {
       nextStep();
-    }else{
-      console.log("Job posted:", form);
-      navigate('/successcreateupdate', { state: { action: 'create' } });
+    } else if (currentStep === 2) {
+      // Validate step 2 fields before submitting
+      setEmailError('');
+      setSkillError('');
+      const { email, skills } = form;
+
+      if (!email) {
+        setEmailError("Email is required!!");
+        return;
+      }
+
+      if (isTextareaEmpty(skills)) {
+        setSkillError("Skills are required!!");
+        return;
+      }
+
+      // If validation passes, create the job
+      const {
+        position,
+        about,
+        location,
+        type,
+        status,
+        salary,
+        vacancy,
+        deadline,
+      } = form;
+
+      const formPayload = {
+        title: position,
+        description: about,
+        location,
+        job_type: type,
+        job_status: status,
+        salary,
+        vacancies: vacancy,
+        deadline,
+        contact_email: email,
+        req_skills: skills,
+      };
+
+      try {
+        setIsSubmitting(true);
+        const response = await api.post('/jobs/create/', formPayload, {
+          headers: { "Content-Type": "application/json" }
+        });
+        console.log("Job posted Status:", response.data.message);
+        navigate('/successcreateupdate', { state: { action: 'create' } });
+      } catch (error) {
+        console.error("Job creation failed:", error.response?.data || error.message);
+        alert("Job creation failed. Please check your input and try again.");
+      }
+      finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   const nextStep = () => {
-    if (currentStep == 1) {
+    if (currentStep === 1) {
       setPositionError('');
       setCompanyError('');
       const { position, company } = form;
       if (!position) {
-        setPositionError("Position is required!!")
+        setPositionError("Position is required!!");
         return;
       }
       if (!company) {
-        setCompanyError("Company is required!!")
+        setCompanyError("Company is required!!");
         return;
       }
+      setCurrentStep(2);
     }
-
-    if (currentStep == 2) {
-      setEmailError('');
-      setSkillError('');
-      const { email, skills } = form;
-      if (!email) {
-        setEmailError("Email is required!!")
-        return;
-      }
-      if (!skills) {
-        setSkillError("Skills are required!!")
-        return;
-      }
-    }
-
-
-    setCurrentStep(currentStep + 1);
-
   };
 
   const prevStep = () => {
@@ -96,8 +146,7 @@ const CreateJob = () => {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1: return 'Basic Information';
-      case 2: return 'Job Details';
-      case 3: return 'Create Job';
+      case 2: return 'Create Job';
       default: return 'Create Job';
     }
   };
@@ -131,7 +180,6 @@ const CreateJob = () => {
             {/* Step 1: Basic Information */}
             {currentStep === 1 && (
               <div>
-                {/* Position */}
                 <label className="pl-3 text-[15px] font-semibold">Position<span className="text-red-500">*</span></label>
                 <input
                   name="position"
@@ -140,23 +188,21 @@ const CreateJob = () => {
                   required
                   placeholder="e.g. Senior UX Designer"
                   className={`${!positionError ? 'mb-4' : ''} w-full mt-2  p-3 border dark:focus-within:border-gray-300 dark:border-gray-600 rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white`}
-
                 />
                 {positionError && <p className="text-red-500  text-[13px] pl-[12px]">{positionError}</p>}
 
-                {/* Company */}
                 <label className="pl-3 text-[15px] font-semibold ">Company<span className="text-red-500">*</span></label>
                 <input
                   name="company"
                   value={form.company}
                   onChange={handleChange}
                   required
+                  disabled
                   placeholder="e.g. Google"
                   className={`${!companyError ? 'mb-4' : ''} w-full mt-2  p-3 border dark:focus-within:border-gray-300 dark:border-gray-600 rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white`}
                 />
                 {companyError && <p className="text-red-500 text-[13px] pl-[12px] mb-4">{companyError}</p>}
 
-                {/* Location */}
                 <label className="pl-3 text-[15px] font-semibold">Location</label>
                 <input
                   name="location"
@@ -166,7 +212,6 @@ const CreateJob = () => {
                   className="w-full dark:focus-within:border-gray-300 dark:border-gray-600 mt-2 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white"
                 />
 
-                {/* Job Status */}
                 <label className="pl-3 text-[15px] font-semibold">Job Status</label>
                 <div className="w-full dark:focus-within:border-gray-300 h-[46.6px] focus-within:border-gray-400 dark:border-gray-600 mt-2 mb-4 px-3 cursor-pointer border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white">
                   <select
@@ -175,12 +220,11 @@ const CreateJob = () => {
                     onChange={handleChange}
                     className="w-full dark:bg-[#1f2a45] py-3 focus:outline-none cursor-pointer"
                   >
-                    <option value="Open">Open</option>
-                    <option value="Closed">Closed</option>
+                    <option value="open">Open</option>
+                    <option value="close" disabled >Closed</option>
                   </select>
                 </div>
 
-                {/* Job Type */}
                 <label className="pl-3 text-[15px] font-semibold">Job Type</label>
                 <div className="mt-2 mb-4 px-3 cursor-pointer h-[46.6px] border focus-within:border-gray-400 dark:focus-within:border-gray-300 dark:border-gray-600 rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white">
                   <select
@@ -189,14 +233,13 @@ const CreateJob = () => {
                     onChange={handleChange}
                     className="w-full py-3 dark:bg-[#1f2a45] dark:focus-within:border-gray-300 dark:border-gray-600 focus:outline-none cursor-pointer"
                   >
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Freelance">Freelance</option>
+                    <option value="full_time">Full-time</option>
+                    <option value="part_time">Part-time</option>
+                    <option value="intern">Internship</option>
+                    <option value="freelancing">Freelance</option>
                   </select>
                 </div>
 
-                {/* Vacancy */}
                 <label className="pl-3 text-[15px] font-semibold">Vacancy</label>
                 <input
                   name="vacancy"
@@ -206,14 +249,6 @@ const CreateJob = () => {
                   className="w-full mt-2 dark:focus-within:border-gray-300 dark:border-gray-600 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white"
                 />
 
-                <div className="mb-24"></div>
-              </div>
-            )}
-
-            {/* Step 2: Job Details */}
-            {currentStep === 2 && (
-              <div>
-                {/* Salary */}
                 <label className="pl-3 text-[15px] font-semibold">Salary</label>
                 <input
                   name="salary"
@@ -223,25 +258,33 @@ const CreateJob = () => {
                   className="w-full mt-2 mb-4 p-3 border dark:focus-within:border-gray-300 dark:border-gray-600 rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white"
                 />
 
-                {/* Deadline */}
+                <div className="mb-24"></div>
+              </div>
+            )}
+
+            {/* Step 2: Job Details */}
+            {currentStep === 2 && (
+              <div>
+
+
                 <label className="pl-3 text-[15px] font-semibold">Application Deadline</label>
-                <div className="relative">
-                   <input
-                  name="deadline"
-                  value={form.deadline}
-                  onChange={handleChange}
-                  type="date"
-                  className="w-full mt-2 mb-4 p-3 pr-10 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white appearance-none remove-date-icon"
-                />
-                <div className="absolute top-6 right-4">
-
-                <img src={images.calender} className="dark:invert"  alt="" />
+                <div className="relative mt-2">
+                  <DatePicker
+                    selected={form.deadline ? new Date(form.deadline) : null}
+                    onChange={handleDateChange}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select deadline"
+                    className="w-full p-[12px]  rounded-xl datepicker picker-date-only outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4"
+                    ref={datePickerRef}
+                    calendarClassName="calendar-deadline"
+                  />
+                  <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
+                    <img src={images.calender} className="dark:invert" alt="calendar" />
+                  </div>
                 </div>
-                </div>
-               
 
-                {/* Email */}
-                <label className="pl-3 text-[15px] font-semibold">Contact Email</label>
+
+                <label className="pl-3 text-[15px] font-semibold">Contact Email<span className="text-red-500">*</span></label>
                 <input
                   name="email"
                   value={form.email}
@@ -253,65 +296,64 @@ const CreateJob = () => {
                 {emailError && <p className="text-red-500 text-[13px] pl-[12px] mb-4">{emailError}</p>}
 
                 <div className="mb-4">
-                  <label className="pl-3 text-[15px] font-semibold mb-2 block">Required Skills</label>
-                  <Editor
-                    className={`${skillError ? 'mt-4' : ''}`}
-                    apiKey="9xgp4373zlbxlw2r6rxbpkloeyrgwv1os4iltwqam4bdlekk"
-                    value={form.skills}
-                    onEditorChange={(content) =>
-                      setForm((prev) => ({ ...prev, skills: content }))
-                    }
-                    init={getTinyMCEConfig(theme)}
+                  <label className="pl-3 text-[15px] font-semibold mb-2 block">Required Skills<span className="text-red-500">*</span></label>
+                  <JoditEditor
+                    ref={editorRef}
+                    value={form.skills || ''}
+                    config={{
+                      readonly: false,
+                      height: 250,
+                      theme: theme === 'dark' ? 'dark' : 'default',
+                      style: {
+                        backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
+                        color: theme === 'dark' ? '#ffffff' : '#000000',
+                        'padding-left':'30px',
+                      },
+                      iframeStyle: `
+      body {
+        background-color: ${theme === 'dark' ? '#1f2a45' : '#ffffff'};
+        color: ${theme === 'dark' ? '#ffffff' : '#000000'};
+        font-family: 'Urbanist', sans-serif;
+ 
+      }
+    `
+                    }}
+                    onBlur={(newContent) => {
+                      setForm((prev) => ({ ...prev, skills: newContent || '' }));
+                    }}
                   />
-                  {skillError && <p className="text-red-500 text-[13px] pl-[12px] mb-4">{skillError}</p>}
+                  {skillError && <p className="text-red-500 text-[13px] pl-[12px] mt-2">{skillError}</p>}
                 </div>
 
-                {/* Facilities */}
-                <div className="mb-4">
-                  <label className="pl-3 text-[15px] font-semibold mb-2 block">Job Facilities</label>
-                  <Editor
-                    className='mb-4'
-                    apiKey="9xgp4373zlbxlw2r6rxbpkloeyrgwv1os4iltwqam4bdlekk"
-                    value={form.facilities}
-                    onEditorChange={(content) =>
-                      setForm((prev) => ({ ...prev, facilities: content }))
-                    }
-                    init={getTinyMCEConfig(theme)}
+                <div className="mb-6">
+                  <label className="pl-3 text-[15px] font-semibold mb-2 block">About</label>
+                  <JoditEditor
+                    ref={editorRef}
+                    value={form.about || ''}
+                    config={{
+                      readonly: false,
+                      height: 250,
+                      theme: theme === 'dark' ? 'dark' : 'default',
+                      style: {
+                        backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
+                        color: theme === 'dark' ? '#ffffff' : '#000000',
+                      },
+                      iframeStyle: `
+      body {
+        background-color: ${theme === 'dark' ? '#1f2a45' : '#ffffff'};
+        color: ${theme === 'dark' ? '#ffffff' : '#000000'};
+        font-family: 'Urbanist', sans-serif;
+        border-radius:16px;
+      }
+    `
+                    }}
+                    onBlur={(newContent) => {
+                      setForm((prev) => ({ ...prev, about: newContent || '' }));
+                    }}
                   />
                 </div>
 
                 <div className="mb-24"></div>
-              </div>
-            )}
-
-            {/* Step 3: Create Job */}
-            {currentStep === 3 && (
-              <div>
-                <div className="mb-6">
-                  <label className="pl-3 text-[15px] font-semibold mb-2 block">About</label>
-                  <Editor
-                    className='mb-4'
-                    apiKey="9xgp4373zlbxlw2r6rxbpkloeyrgwv1os4iltwqam4bdlekk"
-                    value={form.about}
-                    onEditorChange={(content) =>
-                      setForm((prev) => ({ ...prev, about: content }))
-                    }
-                    init={getTinyMCEConfig(theme)}
-                  />
-                </div>
-
-                <div className="mb-24">
-                  <label className="pl-3 text-[15px] font-semibold mb-2 block">Requirements</label>
-                  <Editor
-                    className='mb-4'
-                    apiKey="9xgp4373zlbxlw2r6rxbpkloeyrgwv1os4iltwqam4bdlekk"
-                    value={form.requirements}
-                    onEditorChange={(content) =>
-                      setForm((prev) => ({ ...prev, requirements: content }))
-                    }
-                    init={getTinyMCEConfig(theme)}
-                  />
-                </div>
               </div>
             )}
 
@@ -320,11 +362,11 @@ const CreateJob = () => {
               <div className="max-w-[1024px] mx-auto px-6">
                 <button
                   type="submit"
-                  className="w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl"
-                >
-                  {currentStep < 3 ? "Next" : "Create Job"}
+                  disabled={isSubmitting}
+                  className={`w-full bg-[#2869FE] p-[16px] text-white font-medium rounded-xl transition-opacity ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}>
+                  {isSubmitting ? 'Creating...' : currentStep === 1 ? "Next" : "Create Job"}
                 </button>
-
               </div>
             </div>
           </form>
@@ -333,4 +375,5 @@ const CreateJob = () => {
     </motion.div>
   );
 };
+
 export default CreateJob;

@@ -9,6 +9,13 @@
   min-width: 327px;
   overflow: hidden;
 }
+.calendar-deadline.react-datepicker {
+  min-width: 240px; /* or any value that matches your input width */
+  max-width: 100%;
+  /* right: 20%; */
+  top:55px;
+  width: 100%;
+}
 
 .dark .react-datepicker {
   background-color: #111d39;
@@ -81,6 +88,7 @@
 }
 .react-datepicker__time-container {
   max-height: 250px; /* adjust as needed */
+  
 }
 
 .react-datepicker__time-container .react-datepicker__time {

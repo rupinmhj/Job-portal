@@ -22,11 +22,11 @@ const Details = () => {
       transition={{ duration: 0.3, delay: 0.1 }}
       className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39]"
     >
-      <div className="bg-white dark:bg-[#111d39] text-[#121927] dark:text-white font-urbanist w-full lg:px-[232px] xl:px-[274px] px-[24px]">
+      <div className="bg-white dark:bg-[#111d39] text-[#121927] dark:text-white font-urbanist w-full max-w-[1024px] mx-auto px-[24px]">
         
         {/* Header */}
-        <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
-          <div className="flex items-center justify-between px-[24px] lg:px-[232px] xl:px-[274px] py-[16px]">
+        <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10 max-w-[1024px] mx-auto">
+          <div className="flex items-center justify-between px-[24px]  py-[16px]">
             <div onClick={back} className="p-[6px] border rounded-lg border-black dark:border-white cursor-pointer">
               <FaAngleLeft className="text-gray-500 dark:text-white size-[14px]" />
             </div>

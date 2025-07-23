@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa6";
 import images from "../assets/images";
 import { useContext, useState } from "react";
-import ThemeContext from "./Themecontext";
+import ThemeContext from "./ThemeContext";
 
 const interestsList = [
   { id: 1, label: "Design", icon: images.intDesign },

@@ -106,10 +106,14 @@ const CompanyProfile = () => {
       if (profileImage) {
         formPayload.append("logo", profileImage);
       }
+       for (let pair of formPayload.entries()) {
+  console.log(pair[0]+ ': ' + pair[1]);
+}
 
       const response = await api.put("/companies/update/", formPayload, {
         headers: { "Content-Type": "multipart/form-data" }
       });
+
 
       console.log("Company updated successfully:", response.data);
       setupCompany(response.data.company);
@@ -179,6 +183,7 @@ const CompanyProfile = () => {
                   value={formData[id]}
                   onChange={handleChange}
                   placeholder={placeholder}
+                 
                   className={`mt-[12px] p-[14px] w-full h-[120px] rounded-xl shadow-sm focus:outline-none ${theme === "dark" ? "bg-[#1f2a45] border-gray-600 text-white" : "border border-gray-400"} ${errors[id] ? "border-red-500" : ""}`}
                 />
               ) : (
@@ -189,6 +194,7 @@ const CompanyProfile = () => {
                   value={formData[id]}
                   onChange={handleChange}
                   placeholder={placeholder}
+                   disabled={id === "companyName"}
                   className={`mt-[12px] p-[14px] w-full rounded-xl shadow-sm focus:outline-none ${theme === "dark" ? "bg-[#1f2a45] border-gray-600 text-white" : "border border-gray-400"} ${errors[id] ? "border-red-500" : ""}`}
                 />
               )}

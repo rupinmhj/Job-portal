@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import images from "../assets/images";
 import Select from "react-select";
-import ThemeContext from "./ThemeContext"; // Ensure this is the correct path
+import ThemeContext from "./ThemeContext";
+import apiPublic from "../api/api";
 
 const AllJob = () => {
   const navigate = useNavigate();
@@ -12,74 +13,38 @@ const AllJob = () => {
 
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchJobs = async (page = 1) => {
+    try {
+      const res = await apiPublic.get(`jobs/seeker/list/?page=${page}`);
+      console.log(res.data.jobs);
+      const jobData = res.data.jobs.map((job, index) => ({
+        id: job.id,
+        title: job.title,
+        salary: job.salary,
+        location: job.location,
+        company: job.company_name,
+icon: job.company_logo
+  ? `${import.meta.env.VITE_API_BASE_URL}${job.company_logo}`
+  : images.notigoogle,
+        time: job.posted_days + "d",
+      }));
+      setJobs(jobData);
+      setTotalPages(res.data.total_pages);
+      setCurrentPage(res.data.current_page);
+    } catch (error) {
+      console.error("Failed to fetch jobs:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchJobs = async () => {
-      const data = [
-        {
-          id: 1,
-          company: "Google LLC",
-          title: "Lead Product Designer",
-          salary: "$6k/month",
-          location: "Berlin, Germany",
-          time: "24h",
-          icon: images.notigoogle,
-        },
-        {
-          id: 2,
-          company: "Mailchimp",
-          title: "Lead Product Designer",
-          salary: "$8k/month",
-          location: "United States",
-          time: "36h",
-          icon: images.mailchimp,
-        },
-        {
-          id: 3,
-          company: "Slack",
-          title: "Mobile Apps Designer",
-          salary: "$8k/month",
-          location: "United States",
-          time: "48h",
-          icon: images.slack,
-        },
-        {
-          id: 4,
-          company: "Treehouse",
-          title: "Graphic Designer",
-          salary: "$5k/month",
-          location: "London",
-          time: "3d",
-          icon: images.treehouse,
-        },
-        {
-          id: 5,
-          company: "Zapier",
-          title: "Application Designer",
-          salary: "$6K/month",
-          location: "Dublin, Ireland",
-          time: "5h",
-          icon: images.zapier,
-        },
-        {
-          id: 6,
-          company: "Evernote",
-          title: "Lead Product Designer",
-          salary: "8k/month",
-          location: "United States",
-          time: "5d",
-          icon: images.evernote,
-        },
-      ];
-
-      setJobs(data);
-    };
-
-    fetchJobs();
-  }, []);
+    fetchJobs(currentPage);
+  }, [currentPage]);
 
   const back = () => navigate(-1);
-  const details = () => navigate("/details");
+  const details = (id) => navigate(`/details/${id}`);
 
   const filterJobs = jobs.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -132,18 +97,18 @@ const AllJob = () => {
               }
               isClearable
               placeholder="Search or select job title"
-              className="outline-none w-full"
+              className="outline-none w-full "
               styles={{
-                control: (base, state) => ({
+                control: (base) => ({
                   ...base,
                   backgroundColor: theme === "dark" ? "#111d39" : "#fff",
                   color: theme === "dark" ? "white" : "black",
                   boxShadow: "none",
-                  // borderColor: "#ccc",
                   paddingLeft: "40px",
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   borderRadius: "0.75rem",
+                  overflowY: "auto", 
                   fontSize: "14px",
                 }),
                 menu: (base) => ({
@@ -163,11 +128,11 @@ const AllJob = () => {
                   ...base,
                   backgroundColor: state.isFocused
                     ? theme === "dark"
-                      ? "#3F3F5E"   // Hover bg in dark
-                      : "#f0f0f0"   // Hover bg in light
+                      ? "#3F3F5E"
+                      : "#f0f0f0"
                     : theme === "dark"
-                      ? "#2A2A40"     // Default bg in dark
-                      : "#fff",       // Default bg in light
+                    ? "#2A2A40"
+                    : "#fff",
                   color: theme === "dark" ? "white" : "black",
                   cursor: "pointer",
                 }),
@@ -188,9 +153,13 @@ const AllJob = () => {
                 <div className="flex justify-center items-start">
                   <div
                     className="w-[40px] h-[40px] flex justify-center items-center border border-gray-400 rounded-xl cursor-pointer dark:border-gray-500"
-                    onClick={details}
+                    onClick={()=>details(job.id)}
                   >
-                    <img src={job.icon} className="size-[24px]  " alt="" />
+                    <img
+                      src={job.icon}
+                      className="size-[24px] object-cover"
+                      alt=""
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col flex-1">
@@ -204,7 +173,7 @@ const AllJob = () => {
                     <p>
                       <img
                         src={images.wallet}
-                        className="size-[12px] mb-1 inline-block mr-[4px]  "
+                        className="size-[12px] mb-1 inline-block mr-[4px]"
                         alt=""
                       />
                       {job.salary}
@@ -212,7 +181,7 @@ const AllJob = () => {
                     <p>
                       <img
                         src={images.location}
-                        className="size-[12px] mb-1 inline-block mr-[4px] "
+                        className="size-[12px] mb-1 inline-block mr-[4px]"
                         alt=""
                       />
                       {job.location}
@@ -220,11 +189,7 @@ const AllJob = () => {
                   </div>
                 </div>
                 <div className="flex flex-col justify-between">
-                  <img
-                    src={images.bookmark2}
-                    className="h-5 w-5 dark:invert"
-                    alt=""
-                  />
+                  <img src={images.bookmark2} className="h-5 w-5 dark:invert" alt="" />
                   <span className="text-[12px] text-gray-600 dark:text-gray-400">
                     {job.time}
                   </span>
@@ -232,6 +197,27 @@ const AllJob = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-4 mt-6 mb-10">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 rounded-md bg-gray-300 dark:bg-gray-600 text-sm"
+          >
+            Previous
+          </button>
+          <span className="text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 rounded-md bg-gray-300 dark:bg-gray-600 text-sm"
+          >
+            Next
+          </button>
         </div>
       </div>
     </motion.div>

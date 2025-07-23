@@ -53,8 +53,8 @@ const SetFilters = () => {
   );
 
   const jobTypes = [
-    "Company",
-    "Contract Based",
+    "Remote",
+    "Internship",
     "Freelance",
     "Full Time",
     "Part Time",
@@ -110,7 +110,7 @@ const SetFilters = () => {
               className="focus:outline-gray-500 text-[15px] font-medium leading-[24px] border dark:border-gray-600 shadow-sm rounded-xl mt-[12px] pl-[58px] py-[14px] pr-[20px] w-full bg-white dark:bg-[#2A2A40] text-black dark:text-white cursor-pointer"
             />
             {showOptions && (
-              <div className="absolute left-0 right-0 mt-2 bg-white dark:bg-[#2A2A40] border dark:border-gray-600 rounded-xl shadow-lg z-10 max-h-[150px] overflow-y-auto">
+              <div className="absolute h-screen overflow-y-scroll scroll-container left-0 right-0 mt-2 bg-white dark:bg-[#2A2A40] border dark:border-gray-600 rounded-xl shadow-lg z-10 max-h-[150px] overflow-y-auto">
                 {categories.map((category) => (
                   <div
                     key={category}

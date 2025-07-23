@@ -4,7 +4,7 @@ import SetFilters from "./SetFilters"
 import { Plus, Users, Briefcase, FileText, TrendingUp, Clock, Eye, UserCheck } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
-const LearnMoreRecruiter = () => {
+const LearnMoreRecruiter = ({statsData}) => {
   const navigate=useNavigate();
   const filter=()=>{
     navigate("/details")
@@ -27,7 +27,8 @@ const LearnMoreRecruiter = () => {
                 <div className="bg-white/10 rounded-lg p-6">
                   <Briefcase className="h-12 w-12 text-white mb-2" />
                   <div className="text-sm opacity-90">Active Jobs</div>
-                  <div className="text-2xl font-bold">8</div>
+                  {console.log('stats',statsData)}
+                  <div className="text-2xl font-bold">{statsData?.open_positions}</div>
                 </div>
               </div>
         </div>

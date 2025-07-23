@@ -115,7 +115,6 @@ const JobCard = ({ job, onEdit, onView }) => {
                         <span className="w-[4px] h-[4px] bg-[#00CC9A] rounded-full"></span>
                         {(() => {
                             let jobType = "";
-
                             if (job.job_type === 'full_time') {
                                 jobType = "Full Time";
                             } else if (job.job_type === 'part_time') {
@@ -187,36 +186,58 @@ const JobCard = ({ job, onEdit, onView }) => {
 const ManageJobs = () => {
     const navigate = useNavigate();
     const api = useAxiosAuth();
-    const { companyDetails } = useContext(AuthContext);
+    const { authTokens, authReady } = useContext(AuthContext);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [jobs, setJobs] = useState([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [totalJobs, setTotalJobs] = useState(0);
+    const [currentPage,setCurrentPage]=useState(1);
+    const [totalPage,setTotalPage]=useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                setLoading(true);
-                const response = await api.get("/jobs/list/");
-                console.log("Fetched Jobs:", response.data.job_list)
-                setJobs(response.data.job_list);
+    const fetchJobs = async (url = "jobs/creator/list/") => {
+        try {
+            setLoading(true);
+            const response = await api.get(url);
+            setJobs(response.data.job_list);
+            setTotalJobs(response.data.total_jobs);
+            setNextPage(response.data.next_page);
+            setPrevPage(response.data.previous_page);
+            setCurrentPage(response.data.current_page);
+            setTotalPage(response.data.total_pages);
+        } catch (err) {
+            setError(err.response?.data?.message || err.message || 'Failed to fetch jobs');
+        } finally {
+            setLoading(false);
+        }
+    };
 
-            } catch (err) {
-                setError(err.response?.data?.message || err.message || 'Failed to fetch jobs');
-            } finally {
-                setLoading(false);
-            }
-        };
+    useEffect(() => {
+        if (!authReady || !authTokens?.access) return;
         fetchJobs();
-    }, []);
+    }, [authTokens, authReady]);
+
+    if (!authReady) {
+        return (
+            <motion.div className="h-screen flex items-center justify-center dark:bg-[#111d39] text-[#121927] font-urbanist">
+                <SkeletonLoader />
+            </motion.div>
+        );
+    }
 
     const filteredJobs = jobs.filter(job =>
         job.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, delay: 0.15 }}
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39] text-[#121927] font-urbanist"
         >
             <Header onBack={() => navigate('/homerecruiter')} onCreate={() => navigate("/createjob")} />
@@ -229,6 +250,8 @@ const ManageJobs = () => {
                 <>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                     <div className="max-w-[1024px] mx-auto px-[24px] pb-[100px]">
+                        <p className="text-sm text-gray-500 dark:text-gray-300 mb-2">Total Jobs: {totalJobs}</p>
+
                         {filteredJobs.length > 0 ? (
                             <div className="space-y-[16px]">
                                 {filteredJobs.map(job => (
@@ -260,11 +283,49 @@ const ManageJobs = () => {
                                 </button>
                             </div>
                         )}
+
+                        {/* Pagination Buttons */}
+                        {/* Pagination Controls */}
+                        {(nextPage || prevPage) && (
+                            <div className="flex flex-col items-center mt-8 gap-2">
+                                {/* Page Info */}
+                                <span className="text-sm text-gray-600 dark:text-gray-300">
+Page {currentPage} of {totalPage}                                </span>
+
+                                <div className="flex justify-center gap-4">
+                                    {/* Prev Button */}
+                                    <button
+                                        onClick={() => fetchJobs(prevPage)}
+                                        disabled={!prevPage || loading}
+                                        className={`px-4 py-2 rounded-xl text-sm font-semibold ${prevPage && !loading
+                                                ? "bg-[#f3f4f6] text-[#121927] hover:bg-[#e5e7eb] dark:bg-[#313b54] dark:text-white dark:hover:bg-[#3a4a6a]"
+                                                : "bg-gray-300 text-gray-500 dark:bg-gray-700 cursor-not-allowed"
+                                            }`}
+                                    >
+                                        {loading && prevPage ? "Loading..." : "Previous"}
+                                    </button>
+
+                                    {/* Next Button */}
+                                    <button
+                                        onClick={() => fetchJobs(nextPage)}
+                                        disabled={!nextPage || loading}
+                                        className={`px-4 py-2 rounded-xl text-sm font-semibold ${nextPage && !loading
+                                                ? "bg-[#f3f4f6] text-[#121927] hover:bg-[#e5e7eb] dark:bg-[#313b54] dark:text-white dark:hover:bg-[#3a4a6a]"
+                                                : "bg-gray-300 text-gray-500 dark:bg-gray-700 cursor-not-allowed"
+                                            }`}
+                                    >
+                                        {loading && nextPage ? "Loading..." : "Next"}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                 </>
             )}
         </motion.div>
     );
 };
+
 
 export default ManageJobs;

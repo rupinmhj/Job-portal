@@ -21,7 +21,16 @@ export default function useAxiosAuth() {
       return config;
     });
 
-    // 2. Response: refresh token on 401
+  
+
+    return instance;
+  }, [authTokens, login, logout]);
+
+  return api;
+}
+
+
+  // 2. Response: refresh token on 401
     // instance.interceptors.response.use(
     //   (response) => response,
     //   async (error) => {
@@ -49,9 +58,3 @@ export default function useAxiosAuth() {
     //     return Promise.reject(error);
     //   }
     // );
-
-    return instance;
-  }, [authTokens, login, logout]);
-
-  return api;
-}

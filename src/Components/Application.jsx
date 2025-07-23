@@ -332,6 +332,7 @@ const Applications = () => {
                                 dateFormat="Pp"
                                 className="w-full pr-4 pl-10 py-2 rounded-xl outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 bg-white dark:bg-[#334155] text-sm text-black dark:text-white"
                                 ref={datePickerRef}
+                                minDate={new Date()}
                               />
                               <div className="absolute top-2 left-2 cursor-pointer" onClick={handleIconClick}>
                                 <img src={images.calender} className="dark:invert" alt="" />

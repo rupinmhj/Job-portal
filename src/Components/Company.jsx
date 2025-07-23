@@ -3,7 +3,8 @@ import images from "../assets/images";
 import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import ThemeContext from "./Themecontext";
+import ThemeContext from "./ThemeContext";
+import apiPublic from "../api/api";
 const Company = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
@@ -52,6 +53,15 @@ const Company = () => {
     };
     fetchJobs();
   }, []);
+
+
+  useEffect(()=>{
+    const fetchJobs=async()=>{
+      const response=await apiPublic.get('dashboards/jobseeker/dashboard/');
+      console.log(response.data);
+    }
+    fetchJobs();
+  },[])
 
   const detail = () => {
     navigate("/details");

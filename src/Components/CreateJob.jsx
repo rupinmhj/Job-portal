@@ -246,6 +246,9 @@ const CreateJob = () => {
                   value={form.vacancy}
                   onChange={handleChange}
                   type="number"
+                  min="1"
+                  step="1"
+                  pattern="\d+"
                   className="w-full mt-2 dark:focus-within:border-gray-300 dark:border-gray-600 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white"
                 />
 
@@ -277,6 +280,7 @@ const CreateJob = () => {
                     className="w-full p-[12px]  rounded-xl datepicker picker-date-only outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4"
                     ref={datePickerRef}
                     calendarClassName="calendar-deadline"
+                    minDate={new Date()}
                   />
                   <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
                     <img src={images.calender} className="dark:invert" alt="calendar" />
@@ -303,11 +307,17 @@ const CreateJob = () => {
                     config={{
                       readonly: false,
                       height: 250,
+                      removeButtons: [
+                        'source', 'image', 'file', 'video', 'speech-recognize',
+                        'print', 'about', 'fullsize', 'selectall',
+                        'symbol', 'copyformat', 'preview', 'find', 'emoticons',
+                        'brush', 'fontsize', 'paragraph', 'link', 'table', 'hr', 'classSpan', 'superscript', 'subscript'
+                      ],
                       theme: theme === 'dark' ? 'dark' : 'default',
                       style: {
                         backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
                         color: theme === 'dark' ? '#ffffff' : '#000000',
-                        'padding-left':'30px',
+                        'padding-left': '30px',
                       },
                       iframeStyle: `
       body {
@@ -334,6 +344,12 @@ const CreateJob = () => {
                       readonly: false,
                       height: 250,
                       theme: theme === 'dark' ? 'dark' : 'default',
+                      removeButtons: [
+                        'source', 'image', 'file', 'video', 'speech-recognize',
+                        'print', 'about', 'fullsize', 'selectall',
+                        'symbol', 'copyformat', 'preview', 'find', 'emoticons',
+                        'brush', 'fontsize', 'paragraph', 'link', 'table', 'hr', 'classSpan', 'superscript', 'subscript'
+                      ],
                       style: {
                         backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
                         color: theme === 'dark' ? '#ffffff' : '#000000',

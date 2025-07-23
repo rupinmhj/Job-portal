@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import ThemeContext from "./ThemeContext";
 // import api from "../api/api";
 // import useAxiosAuth from "../hooks/useAxiosAuth";
-import { toast,ToastContainer  } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import apiPublic from "../api/api";
 const SignUp = () => {
@@ -31,7 +31,7 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [roleError, setRoleError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  
+
 
   const validate = () => {
     let valid = true;
@@ -100,7 +100,7 @@ const SignUp = () => {
   //       const res = await api.post("/accounts/register/", signupData);
   //       // localStorage.setItem("temp_token", res.data.temp_token);
   //       navigate("/verificationSignup", { state: { email: res.data.email } });
-     
+
 
   //     } catch (err) {
   //       console.error("Signup error:", err);
@@ -112,49 +112,49 @@ const SignUp = () => {
   // };
 
   const validateSignUp = async () => {
-  if (validate()) {
-    try {
-      setLoading(true);
-      const signupData = {
-        full_name: name,
-        email,
-        password,
-        confirm_password: confirmPassword,
-        role: role,
-      };
+    if (validate()) {
+      try {
+        setLoading(true);
+        const signupData = {
+          full_name: name,
+          email,
+          password,
+          confirm_password: confirmPassword,
+          role: role,
+        };
 
-      const res = await apiPublic.post("/accounts/register/", signupData);
-      navigate("/verificationSignup", { state: { email: res.data.email } });
+        const res = await apiPublic.post("/accounts/register/", signupData);
+        navigate("/verificationSignup", { state: { email: res.data.email } });
 
-    } catch (err) {
-      setLoading(false);
+      } catch (err) {
+        setLoading(false);
 
-      if (err.response && err.response.data) {
-        const errorData = err.response.data;
+        if (err.response && err.response.data) {
+          const errorData = err.response.data;
 
-        // Show specific error per field (optional: setError state to show in UI)
-        if (errorData.email) {
-          toast.error(`Email error: ${errorData.email[0]}`);
-        } else if (errorData.password) {
-          toast.error(`Password error: ${errorData.password[0]}`);
-        } else if (errorData.confirm_password) {
-          toast.error(`Confirm Password error: ${errorData.confirm_password[0]}`);
-        } else if (typeof errorData === 'string') {
-          toast.error(errorData); // for plain string error
+          // Show specific error per field (optional: setError state to show in UI)
+          if (errorData.email) {
+            toast.error(`Email error: ${errorData.email[0]}`);
+          } else if (errorData.password) {
+            toast.error(`Password error: ${errorData.password[0]}`);
+          } else if (errorData.confirm_password) {
+            toast.error(`Confirm Password error: ${errorData.confirm_password[0]}`);
+          } else if (typeof errorData === 'string') {
+            toast.error(errorData); // for plain string error
+          } else {
+            toast.error("Signup failed. Please check the form again.");
+          }
+
+          console.log("Field errors:", errorData);
         } else {
-          toast.error("Signup failed. Please check the form again.");
+          toast.error("Something went wrong. Please try again.");
         }
 
-        console.log("Field errors:", errorData);
-      } else {
-        toast.error("Something went wrong. Please try again.");
+      } finally {
+        setLoading(false);
       }
-
-    } finally {
-      setLoading(false);
     }
-  }
-};
+  };
 
   return (
     <motion.div
@@ -163,7 +163,7 @@ const SignUp = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
     >
-      <div className="h-screen dark:bg-[#111d39]">
+      <div className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39]">
         <div className="bg-white max-w-[430px] px-[24px] pb-[24px] mb-[35.6px] pt-[16px] font-urbanist text-[#121927] dark:text-white w-full">
           <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
             <div className="flex items-center justify-between px-[24px] max-w-[430px] mx-auto py-[16px]">
@@ -192,7 +192,7 @@ const SignUp = () => {
           <form onSubmit={(e) => { e.preventDefault(); validateSignUp(); }}>
             {/* Name */}
             <div className="mt-[32px] w-full flex flex-col">
-              <p className="pl-[12px] text-[16px] font-bold">Full Name</p>
+              <p className="pl-[12px] text-[16px] font-bold">Username</p>
               <div className="relative mb-[20px]">
                 <img
                   src={images.profile}
@@ -204,7 +204,7 @@ const SignUp = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="dark:bg-[#1f2937] dark:text-white dark:border-gray-600 border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
-                  placeholder="Type your full name"
+                  placeholder="Type  Username"
                 />
                 {nameError && <p className="text-red-500 text-[13px] pl-[12px]">{nameError}</p>}
               </div>
@@ -234,24 +234,38 @@ const SignUp = () => {
             <div className="mt-[2px] w-full flex flex-col mb-6">
               <p className="pl-[12px] text-[16px] font-bold">Register As:</p>
               <div className="flex gap-4 mt-[20px] px-4">
-                {["jobseeker", "jobcreator"].map((roleOption) => (
-                  <label key={roleOption} className="inline-flex items-center cursor-pointer">
-                    <input
-                      type="radio"
-                      name="role"
-                      value={roleOption}
-                      checked={role === roleOption}
-                      onChange={(e) => setRole(e.target.value)}
-                      className="peer hidden"
-                    />
-                    <span className="w-3 h-3 inline-block rounded-full border-2 border-indigo-600 
-                      dark:border-green-500 peer-checked:bg-indigo-600 dark:peer-checked:bg-green-500"></span>
-                    <span className="ml-2 capitalize">{roleOption.replace("_", " ")}</span>
-                  </label>
-                ))}
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="jobseeker"
+                    checked={role === "jobseeker"}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="peer hidden"
+                  />
+                  <span className="w-3 h-3 inline-block rounded-full border-2 border-indigo-600 
+        dark:border-green-500 peer-checked:bg-indigo-600 dark:peer-checked:bg-green-500"></span>
+                  <span className="ml-2 capitalize">Job Seeker</span>
+                </label>
+
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="jobcreator"
+                    checked={role === "jobcreator"}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="peer hidden"
+                  />
+                  <span className="w-3 h-3 inline-block rounded-full border-2 border-indigo-600 
+        dark:border-green-500 peer-checked:bg-indigo-600 dark:peer-checked:bg-green-500"></span>
+                  <span className="ml-2 capitalize">Job Recruiter</span>
+                </label>
               </div>
+
               {roleError && <p className="text-red-500 text-[13px] pl-[12px]">{roleError}</p>}
             </div>
+
 
             {/* Password */}
             <div className="mt-[2px] w-full flex flex-col">
@@ -310,9 +324,8 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px] ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px] ${loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               {loading ? "Signing Up..." : "Sign Up"}
             </button>
@@ -343,7 +356,7 @@ const SignUp = () => {
           <div className="h-6"></div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </motion.div>
   );
 };

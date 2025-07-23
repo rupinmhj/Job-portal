@@ -11,7 +11,7 @@ import images from "../assets/images";
 import ThemeContext from "./ThemeContext";
 import AuthContext from "../Context/authContext";
 const ProfileRecruiter = () => {
-  const {logout,companyDetails}=useContext(AuthContext)
+  const {logout,companyDetails,email}=useContext(AuthContext)
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
 
@@ -19,10 +19,11 @@ const ProfileRecruiter = () => {
   const [showSettings, setShowSettings] = useState(false);
 
   const [profile, setProfile] = useState({
-    name: "TechCorp (Recruiter)",
-    email: "recruiter@techcorp.com",
-    logo: images.companyLogo,
-  });
+  name: "",
+  email: "",
+  logo: "",
+});
+
 
   const [stats, setStats] = useState({
     postedJobs: 0,
@@ -157,7 +158,7 @@ const ProfileRecruiter = () => {
               theme === "dark" ? "text-white/60" : "text-gray-500"
             }`}
           >
-            {profile.email}
+            {email}
           </p>
         </div>
 

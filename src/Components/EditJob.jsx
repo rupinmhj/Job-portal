@@ -1,6 +1,7 @@
 // Updated EditJob.jsx with refactored structure based on CreateJob layout
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import CryptoJS from 'crypto-js';
 import { FaAngleLeft } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import ThemeContext from "./ThemeContext";
@@ -12,6 +13,9 @@ import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import "./custom-datepickerOnly.css";
 import 'jodit/es2021/jodit.min.css';
+import apiPublic from '../api/api'
+import Cookies from "js-cookie"
+const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 const EditJob = () => {
   const api = useAxiosAuth();
   const editorRef = useRef(null);
@@ -47,7 +51,18 @@ const EditJob = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await api.get(`/jobs/${id}/detail/`);
+        const encryptedToken = Cookies.get('access_token');
+        console.log("Secret key is:", SECRET_KEY); // Add this temporarily
+
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedToken, SECRET_KEY);
+        console.log('Decrypted access token:', decryptedBytes);
+        const token = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        console.log('token', token);
+        const res = await apiPublic.get(`/jobs/${id}/detail/`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const job = res.data.job_detail;
         setForm({
           position: job.title,
@@ -157,7 +172,7 @@ const EditJob = () => {
           </div>
         </div>
 
-         <div className="px-[24px] max-w-[1024px] mx-auto mt-[74px]">
+        <div className="px-[24px] max-w-[1024px] mx-auto mt-[74px]">
           <form onSubmit={handleSubmit}>
             {/* Step 1: Basic Information */}
             {currentStep === 1 && (
@@ -228,6 +243,9 @@ const EditJob = () => {
                   value={form.vacancy}
                   onChange={handleChange}
                   type="number"
+                  min="1"
+                  step="1"
+                  pattern="\d+"
                   className="w-full mt-2 dark:focus-within:border-gray-300 dark:border-gray-600 mb-4 p-3 border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white"
                 />
 
@@ -259,6 +277,7 @@ const EditJob = () => {
                     className="w-full p-[12px]  rounded-xl datepicker picker-date-only outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4"
                     ref={datePickerRef}
                     calendarClassName="calendar-deadline"
+                    minDate={new Date()}
                   />
                   <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
                     <img src={images.calender} className="dark:invert" alt="calendar" />
@@ -286,6 +305,12 @@ const EditJob = () => {
                       readonly: false,
                       height: 250,
                       theme: theme === 'dark' ? 'dark' : 'default',
+                            removeButtons: [
+    'source', 'image', 'file', 'video', 'speech-recognize',
+    'print', 'about', 'fullsize', 'selectall',
+    'symbol', 'copyformat', 'preview', 'find', 'emoticons',
+    'brush', 'fontsize', 'paragraph', 'link', 'table', 'hr','classSpan','superscript', 'subscript'
+  ],
                       style: {
                         backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
                         color: theme === 'dark' ? '#ffffff' : '#000000',
@@ -314,6 +339,12 @@ const EditJob = () => {
                     config={{
                       readonly: false,
                       height: 250,
+                        removeButtons: [
+    'source', 'image', 'file', 'video', 'speech-recognize',
+    'print', 'about', 'fullsize', 'selectall',
+    'symbol', 'copyformat', 'preview', 'find', 'emoticons',
+    'brush', 'fontsize', 'paragraph', 'link', 'table', 'hr','classSpan','superscript', 'subscript'
+  ],
                       theme: theme === 'dark' ? 'dark' : 'default',
                       style: {
                         backgroundColor: theme === 'dark' ? '#1f2a45' : '#ffffff',
@@ -352,7 +383,7 @@ const EditJob = () => {
             </div>
           </form>
         </div>
-       
+
       </div>
     </motion.div>
   );

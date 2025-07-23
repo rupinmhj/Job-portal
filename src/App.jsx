@@ -59,9 +59,9 @@ const router = createBrowserRouter([
     path: "/home",
     element: 
    (
-     <ProtectedRoute allowedRoles={["jobseeker"]} >
+    //  <ProtectedRoute allowedRoles={["jobseeker"]} >
         <Home />
-  </ProtectedRoute>
+  // </ProtectedRoute>
    )
   },
   {
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
     element:<SignIn/>
   },
   {
-    path:"/applyjob",
+    path:"/applyjob/:id",
     element:<ApplyJob/>
   },
   {
@@ -102,7 +102,7 @@ const router = createBrowserRouter([
     element:<SetFilters/>
   },
   {
-    path:"/details",
+    path:"/details/:id",
     element:<Details/>
   },
   {
@@ -198,9 +198,9 @@ const router = createBrowserRouter([
   {
     path:'/homerecruiter',
     element:(
-      <ProtectedRoute allowedRoles={["jobcreator"]}>
+      // <ProtectedRoute allowedRoles={["jobcreator"]}>
         <HomeRecruiter />
-      </ProtectedRoute>
+      // </ProtectedRoute>
      )
   },
   {

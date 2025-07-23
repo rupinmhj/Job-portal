@@ -2,16 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { FaAngleLeft, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
-// import api from "../api/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import ThemeContext from "./ThemeContext";
 import AuthContext from "../Context/authContext";
-// import { jwtDecode } from "jwt-decode";
 import useAxiosAuth from "../hooks/useAxiosAuth";
 import apiPublic from "../api/api";
-
 
 const SignIn = () => {
   const { theme } = useContext(ThemeContext);
@@ -20,7 +17,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const back = () => navigate("/");
   const signup = () => navigate("/signup");
-  const [isSubmitting,setIsSubmitting]=useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -31,9 +28,8 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const { setupCompany, companyDetails } = useContext(AuthContext);
+  const { setupCompany, companyDetails, setupSeeker } = useContext(AuthContext);
 
-  // Validation function
   const validate = () => {
     let valid = true;
     setEmailError("");
@@ -51,10 +47,9 @@ const SignIn = () => {
     return valid;
   };
 
-  // Handle form submit
   const handleSignIn = async (e) => {
-    e.preventDefault();  // prevent page reload on form submit
-    if(loading) return;
+    e.preventDefault();
+    if (loading) return;
     if (!validate()) return;
 
     try {
@@ -64,25 +59,28 @@ const SignIn = () => {
         password,
         remember_me: remember,
       });
+      console.log(response.data);
 
       const tokens = response.data.tokens;
       const status = response.data.has_profile;
-      // console.log(tokens)
       const role = response.data.role;
-      login(tokens, role); // Save tokens and decode user info
-      // console.log(role);
-      console.log(response.data.role);
-      setupCompany(response.data.company);
-      // console.log(companyDetails);
-      // Redirect based on role
-      if (role === "jobseeker") {
-        navigate("/home");
-      } else if (role === "jobcreator" && status) {
-        navigate("/homerecruiter");
-      } else if (role === 'jobcreator' && !status) {
-        navigate('/setupcompany')
+      login(tokens, role,email);
+      if (role === 'jobcreator') {
+        setupCompany(response.data.company);
       }
       else {
+        setupSeeker(response.data.jobseeker_profile_data);
+      }
+
+      if (role === "jobseeker" && status) {
+        navigate("/home");
+      } else if (role === "jobseeker" && !status) {
+        navigate("/setup");
+      } else if (role === "jobcreator" && status) {
+        navigate("/homerecruiter");
+      } else if (role === "jobcreator" && !status) {
+        navigate("/setupcompany");
+      } else {
         toast.error("Unknown role. Please contact support.");
       }
     } catch (error) {
@@ -135,10 +133,7 @@ const SignIn = () => {
             </div>
           </div>
 
-          {/* Wrap inputs and button in form */}
           <form onSubmit={handleSignIn}>
-
-            {/* Email Field */}
             <div className="mt-[32px] w-full flex flex-col">
               <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
                 Email <span className="text-red-500">*</span>
@@ -164,7 +159,6 @@ const SignIn = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="mt-[10px] w-full flex flex-col">
               <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
                 Password <span className="text-red-500">*</span>
@@ -200,7 +194,6 @@ const SignIn = () => {
                 )}
               </div>
 
-              {/* Remember Me */}
               <div className="flex items-center gap-2 mb-[20px]">
                 <input
                   type="checkbox"
@@ -225,12 +218,10 @@ const SignIn = () => {
               </p>
             </div>
 
-            {/* Sign In Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full cursor-pointer ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2869FE]"
-                } p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]`}
+              className={`w-full ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2869FE]"} p-[16px] text-[16px] font-bold text-white rounded-xl mt-[40px]`}
             >
               {loading ? "Signing In..." : "Sign In"}
             </button>
@@ -240,21 +231,12 @@ const SignIn = () => {
             or continue with
           </div>
 
-          {/* Social Logins */}
           <div className="flex justify-center gap-[16px]">
             <div className="items-center rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm h-[52px] w-[80px] flex justify-center dark:bg-[#1f2937]">
-              <img
-                src={images.facebook}
-                className="w-[24px] h-[24px]"
-                alt="Facebook"
-              />
+              <img src={images.facebook} className="w-[24px] h-[24px]" alt="Facebook" />
             </div>
             <div className="items-center rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm h-[52px] w-[80px] flex justify-center dark:bg-[#1f2937]">
-              <img
-                src={images.googlelogo}
-                className="w-[24px] h-[24px]"
-                alt="Google"
-              />
+              <img src={images.googlelogo} className="w-[24px] h-[24px]" alt="Google" />
             </div>
             <div className="items-center rounded-lg cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm h-[52px] w-[80px] flex justify-center dark:bg-[#1f2937]">
               <img src={images.apple} className="w-[24px] h-[24px]" alt="Apple" />

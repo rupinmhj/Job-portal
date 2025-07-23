@@ -1,173 +1,252 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { Outlet } from "react-router-dom";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import ThemeContext from "./ThemeContext";
+import AuthContext from "../Context/authContext";
+import useAxiosAuth from "../hooks/useAxiosAuth";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PersonalInfo = () => {
+  const { theme } = useContext(ThemeContext);
+  const { authTokens, seekerDetails } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    fullName: "Jonathan",
-    contactNumber: "9861771141",
-    dateOfBirth: "02-01-2002",
-    gender: ""
-  });
-  const [errors, setErrors] = useState({
-    fullName: "",
-    contactNumber: "",
-    dateOfBirth: "",
-    gender: "male"
-  });
+  const api = useAxiosAuth();
+  const datePickerRef = useRef(null);
+
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+
+  const [formData, setFormData] = useState({
+    fullName: seekerDetails.full_name || "",
+    contactNumber: seekerDetails.contact_no || "",
+    dateOfBirth: seekerDetails.dob ? new Date(seekerDetails.dob) : "",
+    gender: seekerDetails.gender || "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const back = () => navigate("/profile");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: "" });
-    }
+    if (errors[name]) setErrors({ ...errors, [name]: "" });
   };
 
   const handleFileChange = (e) => {
-    if (e.target.files[0]) {
-      setProfileImage(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setErrors(prev => ({ ...prev, profilePic: "File size too large (max 5MB)" }));
+        toast.error("File size too large(max 5MB")
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        setErrors(prev => ({ ...prev, profilePic: "Please select an image file" }));
+         toast.error("Please select a valid image file");
+        return;
+      }
+
+      setProfileImage(file);
+      setPreviewUrl(URL.createObjectURL(file));
+      // Clear any previous profile pic error
+      if (errors.profilePic) {
+        setErrors(prev => ({ ...prev, profilePic: "" }));
+      }
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/setup/interest"); // Assuming validation passes
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Full name is required";
+      isValid = false;
+    }
+
+    if (!formData.contactNumber.trim()) {
+      newErrors.contactNumber = "Contact number is required";
+      isValid = false;
+    }
+
+    if (!formData.dateOfBirth) {
+      newErrors.dateOfBirth = "Date of birth is required";
+      isValid = false;
+    }
+
+    if (!formData.gender) {
+      newErrors.gender = "Gender is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
-  const back = () => navigate(-1);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading || !validateForm()) return;
+
+    try {
+      setLoading(true);
+
+      const formPayload = new FormData();
+      formPayload.append("full_name", formData.fullName);
+      formPayload.append("contact_no", formData.contactNumber);
+      formPayload.append("dob", formData.dateOfBirth.toISOString().split("T")[0]);
+      formPayload.append("gender", formData.gender);
+
+      if (profileImage) {
+        formPayload.append("profile_pic", profileImage);
+      }
+     for (let pair of formPayload.entries()) {
+  console.log(pair[0]+ ': ' + pair[1]);
+}
+
+
+      const response=await api.put("dashboards/jobseeker/setup/", formPayload, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+
+      console.log("Seeker updated data:",response.data);
+
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error("Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39] "
+      transition={{ duration: 0.3, delay: 0.1 }}
+      className={`min-h-screen font-urbanist ${theme === "dark" ? "bg-[#111d39] text-white" : "bg-white text-black"}`}
     >
-      <div className="bg-white dark:bg-[#111d39] font-urbanist text-[rgb(18,25,39)] dark:text-white w-full">
-        <div className="fixed top-0 left-0 right-0 bg-white dark:bg-[#111d39] z-10">
-          <div className="flex px-[24px]  mx-auto max-w-[1024px] items-center justify-between py-[16px]">
-            <div className="p-[6px] border dark:border-white rounded-lg border-black cursor-pointer" onClick={back}>
-              <FaAngleLeft className="text-gray-500 size-[14px] dark:text-white" />
-            </div>
-            <h2 className="text-[20px] font-bold leading-[24px]">Set Up Profile</h2>
-            <img src={images.home} className="cursor-pointer dark:invert" onClick={() => navigate('/home')} alt="home" />
+      <div className="px-[24px] lg:px-[252px] pt-[16px]">
+        <div className="flex items-center justify-between pb-4">
+          <div onClick={back} className={`p-[6px] rounded-lg cursor-pointer border ${theme === 'dark' ? 'border-white' : 'border-black'}`}>
+            <FaAngleLeft className={`${theme === 'dark' ? 'text-white' : 'text-gray-500'} size-[14px]`} />
           </div>
+          <h2 className="text-[20px] font-bold">Edit Personal Info</h2>
+          <div></div>
         </div>
 
-        <div className="px-[24px]  mx-auto max-w-[1024px] flex flex-col justify-center items-center pt-[67.6px]">
+        {/* Profile Picture Upload Section */}
+        <div className="flex flex-col justify-center items-center mb-6">
           <input
             type="file"
-            id="fileInput"
+            id="profilePicInput"
             accept="image/*"
             className="hidden"
             onChange={handleFileChange}
           />
-          <label htmlFor="fileInput" className="cursor-pointer">
+          <label htmlFor="profilePicInput" className="cursor-pointer">
             <img
-              src={profileImage || images.profileSmall}
-              className="h-[80.4px] w-[80.4px] object-cover mb-[24px] bg-gray-300 p-1 rounded-xl"
-              alt="Upload Profile"
+              src={previewUrl || seekerDetails.profile_pic || images.defaultProfile || images.companyprofile}
+              className="h-[80px] w-[80px] object-cover mb-4 bg-gray-300 p-1 rounded-full border-2 border-gray-300"
+              alt="Profile Picture"
             />
           </label>
-          <h2 className="text-[18px] flex justify-center font-bold leading-[22px] pb-[24px] border-b w-full">
-            Personal Information
-          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Tap to change profile picture</p>
+          {errors.profilePic && <p className="text-red-500 text-sm mb-2">{errors.profilePic}</p>}
         </div>
 
-        <div className="px-[24px] mt-[24px]  mx-auto max-w-[1024px]">
-          <form onSubmit={handleSubmit}>
-            {/* Full Name */}
-            <label className="pl-[12px] text-[16px] font-bold" htmlFor="fullName">Full Name</label>
-            <div className="relative mb-[8px]">
-              <img src={images.profile} className="absolute dark:invert  inset-y-7 size-[20px] left-4" alt="" />
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className={`focus:outline-none border placeholder-black dark:placeholder-gray-400 dark:bg-[#111d39] dark:text-white ${errors.fullName ? "border-red-500" : "border-gray-900 dark:border-gray-700"} shadow-sm rounded-xl mt-[12px] pl-[52px] border py-[14px] pr-[20px] w-full`}
-                placeholder="Jonathan"
-              />
-            </div>
-            {errors.fullName && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.fullName}</p>}
 
-            {/* Contact Number */}
-            <label className="pl-[12px] text-[16px] font-bold" htmlFor="contactNumber">Contact Number</label>
-            <div className="relative mb-[8px]">
-              <img src={images.contact} className="absolute dark:invert inset-y-7 size-[20px] left-4" alt="" />
-              <input
-                type="text"
-                id="contactNumber"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                className={`focus:outline-none border placeholder-black dark:placeholder-gray-400 dark:bg-[#111d39] dark:text-white ${errors.contactNumber ? "border-red-500" : "border-gray-900 dark:border-gray-700"} shadow-sm rounded-xl mt-[12px] pl-[52px] border py-[14px] pr-[20px] w-full`}
-                placeholder="9861771141"
-              />
-            </div>
-            {errors.contactNumber && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.contactNumber}</p>}
+        <form onSubmit={handleSubmit}>
+          <label className="pl-3 text-[15px] font-semibold">Full Name<span className="text-red-500">*</span></label>
+          <div className="w-full h-[46.6px] mt-2 mb-4 px-3 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 dark:border-gray-600 dark:bg-[#1f2a45] dark:text-white flex items-center">
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              className="w-full bg-transparent outline-none"
+              placeholder="Type your full name"
 
-            {/* Date of Birth */}
-            <label className="pl-[12px] text-[16px] font-bold" htmlFor="dateOfBirth">Date of Birth</label>
-            <div className="relative mb-[8px]">
-              <img src={images.calender} className="absolute dark:invert inset-y-7 size-[20px] left-4" alt="" />
-              <input
-                type="text"
-                id="dateOfBirth"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                className={`bg-white dark:bg-[#111d39] dark:text-white dark:placeholder-gray-400 appearance-none focus:outline-none border ${errors.dateOfBirth ? "border-red-500" : "border-gray-900 dark:border-gray-700"} shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full`}
-              />
-              <RiArrowDropDownLine className="sm:hidden size-6 text-gray-500 right-4 top-7 absolute" />
-            </div>
-            {errors.dateOfBirth && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.dateOfBirth}</p>}
+            />
+          </div>
+          {errors.fullName && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.fullName}</p>}
 
-            {/* Gender */}
-            <label className="pl-[12px] text-[16px] font-bold" htmlFor="gender">Gender</label>
-            <div className="relative mb-[8px] cursor-pointer">
-              <img src={images.gender} className="absolute dark:invert inset-y-7 size-[20px] left-4" alt="gender" />
-              <select
-                id="gender"
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="appearance-none focus:outline-none border placeholder-black bg-white dark:bg-[#111d39] dark:text-white dark:placeholder-gray-400 border-gray-900 dark:border-gray-700 shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] border pr-[20px] w-full"
-              >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-              <RiArrowDropDownLine className="size-6 text-gray-500 right-4 top-7 absolute" />
-            </div>
+          <label className="pl-3 text-[15px] font-semibold">Contact Number<span className="text-red-500">*</span></label>
+          <div className="w-full h-[46.6px] mt-2 mb-4 px-3 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 dark:border-gray-600 dark:bg-[#1f2a45] dark:text-white flex items-center">
+            <input
+              type="text"
+              name="contactNumber"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              className="w-full bg-transparent outline-none"
+              placeholder="Type your phone number"
+            />
+          </div>
+          {errors.contactNumber && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.contactNumber}</p>}
 
-            <div className="h-[100px]"></div>
-
-            {/* Submit Button */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-[#111d39] py-4 z-10">
-              <div className="px-[24px]  mx-auto max-w-[1024px]">
-                <button
-                  onClick={() => navigate('/profile')}
-                  type="submit"
-                  className="w-full bg-[#2869FE] hover:bg-[#1752e4] transition-colors p-[16px] text-white font-medium rounded-xl"
-                >
-                  Continue
-                </button>
-              </div>
+          <label className="pl-3 text-[15px] font-semibold">Date of Birth<span className="text-red-500">*</span></label>
+          <div className="relative mt-2">
+            <DatePicker
+              selected={formData.dateOfBirth}
+              onChange={(date) => setFormData({ ...formData, dateOfBirth: date })}
+              dateFormat="yyyy-MM-dd"
+              placeholderText="Select DOB"
+              className="w-full p-[12px] rounded-xl outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4"
+              ref={datePickerRef}
+              calendarClassName="calendar-deadline"
+              maxDate={new Date()}
+              showYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={100} 
+            />
+            <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
+              <img src={images.calender} className="dark:invert" alt="calendar" />
             </div>
-          </form>
-        </div>
-        <Outlet />
+          </div>
+          {errors.dateOfBirth && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.dateOfBirth}</p>}
+
+          <label className="pl-3 text-[15px] font-semibold">Gender<span className="text-red-500">*</span></label>
+          <div className="w-full h-[46.6px] mt-2 mb-4 px-3 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 dark:border-gray-600 dark:bg-[#1f2a45] dark:text-white flex items-center">
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="w-full bg-transparent dark:bg-[#1f2a45] cursor-pointer outline-none"
+            >
+              <option value="" disabled>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          {errors.gender && <p className="text-red-500 text-sm pl-[12px] mb-[12px]">{errors.gender}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full mt-6 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2869FE]"} p-[16px] text-white font-medium rounded-xl`}
+          >
+            {loading ? "Updating..." : "Save Changes"}
+          </button>
+        </form>
       </div>
+      <ToastContainer />
     </motion.div>
   );
 };

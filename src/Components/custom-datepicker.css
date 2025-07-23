@@ -111,7 +111,7 @@
 /* Override the default hover background and text color */
 .react-datepicker__time-list-item:hover,
 .react-datepicker__day:hover {
-  background-color: #7fa0ed !important;
+  background-color: #dfe0e3 !important;
   color: white !important;
 }
 
@@ -139,7 +139,7 @@
 }
 
 .react-datepicker__month-container {
-  background-color: #9aacc8;
+  background-color: #eeeff2;
   color: white !important;
 }
 
@@ -172,4 +172,49 @@
 
 .react-datepicker__time-container .react-datepicker__time {
   border-radius: 0;
+}
+
+/* Style the year dropdown (light mode) */
+.react-datepicker__year-dropdown,
+.react-datepicker__year-dropdown select,
+.react-datepicker__year-option {
+  background-color: #eef3ff;
+  color: black;
+  font-family: 'Urbanist', sans-serif;
+  border: none;
+}
+
+/* Style the year dropdown (dark mode) */
+.dark .react-datepicker__year-dropdown,
+.dark .react-datepicker__year-option {
+  margin-bottom: 4px;
+  background-color: #1e293b;
+  color: white;
+}
+
+/* Highlight year options on hover */
+.react-datepicker__year-option:hover {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Selected year style */
+.react-datepicker__year-option--selected {
+  font-weight: bold;
+  background-color: #3b82f6;
+  color: white;
+}
+.react-datepicker__year-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.dark .react-datepicker__year-dropdown select{
+  background-color:#3b82f6 ;
+}
+ .react-datepicker__year-option--selected-mark{
+  display: none !important;
+}
+.dark .react-datepicker__year-option--selected{
+ background-color: #30394f;
+ color: white !important;
 }

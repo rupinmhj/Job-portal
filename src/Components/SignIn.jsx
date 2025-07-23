@@ -136,7 +136,7 @@ const SignIn = () => {
           <form onSubmit={handleSignIn}>
             <div className="mt-[32px] w-full flex flex-col">
               <p className="pl-[12px] text-[16px] font-bold leading-[19px]">
-                Email <span className="text-red-500">*</span>
+                Email or Username <span className="text-red-500">*</span>
               </p>
 
               <div className="relative mb-[20px]">
@@ -150,7 +150,7 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="focus:outline-none border dark:focus-within:border-gray-200 focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full dark:bg-[#1f2937] dark:text-white dark:border-gray-600"
-                  placeholder="Type your email"
+                  placeholder="Type your email or username"
                   required
                 />
                 {emailError && (

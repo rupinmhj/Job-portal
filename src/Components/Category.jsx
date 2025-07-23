@@ -13,7 +13,7 @@ const Category = () => {
         <div className="flex w-[100%] flex-wrap ">
           <div onClick={allJob} className="  flex justify-center flex-1 flex-col items-center gap-[8px] w-1/4 ">
             <img src={images.company} className=" cursor-pointer hover:border-blue-500  dark:border-gray-700  border-2 transition-all dark:hover:border-blue-500  duration-300 hover:shadow-sm size-[65.6px]  border-gray-200 p-[9px] rounded-lg" alt="" />
-            <h2 className='text-[12px] font-medium'>Company</h2>
+            <h2 className='text-[12px] font-medium'>On-site</h2>
           </div>
           <div onClick={allJob} className=" flex justify-center flex-1 flex-col items-center gap-[8px] w-1/4 ">
             <img src={images.fullTime} className="cursor-pointer hover:border-blue-500  dark:border-gray-700   transition-all dark:hover:border-blue-500  duration-300 hover:shadow-sm  size-[65.6px] border-2 border-gray-200 p-[9px] rounded-lg" alt="" />

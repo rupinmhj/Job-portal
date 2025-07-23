@@ -6,12 +6,12 @@ import useAxiosAuth from "../hooks/useAxiosAuth";
 import { motion } from 'framer-motion';
 import ThemeContext from './ThemeContext';
 import AuthContext from "../Context/authContext";
-import JoditEditor from 'jodit-react'
+import JoditEditor from 'jodit-react';
 import 'jodit/es2021/jodit.min.css';
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-import './custom-datepickerOnly.css'
+import './custom-datepickerOnly.css';
 import { format } from 'date-fns';
+
 const CreateJob = () => {
   const api = useAxiosAuth();
   const editorRef = useRef(null);
@@ -19,22 +19,24 @@ const CreateJob = () => {
   const { theme } = useContext(ThemeContext);
   const { companyDetails } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleDateChange = (date) => {
     const formatted = format(date, 'yyyy-MM-dd');
-    setForm((prev) => ({ ...prev, deadline: formatted }))
-  }
-  const back = () => {
-    navigate(-1);
+    setForm((prev) => ({ ...prev, deadline: formatted }));
   };
+
+  const back = () => navigate(-1);
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     position: '',
     company: companyDetails?.name || '',
+    category: "",
     location: '',
     status: 'open',
     type: 'full_time',
+    work_mode: 'in_house',
     vacancy: '',
     salary: '',
     deadline: '',
@@ -46,9 +48,17 @@ const CreateJob = () => {
   });
 
   const [positionError, setPositionError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
   const [companyError, setCompanyError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [skillError, setSkillError] = useState("");
+
+  const jobCategory = [
+    "Software Development", "Design", "Marketing", "Sales",
+    "Finance", "Customer Support", "Human Resources",
+    "Education", "Operations", "Product Management",
+    "Data Science", "Internship"
+  ];
 
   const isTextareaEmpty = (text) => !text || text.trim().length === 0;
 
@@ -63,9 +73,9 @@ const CreateJob = () => {
     if (currentStep === 1) {
       nextStep();
     } else if (currentStep === 2) {
-      // Validate step 2 fields before submitting
       setEmailError('');
       setSkillError('');
+      setCategoryError('');
       const { email, skills } = form;
 
       if (!email) {
@@ -78,23 +88,19 @@ const CreateJob = () => {
         return;
       }
 
-      // If validation passes, create the job
       const {
-        position,
-        about,
-        location,
-        type,
-        status,
-        salary,
-        vacancy,
-        deadline,
+        position, category, about, location, type,
+        work_mode, status, salary, vacancy,
+        deadline
       } = form;
 
       const formPayload = {
         title: position,
+        category,
         description: about,
         location,
         job_type: type,
+        work_mode,
         job_status: status,
         salary,
         vacancies: vacancy,
@@ -113,50 +119,39 @@ const CreateJob = () => {
       } catch (error) {
         console.error("Job creation failed:", error.response?.data || error.message);
         alert("Job creation failed. Please check your input and try again.");
-      }
-      finally {
+      } finally {
         setIsSubmitting(false);
       }
     }
   };
 
   const nextStep = () => {
-    if (currentStep === 1) {
-      setPositionError('');
-      setCompanyError('');
-      const { position, company } = form;
-      if (!position) {
-        setPositionError("Position is required!!");
-        return;
-      }
-      if (!company) {
-        setCompanyError("Company is required!!");
-        return;
-      }
-      setCurrentStep(2);
+    setPositionError('');
+    setCompanyError('');
+    const { position, company } = form;
+    if (!position) {
+      setPositionError("Position is required!!");
+      return;
     }
+    if (!company) {
+      setCompanyError("Company is required!!");
+      return;
+    }
+    setCurrentStep(2);
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const getStepTitle = () => {
-    switch (currentStep) {
-      case 1: return 'Basic Information';
-      case 2: return 'Create Job';
-      default: return 'Create Job';
-    }
-  };
+  const getStepTitle = () => currentStep === 1 ? 'Basic Information' : 'Create Job';
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, delay: 0.15 }}
       className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39]"
     >
       <div className="bg-white dark:bg-[#111d39] text-[#121927] dark:text-white font-urbanist w-full">
@@ -203,6 +198,24 @@ const CreateJob = () => {
                 />
                 {companyError && <p className="text-red-500 text-[13px] pl-[12px] mb-4">{companyError}</p>}
 
+                <label className="pl-3 text-[15px] font-semibold">Job Category</label>
+                <div className="mt-2 mb-4 px-3 border rounded-xl h-[46.6px]  text-[14px] dark:bg-[#1f2a45] dark:border-gray-600">
+                  <select
+                    name="category"
+                    value={form.category}
+                    onChange={handleChange}
+                    className="w-full py-3 bg-transparent focus:outline-none dark:text-white dark:bg-[#1f2a45]"
+                    required
+                  >
+                    <option>Select Category</option>
+                    {jobCategory.map((category) => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
+
+                  </select>
+                </div>
+
+
                 <label className="pl-3 text-[15px] font-semibold">Location</label>
                 <input
                   name="location"
@@ -221,7 +234,22 @@ const CreateJob = () => {
                     className="w-full dark:bg-[#1f2a45] py-3 focus:outline-none cursor-pointer"
                   >
                     <option value="open">Open</option>
-                    <option value="close" disabled >Closed</option>
+                    <option value="closed" disabled >Closed</option>
+                  </select>
+                </div>
+
+                <label className="pl-3 text-[15px] font-semibold">Work Mode</label>
+                <div className="w-full dark:focus-within:border-gray-300 h-[46.6px] focus-within:border-gray-400 dark:border-gray-600 mt-2 mb-4 px-3 cursor-pointer border rounded-xl text-[14px] focus:border-gray-400 focus:outline-none dark:bg-[#1f2a45] dark:border-gray-600 dark:text-white">
+                  <select
+                    name="work_mode"
+                    value={form.work_mode}
+                    onChange={handleChange}
+                    className="w-full dark:bg-[#1f2a45] py-3 focus:outline-none cursor-pointer"
+                  >
+                    <option value="in_house">In-house</option>
+                    <option value="remote">Remote</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="on_site">On-site</option>
                   </select>
                 </div>
 

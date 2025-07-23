@@ -21,12 +21,14 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("jobseeker");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [nameError, setNameError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [roleError, setRoleError] = useState("");
@@ -40,6 +42,7 @@ const SignUp = () => {
     setPasswordError("");
     setConfirmPasswordError("");
     setRoleError("");
+    setUsernameError("");
 
     if (!name) {
       setNameError("Name is required");
@@ -48,6 +51,15 @@ const SignUp = () => {
       setNameError("Enter a valid name.");
       valid = false;
     }
+
+    if (!username) {
+      setUsernameError("Username is required");
+      valid = false;
+    } else if (!/^[a-zA-Z0-9_]{3,16}$/.test(username)) {
+      setUsernameError("Username must be 3-16 characters with only letters, numbers, or _");
+      valid = false;
+    }
+
 
     if (!email) {
       setEmailError("Email is required");
@@ -117,6 +129,7 @@ const SignUp = () => {
         setLoading(true);
         const signupData = {
           full_name: name,
+          username,
           email,
           password,
           confirm_password: confirmPassword,
@@ -192,7 +205,7 @@ const SignUp = () => {
           <form onSubmit={(e) => { e.preventDefault(); validateSignUp(); }}>
             {/* Name */}
             <div className="mt-[32px] w-full flex flex-col">
-              <p className="pl-[12px] text-[16px] font-bold">Username</p>
+              <p className="pl-[12px] text-[16px] font-bold">Full Name</p>
               <div className="relative mb-[20px]">
                 <img
                   src={images.profile}
@@ -204,9 +217,28 @@ const SignUp = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="dark:bg-[#1f2937] dark:text-white dark:border-gray-600 border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
-                  placeholder="Type  Username"
+                  placeholder="Type Full Name "
                 />
                 {nameError && <p className="text-red-500 text-[13px] pl-[12px]">{nameError}</p>}
+              </div>
+            </div>
+            {/* Username */}
+            <div className="mt-[2px] w-full flex flex-col">
+              <p className="pl-[12px] text-[16px] font-bold">Username</p>
+              <div className="relative mb-[20px]">
+                <img
+                  src={images.profile}
+                  className="dark:invert absolute inset-y-7 size-[20px] left-4"
+                  alt="Name"
+                />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="dark:bg-[#1f2937] dark:text-white dark:border-gray-600 border text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full"
+                  placeholder="Type Username"
+                />
+                {usernameError && <p className="text-red-500 text-[13px] pl-[12px]">{usernameError}</p>}
               </div>
             </div>
 

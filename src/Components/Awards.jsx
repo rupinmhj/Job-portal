@@ -1,15 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/images";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import useAxiosAuth from "../hooks/useAxiosAuth";
 const Awards = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const api = useAxiosAuth();
+  const { seekerDetails, email } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [awards, setAwards] = useState([
+    {
+      title: "",
+      startDate: null,
+      endDate: null,
+      isOngoing: false,
+      description: "",
+    },
+  ]);
+
   const navigate = useNavigate();
   const back = () => navigate(-1);
+
+  const handleChange = (index, field, value) => {
+    const updated = [...awards];
+    updated[index][field] = value;
+    setAwards(updated);
+  };
+
+  const addAward = () => {
+    setAwards([
+      ...awards,
+      {
+        title: "",
+        startDate: null,
+        endDate: null,
+        isOngoing: false,
+        description: "",
+      },
+    ]);
+  };
+
+  const removeAward = (index) => {
+    const updated = awards.filter((_, i) => i !== index);
+    setAwards(updated);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(false);
+      await api.post("", {
+        experiences,
+
+      });
+      navigate("/profile");
+    } catch (err) {
+      console.error("Submission error", err);
+    } finally {
+      setLoading(true);
+    }
+  };
 
   return (
     <div className="h-screen overflow-y-scroll scroll-container dark:bg-[#111d39] font-urbanist">
@@ -23,81 +74,127 @@ const Awards = () => {
               </div>
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Awards</h2>
-            <img src={images.home} onClick={() => navigate('/home')} className="h-6 w-6 cursor-pointer dark:invert" alt="home" />
+            <img src={images.home} onClick={() => navigate('/')} className="h-6 w-6 cursor-pointer dark:invert" alt="home" />
           </div>
         </div>
 
         {/* Profile */}
         <div className="flex mt-[70px] items-center flex-col">
           <img src={images.profileSmall} className="size-[80.4px] border border-blue-600 rounded-2xl mb-[12px]" alt="Profile" />
-          <h2 className="text-[18px] leading-[22px] font-bold mb-2">Jonathan Smith</h2>
-          <h2 className="text-gray-400 text-[12px] leading-[20px] font-medium">jonathansmith@gmail.com</h2>
+          <h2 className="text-[18px] leading-[22px] font-bold mb-2">{seekerDetails?.full_name}</h2>
+          <h2 className="text-gray-400 text-[12px] leading-[20px] font-medium">{email}</h2>
         </div>
 
         {/* Form */}
-        <div className="max-w-[1024px] mx-auto px-6 mt-[20px]">
-          <form>
-            {/* Title */}
-            <div>
-              <label className="pl-[12px] mb-[12px] block text-4 leading-[19px] font-bold">Title</label>
-              <input
-                className="w-full leading-6 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] focus:outline-none focus:border-gray-500 dark:focus:border-gray-200 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
-                type="text"
-                placeholder="Title"
-              />
-            </div>
+        <form className="max-w-[1024px] mx-auto px-6 mt-[20px] mb-[120px]">
+          {awards.map((award, index) => (
+            <div key={index} className="border-t border-gray-300 mt-6 pt-4 relative">
+              {awards.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeAward(index)}
+                  className="text-gray-200 text-[14px] absolute top-3 right-0 flex items-center gap-1"
+                >
+                  <span className="text-[18px]">
+                    <IoIosCloseCircleOutline />
+                  </span>
+                  <span>Clear</span>
+                </button>
+              )}
 
-            {/* Date Range */}
-            <div className="mt-[20px]">
-              <div className="flex gap-2 leading-6 text-[14px] font-medium justify-between">
-                <div className="relative w-full">
-                  <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    placeholderText="Start"
-                    className="w-full py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none dark:focus:border-gray-200 focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
-                  />
-                  <img src={images.calender} alt="Start" className="absolute top-4 left-[14px] dark:invert" />
-                </div>
+              {/* Title */}
+              <div className="mt-[20px]">
+                <label className="pl-[12px] mb-[12px] block text-4 leading-[19px] font-bold">Title</label>
+                <input
+                  type="text"
+                  value={award.title}
+                  onChange={(e) => handleChange(index, "title", e.target.value)}
+                  className="w-full leading-6 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] focus:outline-none focus:border-gray-500 dark:focus:border-gray-200 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                  placeholder="Title"
+                />
+              </div>
 
-                <div className="relative w-full flex">
-                  <DatePicker
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    placeholderText="End"
-                    className="w-full justify-end py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] dark:focus:border-gray-200 font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
-                  />
-                  <img src={images.calender} alt="End" className="absolute top-4 left-[14px] dark:invert" />
+              {/* Date Range */}
+              <div className="mt-[20px]">
+                <div className="flex gap-2 leading-6 text-[14px] font-medium justify-between">
+                  <div className="relative w-full">
+                    <DatePicker
+                      selected={award.startDate}
+                      showYearPicker
+                      calendarClassName="calendar-deadline"
+                      onChange={(date) => handleChange(index, "startDate", date)}
+                      placeholderText="Start"
+                      className="w-full py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none dark:focus:border-gray-200 focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                    />
+                    <img src={images.calender} alt="Start" className="absolute top-4 left-[14px] dark:invert" />
+                  </div>
+
+                  <div className="relative w-full flex">
+                    <DatePicker
+                      selected={award.endDate}
+                      onChange={(date) => handleChange(index, "endDate", date)}
+                      placeholderText="End"
+                      calendarClassName="calendar-deadline"
+                      showYearPicker
+                      disabled={award.isOngoing}
+                      className={`${award.isOngoing ? "bg-gray-200 cursor-not-allowed" : ""} w-full justify-end py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] dark:focus:border-gray-200 font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700`}
+                    />
+                    <img src={images.calender} alt="End" className="absolute top-4 left-[14px] dark:invert" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Checkbox */}
-            <div className="flex mt-[12px] gap-2">
-              <input type="checkbox" className="accent-[#2869FE]" />
-              <p className="leading-6 text-[14px] font-medium text-gray-500 dark:text-gray-300">Doesn't Expire</p>
-            </div>
+              {/* Checkbox */}
+              <div className="flex mt-[12px] gap-2">
+                <input
+                  type="checkbox"
+                  className="accent-[#2869FE] cursor-pointer"
+                  checked={award.isOngoing}
+                  onChange={(e) => {
+                    handleChange(index, "isOngoing", e.target.checked);
+                    if (e.target.checked) {
+                      handleChange(index, "endDate", null);
+                    }
+                  }}
+                />
+                <p className="leading-6 text-[14px] font-medium text-gray-500 dark:text-gray-300">Holding the title currently</p>
+              </div>
 
-            {/* Description */}
-            <div className="mt-[20px] mb-[107.6px]">
-              <label className="pl-[12px] mb-[12px] block text-4 leading-[19px] font-bold">Description</label>
-              <textarea
-                className="w-full leading-6 dark:focus:border-gray-200 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] min-h-[35px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
-                placeholder="About your details"
-              ></textarea>
+              {/* Description */}
+              <div className="mt-[20px]">
+                <label className="pl-[12px] mb-[12px] block text-4 leading-[19px] font-bold">Description</label>
+                <textarea
+                  value={award.description}
+                  onChange={(e) => handleChange(index, "description", e.target.value)}
+                  className="w-full leading-6 dark:focus:border-gray-200 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] min-h-[35px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                  placeholder="About your details"
+                ></textarea>
+              </div>
             </div>
+          ))}
 
-            {/* Save Button */}
-            <div className="p-6 fixed bottom-0 left-0 right-0 mx-auto max-w-[1024px] bg-white dark:bg-[#111d39]">
-              <button
-                className="p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold bg-[#2869FE] hover:bg-[#1752e4] transition-colors"
-                onClick={() => navigate('/profile')}
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+          <button
+            type="button"
+            onClick={addAward}
+            className="mt-4 text-gray-200 text-[14px]"
+          >
+            + Add Another Award
+          </button>
+
+          {/* Save Button */}
+          <div className="p-6 fixed bottom-0 left-0 right-0 mx-auto max-w-[1024px] bg-white dark:bg-[#111d39]">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={loading}
+              className={`p-4 rounded-[16px] w-full text-white text-[16px] leading-[26px] font-bold transition-colors
+    ${loading ? "bg-[#2869FE] opacity-50 cursor-not-allowed" : "bg-[#2869FE] hover:bg-[#1752e4]"}`}
+            >
+              {loading ? "Saving..." : "Save"}
+            </button>
+
+          </div>
+        </form>
       </div>
     </div>
   );

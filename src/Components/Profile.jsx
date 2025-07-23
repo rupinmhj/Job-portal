@@ -11,10 +11,11 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import ThemeContext from "./ThemeContext";
 import AuthContext from "../Context/authContext";
+import { IoShareSocialOutline } from "react-icons/io5";
 
 const Profile = () => {
   const { theme } = useContext(ThemeContext);
-  const { seekerDetails, email, logout } = useContext(AuthContext);
+  const { seekerDetails, email, logout,authTokens } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const back = () => navigate("/home");
@@ -72,16 +73,16 @@ const Profile = () => {
       <div className="flex max-w-[1024px] mx-auto px-[24px] flex-col pt-[72px] w-full items-center justify-center">
         <img
           src={
-            seekerDetails.profile_pic
-              ? seekerDetails.profile_pic
-              : images.profileSetup
+            authTokens
+              ? seekerDetails?.profile_pic
+              : images.profileImage
           }
           className="size-[80.4px] mb-[12px] border border-blue-500 rounded-xl"
           alt=""
         />
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-[18px] font-bold leading-[22px] mb-[8px]">
-            {seekerDetails.full_name}
+            {seekerDetails?.full_name||''}
           </h2>
           <h2
             className={`text-[12px] leading-[20px] ${
@@ -99,19 +100,19 @@ const Profile = () => {
         <div className="flex mt-[22px] justify-around w-full">
           <div className="flex-col flex gap-[6px] justify-center items-center">
             <div className="py-[13px] px-[32px] rounded-xl bg-[#F6EFFF] dark:bg-[#42366b]">
-              <h2 className="text-[#a55fff] text-[28px] font-bold">36</h2>
+              <h2 className="text-[#a55fff] text-[28px] font-bold">0</h2>
             </div>
             <h2>Applied</h2>
           </div>
           <div className="flex-col flex gap-[6px] justify-center items-center">
             <div className="py-[13px] px-[32px] rounded-xl bg-[#FFEFF8] dark:bg-[#50384f]">
-              <h2 className="text-[#FF5FBF] text-[28px] font-bold">20</h2>
+              <h2 className="text-[#FF5FBF] text-[28px] font-bold">0</h2>
             </div>
             <h2>Reviewed</h2>
           </div>
           <div className="flex-col flex gap-[6px] justify-center items-center">
             <div className="py-[13px] px-[32px] rounded-xl bg-[#E5FAF5] dark:bg-[#265148]">
-              <h2 className="text-[#00CC9A] text-[28px] font-bold">36</h2>
+              <h2 className="text-[#00CC9A] text-[28px] font-bold">0</h2>
             </div>
             <h2>Contacted</h2>
           </div>
@@ -123,7 +124,7 @@ const Profile = () => {
         <div className="px-[24px] pb-[20px]">
           {/* Personal Info */}
           <li
-            onClick={() => navigate("/personalinfo")}
+            onClick={() =>authTokens? navigate("/personalinfo"):navigate("/signin")}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -139,7 +140,7 @@ const Profile = () => {
 
           {/* Skill */}
           <li
-            onClick={() => navigate("/skilltest")}
+            onClick={() => authTokens?navigate("/skilltest"):navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -155,7 +156,7 @@ const Profile = () => {
 
           {/* Work Experience */}
           <li
-            onClick={() => navigate("/workexperience")}
+            onClick={() =>authTokens? navigate("/workexperience"):navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -171,7 +172,7 @@ const Profile = () => {
 
           {/* Education */}
           <li
-            onClick={() => navigate("/education")}
+            onClick={() =>authTokens? navigate("/education"):navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -185,9 +186,25 @@ const Profile = () => {
             <MdOutlineKeyboardArrowRight />
           </li>
 
+          {/* Social Accounts */}
+          <li
+            onClick={() =>authTokens? navigate("/education"):navigate('/signin')}
+            className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
+          >
+            <div className="flex gap-[16px]">
+              <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
+                <IoShareSocialOutline className="h-[24px] w-[24px]"/>
+              </div>
+              <span className="flex items-center text-[16px] font-bold">
+                Social Accounts
+              </span>
+            </div>
+            <MdOutlineKeyboardArrowRight />
+          </li>
+
           {/* Awards */}
           <li
-            onClick={() => navigate("/awards")}
+            onClick={() =>authTokens? navigate("/awards"):navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">

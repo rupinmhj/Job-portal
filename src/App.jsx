@@ -50,6 +50,7 @@ import NotificationRecruiter from "./Components/NotificationRecruiter"
 import VerificationSignup from "./Components/VerificationSignup"
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Loading from "./Components/Loading";
+import SocialAccounts from "./Components/SocialAccounts";
 const router = createBrowserRouter([
    {
     path:"/",
@@ -252,6 +253,10 @@ const router = createBrowserRouter([
 {
   path:'loading',
   element: <Loading />
+},
+{
+  path:'socialaccounts',
+  element:<SocialAccounts/>
 }
 
    

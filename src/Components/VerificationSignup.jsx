@@ -7,7 +7,8 @@ import { toast, ToastContainer } from "react-toastify";
 const VerificationSignup = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const api=useAxiosAuth();
+  const [loading, setLoading] = useState(false);
+  const api = useAxiosAuth();
   // Email passed from signup page (fallback empty)
   const [email, setEmail] = useState(location.state?.email || "");
 
@@ -62,6 +63,7 @@ const VerificationSignup = () => {
     }
 
     try {
+      setLoading(true);
       const response = await api.post("/accounts/verify-email/", {
         email,
         user_input_otp: otpCode,
@@ -74,6 +76,8 @@ const VerificationSignup = () => {
     } catch (error) {
       console.error("OTP verification failed:", error);
       toast.error("Invalid or expired OTP. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -137,7 +141,8 @@ const VerificationSignup = () => {
 
         <button
           onClick={verifyOtp}
-          className="w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[20px]"
+          disabled={loading}
+          className={`w-full cursor-pointer bg-[#2869FE] p-[16px] text-[16px] font-bold text-white rounded-xl mt-[20px] ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           Verify
         </button>

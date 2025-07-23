@@ -4,11 +4,12 @@ import images from '../assets/images';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ toggleSidebar, isSideBarOpen }) => {
+  
   const [ham, setHam] = useState(false);
-  const {seekerDetails}=useContext(AuthContext);
+  const {seekerDetails,authTokens}=useContext(AuthContext);
   const navigate = useNavigate();
   const handleSetup = () => {
-    navigate('/setup');
+    authTokens? navigate('/setup'):navigate('/signin')
   }
   const handleNotification = () => {
     navigate('/notification');
@@ -19,11 +20,13 @@ const Header = ({ toggleSidebar, isSideBarOpen }) => {
       <div className="max-w-[1024px] dark:bg-[#111d39] dark:text-white  px-[24px] mx-auto  pt-[20px] pb-[24px] flex font-urbanist items-center justify-between h-[88px] bg-white z-50 border-none">
         <div onClick={handleSetup} className="cursor-pointer flex gap-[12px] items-center">
           <div>
-            <img src={seekerDetails?.profile_pic} className="h-[38.4px] w-[38.4px] rounded-lg border border-blue-600" alt="" />
+            <img src={seekerDetails?.profile_pic||images.profileImage} className="h-[38.4px] w-[38.4px] rounded-lg border border-blue-600" alt="" />
           </div>
           <div className='flex flex-col gap-[2px]'>
-            <span className='text-[12px] font-medium leading-[20px] text-custGrey dark:text-white  ' >Welcome!</span>
-            <span className='inline-flex text-[18px] font-bold leading-[22px] items-center gap-[4px]'>{seekerDetails.full_name} <img className="size-[16px]" src={images.hello} alt="" /></span>
+<span className='text-[12px] font-medium leading-[20px] text-custGrey dark:text-white'>
+  {authTokens ? `Welcome !` : "Sign in"}
+</span>
+            <span className='inline-flex text-[18px] font-bold leading-[22px] items-center gap-[4px]'>{authTokens?seekerDetails?.full_name:""}<img className="size-[16px]" src={images.hello} alt="" /></span>
           </div>
         </div>
 

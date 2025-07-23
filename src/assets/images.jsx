@@ -114,6 +114,7 @@ import clipboardfillWhite from './clipboardfillWhite.svg'
 import messageWhite from './messageWhite.svg'
 import messagefillWhite from './messagefillWhite.svg'
 import logoDark from './logo-dark.png'
+import profileImage from './profile_pic.png'
 const images = {
     hello,
     profileSmall,
@@ -231,6 +232,7 @@ const images = {
     profileWhite,
     threeDotDark,
     logoDark,
+    profileImage
 
 }
 export default images;

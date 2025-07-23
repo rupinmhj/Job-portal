@@ -14,13 +14,13 @@ import DatePicker from "react-datepicker";
 const SetupProfile = () => {
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { authTokens, setupProfile } = useContext(AuthContext);
+  const { authTokens, setupProfile, seekerDetails } = useContext(AuthContext);
   const [previewUrl, setPreviewUrl] = useState(null);
   const datePickerRef = useRef(null);
   const api = useAxiosAuth();
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullName: seekerDetails?.full_name,
     contactNumber: "",
     dateOfBirth: "",
     gender: ""
@@ -194,7 +194,8 @@ const SetupProfile = () => {
                 calendarClassName="calendar-deadline"
                 maxDate={new Date()}
                 showYearDropdown
-                scrollableYearDropdown={100}
+                scrollableYearDropdown={true}
+                yearDropdownItemNumber={100}
               />
               <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
                 <img src={images.calender} className="dark:invert" alt="calendar" />

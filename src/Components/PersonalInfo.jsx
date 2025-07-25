@@ -162,7 +162,7 @@ const PersonalInfo = () => {
           />
           <label htmlFor="profilePicInput" className="cursor-pointer">
             <img
-              src={previewUrl || seekerDetails.profile_pic || images.defaultProfile || images.companyprofile}
+              src={previewUrl || seekerDetails.profile_pic || images.profileImage}
               className="h-[80px] w-[80px] object-cover mb-4 bg-gray-300 p-1 rounded-full border-2 border-gray-300"
               alt="Profile Picture"
             />

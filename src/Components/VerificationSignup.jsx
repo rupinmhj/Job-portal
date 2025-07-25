@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate, useLocation } from "react-router-dom";
 // import api from "../api/api"; // import your axios instance
-import useAxiosAuth from "../hooks/useAxiosAuth";
+// import useAxiosAuth from "../hooks/useAxiosAuth";
 import { toast, ToastContainer } from "react-toastify";
+import apiPublic from "../api/api";
 const VerificationSignup = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const api = useAxiosAuth();
+  // const api = useAxiosAuth();
   // Email passed from signup page (fallback empty)
   const [email, setEmail] = useState(location.state?.email || "");
 
@@ -64,7 +65,7 @@ const VerificationSignup = () => {
 
     try {
       setLoading(true);
-      const response = await api.post("/accounts/verify-email/", {
+      const response = await apiPublic.post("/accounts/verify-email/", {
         email,
         user_input_otp: otpCode,
       });
@@ -84,7 +85,8 @@ const VerificationSignup = () => {
   // Resend OTP handler
   const resendOtp = async () => {
     try {
-      await api.post("/accounts/resend-otp/", { email });
+      setLoading(true);
+      await apiPublic.post("/accounts/resend-otp/", { email });
       toast.info("Verification code resent to your email.");
       setSeconds(59);
       // Clear OTP inputs
@@ -93,6 +95,8 @@ const VerificationSignup = () => {
     } catch (error) {
       console.error("Failed to resend OTP:", error);
       toast.error("Failed to resend code. Please try later.");
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -150,15 +154,14 @@ const VerificationSignup = () => {
         <div className="text-[14px] mt-[48px] leading-[24px] font-medium text-google dark:text-gray-400 flex gap-2 justify-center">
           <h1>Code expires in 00:{seconds < 10 ? `0${seconds}` : seconds}</h1>
           {seconds === 0 && (
-            <p
-              className="text-[#2869FE] cursor-pointer"
-              onClick={resendOtp}
-              role="button"
-              tabIndex={0}
-              onKeyPress={(e) => e.key === "Enter" && resendOtp()}
-            >
-              Resend code
-            </p>
+           <button
+  onClick={resendOtp}
+  disabled={loading}
+  className="text-[#2869FE] bg-transparent cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none border-none"
+>
+  Resend code
+</button>
+
           )}
         </div>
         <ToastContainer />

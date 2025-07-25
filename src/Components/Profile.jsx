@@ -15,7 +15,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 
 const Profile = () => {
   const { theme } = useContext(ThemeContext);
-  const { seekerDetails, email, logout,authTokens } = useContext(AuthContext);
+  const { seekerDetails, email, logout, authTokens } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const back = () => navigate("/home");
@@ -31,27 +31,23 @@ const Profile = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, delay: 0.15 }}
-      className={`h-screen overflow-y-scroll scroll-container font-urbanist ${
-        theme === "dark" ? "bg-[#111d39] text-white" : ""
-      }`}
+      className={`h-screen overflow-y-scroll scroll-container font-urbanist ${theme === "dark" ? "bg-[#111d39] text-white" : ""
+        }`}
     >
       {/* Header */}
       <div
-        className={`fixed top-0 left-0 right-0 z-10 ${
-          theme === "dark" ? "bg-[#111d39]" : "bg-white"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-10 ${theme === "dark" ? "bg-[#111d39]" : "bg-white"
+          }`}
       >
         <div className="flex items-center justify-between max-w-[1024px] mx-auto px-[24px] pt-[16px] pb-[24px]">
           <div
             onClick={back}
-            className={`p-[6px] border rounded-lg cursor-pointer ${
-              theme === "dark" ? "border-white" : "border-black"
-            }`}
+            className={`p-[6px] border rounded-lg cursor-pointer ${theme === "dark" ? "border-white" : "border-black"
+              }`}
           >
             <FaAngleLeft
-              className={`size-[14px] ${
-                theme === "dark" ? "text-white" : "text-gray-500"
-              }`}
+              className={`size-[14px] ${theme === "dark" ? "text-white" : "text-gray-500"
+                }`}
             />
           </div>
           <h2 className="text-[20px] font-bold leading-[24px] ml-6">Profile</h2>
@@ -82,12 +78,11 @@ const Profile = () => {
         />
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-[18px] font-bold leading-[22px] mb-[8px]">
-            {seekerDetails?.full_name||''}
+            {seekerDetails?.full_name || ''}
           </h2>
           <h2
-            className={`text-[12px] leading-[20px] ${
-              theme === "dark" ? "text-white/60" : "text-[#121927]/60"
-            }`}
+            className={`text-[12px] leading-[20px] ${theme === "dark" ? "text-white/60" : "text-[#121927]/60"
+              }`}
           >
             {email}
           </h2>
@@ -124,7 +119,7 @@ const Profile = () => {
         <div className="px-[24px] pb-[20px]">
           {/* Personal Info */}
           <li
-            onClick={() =>authTokens? navigate("/personalinfo"):navigate("/signin")}
+            onClick={() => authTokens ? navigate("/personalinfo") : navigate("/signin")}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -140,7 +135,7 @@ const Profile = () => {
 
           {/* Skill */}
           <li
-            onClick={() => authTokens?navigate("/skilltest"):navigate('/signin')}
+            onClick={() => authTokens ? navigate("/skilltest") : navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -156,7 +151,7 @@ const Profile = () => {
 
           {/* Work Experience */}
           <li
-            onClick={() =>authTokens? navigate("/workexperience"):navigate('/signin')}
+            onClick={() => authTokens ? navigate("/workexperienceprofile") : navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -172,7 +167,7 @@ const Profile = () => {
 
           {/* Education */}
           <li
-            onClick={() =>authTokens? navigate("/education"):navigate('/signin')}
+            onClick={() => authTokens ? navigate("/educationprofile") : navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
@@ -188,12 +183,12 @@ const Profile = () => {
 
           {/* Social Accounts */}
           <li
-            onClick={() =>authTokens? navigate("/education"):navigate('/signin')}
+            onClick={() => authTokens ? navigate("/socialaccountprofile") : navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">
               <div className="p-2 bg-gray-300 bg-opacity-60 rounded-xl">
-                <IoShareSocialOutline className="h-[24px] w-[24px]"/>
+                <IoShareSocialOutline className="h-[24px] w-[24px]" />
               </div>
               <span className="flex items-center text-[16px] font-bold">
                 Social Accounts
@@ -204,7 +199,7 @@ const Profile = () => {
 
           {/* Awards */}
           <li
-            onClick={() =>authTokens? navigate("/awards"):navigate('/signin')}
+            onClick={() => authTokens ? navigate("/awards") : navigate('/signin')}
             className="mt-[16px] flex justify-between items-center pb-[16px] mb-[16px] cursor-pointer border-b border-gray-200 border-opacity-35"
           >
             <div className="flex gap-[16px]">

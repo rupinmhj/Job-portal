@@ -6,16 +6,17 @@ import images from "../assets/images";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosAuth from "../hooks/useAxiosAuth";
+import AuthContext from "../Context/authContext";
 const Awards = () => {
   const api = useAxiosAuth();
   const { seekerDetails, email } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [awards, setAwards] = useState([
     {
-      title: "",
-      startDate: null,
-      endDate: null,
-      isOngoing: false,
+      award_title: "",
+      start_date: null,
+      end_date: null,
+      has_title: false,
       description: "",
     },
   ]);
@@ -29,14 +30,19 @@ const Awards = () => {
     setAwards(updated);
   };
 
+  const handleDateChange = (index, field, date) => {
+    const formattedDate = date ? date.toISOString().split("T")[0] : null;
+    handleChange(index, field, formattedDate);
+  }
+
   const addAward = () => {
     setAwards([
       ...awards,
       {
-        title: "",
-        startDate: null,
-        endDate: null,
-        isOngoing: false,
+        award_title: "",
+        start_date: null,
+        end_date: null,
+        has_title: false,
         description: "",
       },
     ]);
@@ -50,11 +56,11 @@ const Awards = () => {
     e.preventDefault();
     try {
       setLoading(false);
-      await api.post("", {
-        experiences,
+      await api.post("/dashboards/jobseeker/awards/",
+        awards
 
-      });
-      navigate("/profile");
+      );
+      navigate("/home");
     } catch (err) {
       console.error("Submission error", err);
     } finally {
@@ -74,13 +80,14 @@ const Awards = () => {
               </div>
             </div>
             <h2 className="text-[20px] font-bold leading-[24px]">Awards</h2>
-            <img src={images.home} onClick={() => navigate('/')} className="h-6 w-6 cursor-pointer dark:invert" alt="home" />
+            <h2 onClick={() => navigate('/setup/success')} className="w-[30px] cursor-pointer">Skip</h2>
+
           </div>
         </div>
 
         {/* Profile */}
         <div className="flex mt-[70px] items-center flex-col">
-          <img src={images.profileSmall} className="size-[80.4px] border border-blue-600 rounded-2xl mb-[12px]" alt="Profile" />
+          <img src={seekerDetails?.profile_image || images.profileImage} className="size-[80.4px] border border-blue-600 rounded-2xl mb-[12px]" alt="Profile" />
           <h2 className="text-[18px] leading-[22px] font-bold mb-2">{seekerDetails?.full_name}</h2>
           <h2 className="text-gray-400 text-[12px] leading-[20px] font-medium">{email}</h2>
         </div>
@@ -88,7 +95,7 @@ const Awards = () => {
         {/* Form */}
         <form className="max-w-[1024px] mx-auto px-6 mt-[20px] mb-[120px]">
           {awards.map((award, index) => (
-            <div key={index} className="border-t border-gray-300 mt-6 pt-4 relative">
+            <div key={index} className="border-t border-gray-300 mt-6 pt-4 relative text-[15px]">
               {awards.length > 1 && (
                 <button
                   type="button"
@@ -107,9 +114,9 @@ const Awards = () => {
                 <label className="pl-[12px] mb-[12px] block text-4 leading-[19px] font-bold">Title</label>
                 <input
                   type="text"
-                  value={award.title}
-                  onChange={(e) => handleChange(index, "title", e.target.value)}
-                  className="w-full leading-6 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] focus:outline-none focus:border-gray-500 dark:focus:border-gray-200 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                  value={award.award_title}
+                  onChange={(e) => handleChange(index, "award_title", e.target.value)}
+                  className="w-full leading-6 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] focus:outline-none focus:border-gray-500 dark:focus:border-gray-200 dark:bg-[#1f2a45] dark:text-white dark:border-gray-700"
                   placeholder="Title"
                 />
               </div>
@@ -119,25 +126,27 @@ const Awards = () => {
                 <div className="flex gap-2 leading-6 text-[14px] font-medium justify-between">
                   <div className="relative w-full">
                     <DatePicker
-                      selected={award.startDate}
+                      selected={award.start_date}
                       showYearPicker
+                      dateFormat="yyyy"
                       calendarClassName="calendar-deadline"
-                      onChange={(date) => handleChange(index, "startDate", date)}
+                      onChange={(date) => handleDateChange(index, "start_date", date)}
                       placeholderText="Start"
-                      className="w-full py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none dark:focus:border-gray-200 focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                      className="w-full py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none dark:focus:border-gray-200 focus:border-gray-500 dark:bg-[#1f2a45] dark:text-white dark:border-gray-700"
                     />
                     <img src={images.calender} alt="Start" className="absolute top-4 left-[14px] dark:invert" />
                   </div>
 
                   <div className="relative w-full flex">
                     <DatePicker
-                      selected={award.endDate}
-                      onChange={(date) => handleChange(index, "endDate", date)}
+                      selected={award.end_date}
+                      onChange={(date) => handleDateChange(index, "end_date", date)}
                       placeholderText="End"
                       calendarClassName="calendar-deadline"
                       showYearPicker
-                      disabled={award.isOngoing}
-                      className={`${award.isOngoing ? "bg-gray-200 cursor-not-allowed" : ""} w-full justify-end py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] dark:focus:border-gray-200 font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700`}
+                      dateFormat="yyyy"
+                      disabled={award.has_title}
+                      className={`${award.has_title ? "bg-gray-200 cursor-not-allowed" : ""} w-full justify-end py-[14px] pl-[52px] pr-[20px] leading-6 text-[14px] dark:focus:border-gray-200 font-medium rounded-xl border-[0.5px] px-[20px] focus:outline-none focus:border-gray-500 dark:bg-[#1f2a45] dark:text-white dark:border-gray-700`}
                     />
                     <img src={images.calender} alt="End" className="absolute top-4 left-[14px] dark:invert" />
                   </div>
@@ -149,11 +158,11 @@ const Awards = () => {
                 <input
                   type="checkbox"
                   className="accent-[#2869FE] cursor-pointer"
-                  checked={award.isOngoing}
+                  checked={award.has_title}
                   onChange={(e) => {
-                    handleChange(index, "isOngoing", e.target.checked);
+                    handleChange(index, "has_title", e.target.checked);
                     if (e.target.checked) {
-                      handleChange(index, "endDate", null);
+                      handleChange(index, "end_date", null);
                     }
                   }}
                 />
@@ -166,7 +175,7 @@ const Awards = () => {
                 <textarea
                   value={award.description}
                   onChange={(e) => handleChange(index, "description", e.target.value)}
-                  className="w-full leading-6 dark:focus:border-gray-200 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] min-h-[35px] focus:outline-none focus:border-gray-500 dark:bg-[#111d39] dark:text-white dark:border-gray-700"
+                  className="w-full h-[150px] leading-6 dark:focus:border-gray-200 text-[14px] font-medium rounded-xl border-[0.5px] py-[14px] px-[20px] min-h-[35px] focus:outline-none focus:border-gray-500 dark:bg-[#1f2a45] dark:text-white dark:border-gray-700"
                   placeholder="About your details"
                 ></textarea>
               </div>

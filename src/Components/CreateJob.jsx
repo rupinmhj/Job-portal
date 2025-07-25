@@ -31,7 +31,7 @@ const CreateJob = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     position: '',
-    company: companyDetails?.name || '',
+    company: companyDetails?.name || 'Google',
     category: "",
     location: '',
     status: 'open',
@@ -57,7 +57,7 @@ const CreateJob = () => {
     "Software Development", "Design", "Marketing", "Sales",
     "Finance", "Customer Support", "Human Resources",
     "Education", "Operations", "Product Management",
-    "Data Science", "Internship"
+    "Data Science", "Internship", "Others"
   ];
 
   const isTextareaEmpty = (text) => !text || text.trim().length === 0;

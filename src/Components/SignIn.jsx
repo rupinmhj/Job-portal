@@ -7,13 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import ThemeContext from "./ThemeContext";
 import AuthContext from "../Context/authContext";
-import useAxiosAuth from "../hooks/useAxiosAuth";
+// import useAxiosAuth from "../hooks/useAxiosAuth";
 import apiPublic from "../api/api";
 
 const SignIn = () => {
   const { theme } = useContext(ThemeContext);
   const { login } = useContext(AuthContext);
-  const api = useAxiosAuth();
+  // const api = useAxiosAuth();
   const navigate = useNavigate();
   const back = () => navigate("/");
   const signup = () => navigate("/signup");
@@ -28,7 +28,7 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const { setupCompany, companyDetails, setupSeeker } = useContext(AuthContext);
+  const { setupCompany, companyDetails, setupSeeker, } = useContext(AuthContext);
 
   const validate = () => {
     let valid = true;
@@ -64,7 +64,9 @@ const SignIn = () => {
       const tokens = response.data.tokens;
       const status = response.data.has_profile;
       const role = response.data.role;
-      login(tokens, role,email);
+      const full_name=response.data.full_name;
+      const email2=response.data.email;
+      login(tokens, role,email2,full_name);
       if (role === 'jobcreator') {
         setupCompany(response.data.company);
       }
@@ -146,7 +148,7 @@ const SignIn = () => {
                   alt="Email"
                 />
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="focus:outline-none border dark:focus-within:border-gray-200 focus:border-gray-400 text-[14px] shadow-sm rounded-xl mt-[12px] pl-[52px] py-[14px] pr-[20px] w-full dark:bg-[#1f2937] dark:text-white dark:border-gray-600"

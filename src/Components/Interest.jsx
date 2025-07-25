@@ -29,7 +29,7 @@ const Interest = () => {
     >
        <div className="max-w-[1024px] mx-auto">
         <div className="flex items-center justify-between p-[24px] pt-[16px]">
-          <div onClick={() => navigate("/home")} className="p-[6px] border rounded-lg border-gray-300 cursor-pointer">
+          <div onClick={() => navigate(-1)} className="p-[6px] border rounded-lg border-gray-300 cursor-pointer">
             <FaAngleLeft className="text-gray-300 size-[14px]" />
           </div>
           <h2 className="text-[20px] font-bold text-white leading-[24px]">Interest</h2>
@@ -69,7 +69,7 @@ const Interest = () => {
           <div className="py-[24px] max-w-[1024px] mx-auto">
             <div
               className="bg-[#2869FE] p-[16px] rounded-[16px] flex justify-center text-white cursor-pointer"
-              onClick={() => navigate("/setup/interest/confirmnewaccount")}
+              onClick={() => navigate("/education")}
             >
               <h1 className="text-[16px] leading-[26px] font-bold">Continue</h1>
             </div>

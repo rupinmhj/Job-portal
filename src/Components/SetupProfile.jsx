@@ -14,13 +14,13 @@ import DatePicker from "react-datepicker";
 const SetupProfile = () => {
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { authTokens, setupProfile, seekerDetails } = useContext(AuthContext);
+  const { seekerDetails, fullname } = useContext(AuthContext);
   const [previewUrl, setPreviewUrl] = useState(null);
   const datePickerRef = useRef(null);
   const api = useAxiosAuth();
 
   const [formData, setFormData] = useState({
-    fullName: seekerDetails?.full_name,
+    fullName: fullname || "",
     contactNumber: "",
     dateOfBirth: "",
     gender: ""
@@ -35,6 +35,30 @@ const SetupProfile = () => {
     setFormData({ ...formData, [name]: value });
     if (errors[name]) setErrors({ ...errors, [name]: "" });
   };
+  const handleDateChange = (field, date) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: date,
+    }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
+
+  const CustomDateInput = React.forwardRef(({ value, onClick, placeholder }, ref) => (
+    <div className="relative">
+      <input
+        type="text"
+        onClick={onClick}
+        value={value}
+        placeholder={placeholder}
+        ref={ref}
+        readOnly
+        className="w-full p-[12px] rounded-xl outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4 cursor-pointer"
+      />
+      <div className="absolute top-3 right-3 pointer-events-none">
+        <img src={images.calender} className="dark:invert" alt="calendar" />
+      </div>
+    </div>
+  ));
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -96,7 +120,7 @@ const SetupProfile = () => {
       const formPayload = new FormData();
       formPayload.append("full_name", formData.fullName);
       formPayload.append("contact_no", formData.contactNumber);
-      formPayload.append("dob", formData.dateOfBirth);
+      formPayload.append("dob", formData.dateOfBirth.toISOString().split("T")[0]);
       formPayload.append("gender", formData.gender);
       if (profileImage) formPayload.append("profile_pic", profileImage);
 
@@ -104,7 +128,9 @@ const SetupProfile = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+
       navigate("/setup/interest");
+
     } catch (error) {
       console.error("API Error:", error);
       toast.error("Something went wrong. Please try again.");
@@ -116,6 +142,7 @@ const SetupProfile = () => {
   const back = () => navigate("/signin");
 
   useEffect(() => {
+
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
     };
@@ -171,7 +198,7 @@ const SetupProfile = () => {
             <label className="pl-3 text-[15px] font-semibold">Contact Number<span className="text-red-500">*</span></label>
             <div className="w-full h-[46.6px] mt-2 mb-4 px-3 border rounded-xl text-[14px] focus-within:border-gray-400 dark:focus-within:border-gray-300 dark:border-gray-600 dark:bg-[#1f2a45] dark:text-white flex items-center">
               <input
-                type="text"
+                type="tel"
                 name="contactNumber"
                 value={formData.contactNumber}
                 onChange={handleChange}
@@ -186,17 +213,17 @@ const SetupProfile = () => {
               <DatePicker
                 selected={formData.dateOfBirth}
                 name='dateOfBirth'
-                onChange={(date) => setFormData(prev => ({ ...prev, dateOfBirth: date }))}
+                onChange={(date) => handleDateChange("dateOfBirth", date)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select DOB"
-                className="w-full p-[12px] rounded-xl outline-none border border-gray-300 focus:border-gray-700 dark:border-gray-600 dark:focus:border-gray-200 bg-white dark:bg-[#1f2a45] text-sm text-black dark:text-white mb-4"
-                ref={datePickerRef}
-                calendarClassName="calendar-deadline"
                 maxDate={new Date()}
                 showYearDropdown
-                scrollableYearDropdown={true}
+                scrollableYearDropdown
                 yearDropdownItemNumber={100}
+                calendarClassName="calendar-deadline"
+                customInput={<CustomDateInput />}
               />
+
               <div className="absolute top-3 right-3 cursor-pointer" onClick={() => datePickerRef.current.setFocus()}>
                 <img src={images.calender} className="dark:invert" alt="calendar" />
               </div>

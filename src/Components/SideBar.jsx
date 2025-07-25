@@ -7,6 +7,7 @@ import Component from "./Component";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeContext from "./ThemeContext";
+import AuthContext from "../Context/authContext";
 const SideBar = ({
   isPageOpen,
   setIsPageOpen,
@@ -18,7 +19,7 @@ const SideBar = ({
   console.log("Sidebar activated");
   // const [isPageOpen,setIsPageOpen]=useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  const{seekerDetails}=useContext(AuthContext)
   const handelPages = () => {
     setIsPageOpen(true);
   };
@@ -45,7 +46,7 @@ const SideBar = ({
     <div className="absolute w-[300px] h-screen   z-40 bg-white font-urbanist ">
       <div className="flex p-[15px] w-full bg-bgLogo ">
         <div className="logo cursor-pointer " onClick={home}>
-          <img src={images.jobkoLogo} className="h-[60px]" alt="" />
+          <img src={seekerDetails?.profile_pic||images.profileImage} className="h-[60px]" alt="" />
         </div>
         <div className="flex text-[12px] leading-[20px] font-semibold text-white ml-[16px] justify-start items-center">
           Jobko - Job Finder Mobile App

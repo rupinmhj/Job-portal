@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [authReady, setAuthReady] = useState(false);
   const [role, setRole] = useState(null);
   const [email, setEmail] = useState();
+  const [fullname, setFullname] = useState();
   const [companyDetails, setCompanyDetails] = useState(() => {
     const stored = localStorage.getItem("companyDetails");
     return stored ? JSON.parse(stored) : null;
@@ -27,8 +28,12 @@ export const AuthProvider = ({ children }) => {
         try {
           const decryptedAccess = CryptoJS.AES.decrypt(encryptedAccess, SECRET_KEY).toString(CryptoJS.enc.Utf8);
           setAuthTokens({ access: decryptedAccess });
+
           setRole(localStorage.getItem("role"));
           setEmail(localStorage.getItem("email"));
+          setFullname(localStorage.getItem("full_name"));
+
+
         } catch (err) {
           console.error("Access token decryption failed", err);
           logout();
@@ -41,19 +46,21 @@ export const AuthProvider = ({ children }) => {
     init();
   }, []);
 
-  const login = (tokens, role, email) => {
+  const login = (tokens, role, email2, full_name) => {
 
     const encryptedAccess = CryptoJS.AES.encrypt(tokens.access, SECRET_KEY).toString();
     Cookies.set("access_token", encryptedAccess, {
-      expires: 7,
+      expires: 1,
     });
     const acc = Cookies.get("access_token");
-    console.log(acc);
+    // console.log(acc);
     setAuthTokens({ access: tokens.access });
     setRole(role);
-    setEmail(email);
+    setEmail(email2);
+    setFullname(full_name);
+    localStorage.setItem('full_name', full_name);
     localStorage.setItem("role", role);
-    localStorage.setItem("email", email);
+    localStorage.setItem("email", email2);
   };
 
   const setupCompany = (companyDetails) => {
@@ -80,13 +87,14 @@ export const AuthProvider = ({ children }) => {
     setEmail(null);
     Cookies.remove("access_token");
     localStorage.removeItem("role");
+    localStorage.removeItem('full_name');
     localStorage.removeItem("companyDetails");
     localStorage.removeItem("jobseeker_profile_data");
   };
 
   return (
     <AuthContext.Provider
-      value={{ role, login, logout, authTokens, setupCompany, companyDetails, isLoading, seekerDetails, setupSeeker, email, authReady }}
+      value={{ role, login, logout, authTokens, setupCompany, companyDetails, isLoading, seekerDetails, setupSeeker, email, authReady, fullname }}
     >
       {children}
     </AuthContext.Provider>

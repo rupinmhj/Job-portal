@@ -51,6 +51,9 @@ import VerificationSignup from "./Components/VerificationSignup"
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Loading from "./Components/Loading";
 import SocialAccounts from "./Components/SocialAccounts";
+import EducationProfile from "./Components/EducationProfile";
+import WorkExperienceProfile from "./Components/WorkExperienceProfile";
+import SocialAccountProfile from "./Components/SocialAccountProfile";
 const router = createBrowserRouter([
    {
     path:"/",
@@ -133,7 +136,7 @@ const router = createBrowserRouter([
     element:<ConfirmNewAccount/>
   },
   {
-    path:"/setup/interest/confirmnewaccount/success",
+    path:"/setup/success",
     element:<Success/>
   },
   {
@@ -156,6 +159,20 @@ const router = createBrowserRouter([
     path:'/workexperience',
     element:<WorkExperience/>
   },
+
+  {
+    path:'/workexperience',
+    element:<WorkExperience/>
+  },
+  {
+    path:'/workexperience/edit/:id',
+    element: <WorkExperience mode="edit"/>
+  },
+  {
+    path:'/workexperience/add',
+    element: <WorkExperience mode="add"/>
+  },
+ 
   {
     path:'/skillassessment',
     element:<SkillAssessment/>
@@ -174,7 +191,15 @@ const router = createBrowserRouter([
   },
   {
     path:'/education',
-    element:<Education/>
+    element:<Education mode="onboarding"/>
+  },
+  {
+    path:'/education/edit/:id',
+    element:<Education mode="edit"/>
+  },
+  {
+    path:'/education/add',
+    element:<Education mode="add"/>
   },
   {
     path:'/awards',
@@ -257,7 +282,28 @@ const router = createBrowserRouter([
 {
   path:'socialaccounts',
   element:<SocialAccounts/>
+},
+{
+  path:'socialaccounts/add',
+  element:<SocialAccounts mode='add'/>
+},
+{
+  path:'socialaccounts/edit/:id',
+  element:<SocialAccounts mode='edit'/>
+},
+{
+  path:'educationprofile',
+  element:<EducationProfile/>
+},
+{
+  path:'workexperienceprofile',
+  element: <WorkExperienceProfile />
+},
+{
+  path:'socialaccountsprofile',
+  element: <SocialAccountProfile />
 }
+
 
    
   
